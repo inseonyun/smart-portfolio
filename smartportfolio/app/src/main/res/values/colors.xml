@@ -7,4 +7,10 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <!--User Color -->
+    <color name="user_grey">#FF303030</color>
+    <color name="user_button">#618eed</color>
+    <color name="user_progress">#568bfc</color>
+    <color name="main_color">#6aa2fc</color>
 </resources>
