@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">스마트 포트폴리오</string>
+    <string name="back_toast_message">한 번 더 누르면 앱이 종료 됩니다</string>
 </resources>
