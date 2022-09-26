@@ -20,7 +20,7 @@
     <EditText
         android:id="@+id/et_id"
         android:layout_width="300dp"
-        android:layout_height="40dp"
+        android:layout_height="50dp"
         android:layout_marginTop="40dp"
         android:background="@drawable/custom_edit_text"
         android:drawableStart="@drawable/custom_edit_text_id"
@@ -36,7 +36,7 @@
     <EditText
         android:id="@+id/et_password"
         android:layout_width="300dp"
-        android:layout_height="40dp"
+        android:layout_height="50dp"
         android:layout_marginTop="20dp"
         android:background="@drawable/custom_edit_text"
         android:drawableStart="@drawable/custom_edit_text_password"
