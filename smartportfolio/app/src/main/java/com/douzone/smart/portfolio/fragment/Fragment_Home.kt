@@ -1,4 +1,4 @@
-package com.douzone.smart.portfolio
+package com.douzone.smart.portfolio.fragment
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -10,7 +10,7 @@ import com.douzone.smart.portfolio.databinding.FragmentHomeBinding
 class Fragment_Home : Fragment() {
     // ViewBinding
     private var _binding: FragmentHomeBinding? = null
-    private val binding get() = _binding!!
+    val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -22,5 +22,9 @@ class Fragment_Home : Fragment() {
 
 
         return view
+    }
+
+    fun changeViewPagerPage(idx: Int) {
+        binding.viewpager.currentItem = idx
     }
 }

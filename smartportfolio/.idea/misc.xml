@@ -4,6 +4,8 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/github-repository/2022-2-mobile-programming/smartportfolio/app/src/main/res/layout/activity_main.xml" value="0.358695652173913" />
+        <entry key="..\:/github-repository/smart-portfolio/smartportfolio/app/src/main/res/drawable-v24/ic_listview_user.xml" value="0.174" />
+        <entry key="..\:/github-repository/smart-portfolio/smartportfolio/app/src/main/res/drawable-v24/ic_recycler_user.xml" value="0.174" />
         <entry key="..\:/github-repository/smart-portfolio/smartportfolio/app/src/main/res/drawable/custom_button_round.xml" value="0.1105" />
         <entry key="..\:/github-repository/smart-portfolio/smartportfolio/app/src/main/res/drawable/custom_edit_text.xml" value="0.191" />
         <entry key="..\:/github-repository/smart-portfolio/smartportfolio/app/src/main/res/drawable/custom_edit_text_id.xml" value="0.176" />
@@ -18,13 +20,23 @@
         <entry key="..\:/github-repository/smart-portfolio/smartportfolio/app/src/main/res/drawable/ic_edit_text_password.xml" value="0.1105" />
         <entry key="..\:/github-repository/smart-portfolio/smartportfolio/app/src/main/res/drawable/ic_edit_text_password_focused.xml" value="0.1105" />
         <entry key="..\:/github-repository/smart-portfolio/smartportfolio/app/src/main/res/drawable/ic_menu_bottom_add.xml" value="0.272" />
+        <entry key="..\:/github-repository/smart-portfolio/smartportfolio/app/src/main/res/drawable/ic_menu_bottom_home.xml" value="0.1735" />
         <entry key="..\:/github-repository/smart-portfolio/smartportfolio/app/src/main/res/drawable/ic_menu_bottom_home_no_focus.xml" value="0.272" />
         <entry key="..\:/github-repository/smart-portfolio/smartportfolio/app/src/main/res/drawable/ic_toolbar_button_menu.xml" value="0.171" />
         <entry key="..\:/github-repository/smart-portfolio/smartportfolio/app/src/main/res/drawable/menu_bottom_select.xml" value="0.191" />
+        <entry key="..\:/github-repository/smart-portfolio/smartportfolio/app/src/main/res/layout/activity_loading.xml" value="0.3038949275362319" />
         <entry key="..\:/github-repository/smart-portfolio/smartportfolio/app/src/main/res/layout/activity_login.xml" value="0.22" />
-        <entry key="..\:/github-repository/smart-portfolio/smartportfolio/app/src/main/res/layout/activity_main.xml" value="0.33" />
+        <entry key="..\:/github-repository/smart-portfolio/smartportfolio/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/github-repository/smart-portfolio/smartportfolio/app/src/main/res/layout/fragment__home.xml" value="0.358695652173913" />
         <entry key="..\:/github-repository/smart-portfolio/smartportfolio/app/src/main/res/layout/fragment_home.xml" value="0.30434782608695654" />
+        <entry key="..\:/github-repository/smart-portfolio/smartportfolio/app/src/main/res/layout/fragment_home_main.xml" value="0.3061594202898551" />
+        <entry key="..\:/github-repository/smart-portfolio/smartportfolio/app/src/main/res/layout/listview_home_user.xml" value="0.3061594202898551" />
+        <entry key="..\:/github-repository/smart-portfolio/smartportfolio/app/src/main/res/layout/listview_menu_user.xml" value="0.3061594202898551" />
+        <entry key="..\:/github-repository/smart-portfolio/smartportfolio/app/src/main/res/layout/loading_login.xml" value="0.3038949275362319" />
+        <entry key="..\:/github-repository/smart-portfolio/smartportfolio/app/src/main/res/layout/menu_listview_user.xml" value="0.3061594202898551" />
+        <entry key="..\:/github-repository/smart-portfolio/smartportfolio/app/src/main/res/layout/recyclerview_home_user.xml" value="0.25" />
+        <entry key="..\:/github-repository/smart-portfolio/smartportfolio/app/src/main/res/layout/view_pager_card.xml" value="0.2662878787878788" />
+        <entry key="..\:/github-repository/smart-portfolio/smartportfolio/app/src/main/res/layout/view_pager_main.xml" value="0.3061594202898551" />
         <entry key="..\:/github-repository/smart-portfolio/smartportfolio/app/src/main/res/menu/menu_bottom.xml" value="0.36614583333333334" />
       </map>
     </option>
