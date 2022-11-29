@@ -28,8 +28,10 @@ class Fragment_Home : Fragment() {
     ): View? {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
 
+        // 유저 데이터 가져옴
         getSQLData()
 
+        // 드로어 메뉴에 유저 리스트 갱신
         (activity as MainActivity).initMenuListUserData(userList)
 
         return binding.root
@@ -44,10 +46,6 @@ class Fragment_Home : Fragment() {
 
         // 어댑터 생성
         val pagerAdapter = ViewPagerAdapter(pageList)
-
-//        deprecated
-//        fragment_home.binding.viewpager.adapter = pagerAdapter
-//        binding.indicatorMain.setViewPager2(fragment_home.binding.viewpager)
 
         // 어댑터와 뷰페이지 연결
         binding.viewpager.adapter = pagerAdapter
