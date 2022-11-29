@@ -24,7 +24,7 @@ class UserDatabaseHelper(context: Context) : SQLiteOpenHelper(context, "userData
     }
 
     fun insertData(data: User) {
-        val query = "INSERT INTO user('name', 'title', 'contents', 'image', 'url', 'viewType') values('${data.name}', '${data.title}', '${data.contents}','${data.image}', '${data.url}', '${data.viewType}');"
+        val query = "INSERT INTO user('name', 'title', 'contents', 'image', 'url', 'viewType') values('${data.name}', '${data.viewType}');"
         val db = this.writableDatabase
         db.execSQL(query)
         db.close()
@@ -38,7 +38,7 @@ class UserDatabaseHelper(context: Context) : SQLiteOpenHelper(context, "userData
     }
 
     fun updateData(data: User) {
-        val query = "UPDATE user set name = '${data.name}', title = '${data.title}', contents = '${data.contents}', image = '${data.image}', url = '${data.url}', viewType = '${data.viewType}'"
+        val query = "UPDATE user set name = '${data.name}', viewType = '${data.viewType}'"
         val db = this.writableDatabase
         db.execSQL(query)
         db.close()
@@ -50,7 +50,7 @@ class UserDatabaseHelper(context: Context) : SQLiteOpenHelper(context, "userData
 
         val cursor = db.rawQuery("SELECT * FROM user", null)
         while(cursor.moveToNext()) {
-            val rowData = User(cursor.getString(0), cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getInt(5))
+            val rowData = User(cursor.getString(0), cursor.getInt(1))
             result.add(rowData)
         }
 

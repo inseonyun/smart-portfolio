@@ -81,7 +81,7 @@ class MainActivity : AppCompatActivity()//, NavigationView.OnNavigationItemSelec
         val db_helper = UserDatabaseHelper(this)
         val page_list: ArrayList<User> = db_helper.selectData()
 
-        page_list.add(0, User("home", "home", "home", "home", "home", -1))
+        page_list.add(0, User("home", -1))
 
         // 어댑터 생성
         val pagerAdapter = ViewPagerAdapter(page_list)

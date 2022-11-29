@@ -10,14 +10,14 @@ class portfolioCardViewHolder(private val binding: ViewPagerCardBinding): Recycl
     fun onBind(data: User) {
         this.data = data
 
-        binding.tvTitle.setText(data.title)
-        binding.tvContents.setText(data.contents)
+        binding.tvTitle.setText(data.name)
+        //binding.tvContents.setText(data.contents)
 
-        if(!data.image.isNullOrEmpty()) {
-            // 이미지 설정
-        }
-        if(!data.url.isNullOrEmpty()) {
-            // 하이퍼링크 설정
-        }
+//        if(!data.image.isNullOrEmpty()) {
+//            // 이미지 설정
+//        }
+//        if(!data.url.isNullOrEmpty()) {
+//            // 하이퍼링크 설정
+//        }
     }
 }

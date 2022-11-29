@@ -15,7 +15,7 @@ class HomeUserListViewAdapter(val context: Context, var items: ArrayList<User>) 
         val binding = ListviewHomeUserBinding.inflate(LayoutInflater.from(context))
 
         binding.tvUserName.setText(items[p0].name)
-        binding.tvUserTitle.setText(items[p0].title)
+        //binding.tvUserTitle.setText(items[p0].title)
 
         binding.cvUser.setOnClickListener {
             (context as MainActivity).changeViewPagerPage(p0 + 1)
