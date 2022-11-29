@@ -45,14 +45,16 @@ class UserDatabaseHelper(context: Context) : SQLiteOpenHelper(context, "userData
     }
 
     fun selectData(): ArrayList<user> {
-        val db = this.writableDatabase
-        var result = ArrayList<user>()
+        val db = this.readableDatabase
+        val result = ArrayList<user>()
 
         val cursor = db.rawQuery("SELECT * FROM user", null)
         while(cursor.moveToNext()) {
-            val row_data = user(cursor.getString(0), cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getInt(5))
-            result.add(row_data)
+            val rowData = user(cursor.getString(0), cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getInt(5))
+            result.add(rowData)
         }
+
+        cursor.close()
 
         return result
     }
