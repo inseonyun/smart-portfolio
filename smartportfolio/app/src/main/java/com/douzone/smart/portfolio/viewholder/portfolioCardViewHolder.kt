@@ -1,13 +1,13 @@
 package com.douzone.smart.portfolio.viewholder
 
 import androidx.recyclerview.widget.RecyclerView
-import com.douzone.smart.portfolio.data.user
+import com.douzone.smart.portfolio.data.User
 import com.douzone.smart.portfolio.databinding.ViewPagerCardBinding
 
 class portfolioCardViewHolder(private val binding: ViewPagerCardBinding): RecyclerView.ViewHolder(binding.root) {
-    var data: user? = null
+    var data: User? = null
 
-    fun onBind(data: user) {
+    fun onBind(data: User) {
         this.data = data
 
         binding.tvTitle.setText(data.title)

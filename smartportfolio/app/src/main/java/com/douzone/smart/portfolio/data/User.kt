@@ -1,6 +1,6 @@
 package com.douzone.smart.portfolio.data
 
-class user (
+class User (
     var name: String,
     var title: String,
     var contents: String,

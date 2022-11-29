@@ -4,13 +4,13 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.douzone.smart.portfolio.data.ViewType
-import com.douzone.smart.portfolio.data.user
+import com.douzone.smart.portfolio.data.User
 import com.douzone.smart.portfolio.databinding.ViewPagerCardBinding
 import com.douzone.smart.portfolio.databinding.ViewPagerMainBinding
 import com.douzone.smart.portfolio.viewholder.homeMainViewHolder
 import com.douzone.smart.portfolio.viewholder.portfolioCardViewHolder
 
-class ViewPagerAdapter(var items: ArrayList<user>): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class ViewPagerAdapter(var items: ArrayList<User>): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         when(viewType) {
             ViewType.CARDVIEW -> {

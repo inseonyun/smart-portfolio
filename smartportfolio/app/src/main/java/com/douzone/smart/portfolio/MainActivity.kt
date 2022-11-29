@@ -7,7 +7,6 @@ import android.os.Bundle
 import android.os.Handler
 import android.view.MenuItem
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatDialog
 import androidx.core.view.GravityCompat
@@ -15,10 +14,9 @@ import androidx.drawerlayout.widget.DrawerLayout
 import com.airbnb.lottie.LottieAnimationView
 import com.douzone.smart.portfolio.adapter.MenuUserListViewAdapter
 import com.douzone.smart.portfolio.adapter.ViewPagerAdapter
-import com.douzone.smart.portfolio.data.user
+import com.douzone.smart.portfolio.data.User
 import com.douzone.smart.portfolio.databinding.ActivityMainBinding
 import com.douzone.smart.portfolio.db.UserDatabaseHelper
-import com.douzone.smart.portfolio.fragment.Fragment_Home
 import com.google.android.material.navigation.NavigationView
 import kotlin.random.Random
 
@@ -81,9 +79,9 @@ class MainActivity : AppCompatActivity()//, NavigationView.OnNavigationItemSelec
 
     fun getSQLData() {
         val db_helper = UserDatabaseHelper(this)
-        val page_list: ArrayList<user> = db_helper.selectData()
+        val page_list: ArrayList<User> = db_helper.selectData()
 
-        page_list.add(0, user("home", "home", "home", "home", "home", -1))
+        page_list.add(0, User("home", "home", "home", "home", "home", -1))
 
         // 어댑터 생성
         val pagerAdapter = ViewPagerAdapter(page_list)
@@ -125,7 +123,7 @@ class MainActivity : AppCompatActivity()//, NavigationView.OnNavigationItemSelec
 
     fun initUserData() {
         val db_helper = UserDatabaseHelper(binding.root.context)
-        val user_list: ArrayList<user> = db_helper.selectData()
+        val user_list: ArrayList<User> = db_helper.selectData()
         binding.lvUser.adapter = MenuUserListViewAdapter(this, user_list)
         setListViewHeightBasedOnChildren()
     }
