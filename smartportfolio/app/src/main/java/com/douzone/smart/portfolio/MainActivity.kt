@@ -17,6 +17,7 @@ import com.douzone.smart.portfolio.adapter.ViewPagerAdapter
 import com.douzone.smart.portfolio.data.User
 import com.douzone.smart.portfolio.databinding.ActivityMainBinding
 import com.douzone.smart.portfolio.db.UserDatabaseHelper
+import com.douzone.smart.portfolio.fragment.Fragment_Home
 import com.google.android.material.navigation.NavigationView
 import kotlin.random.Random
 
@@ -33,7 +34,7 @@ class MainActivity : AppCompatActivity()//, NavigationView.OnNavigationItemSelec
     private lateinit var drawer_layout : DrawerLayout
 
     //duplicate
-    //private lateinit var fragment_home: Fragment_Home
+    private lateinit var fragment_home: Fragment_Home
 
     private lateinit var progressDialog: AppCompatDialog
 
@@ -41,24 +42,23 @@ class MainActivity : AppCompatActivity()//, NavigationView.OnNavigationItemSelec
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        _binding = ActivityMainBinding.inflate(getLayoutInflater())
+        _binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
 
-        //deprecated
-        //fragment_home = Fragment_Home()
+        fragment_home = Fragment_Home()
+        initFrameLayout()
 
         initToolBar()
         initMenuButton()
-
-        //deprecated
-        //initFrameLayout()
 
         startLoading()
 
         initBottomNavigation()
         initSlidingDrawer()
-        initUserData()
+
+        //deprecated
+        //initUserData()
     }
 
     fun startLoading() {
@@ -72,36 +72,16 @@ class MainActivity : AppCompatActivity()//, NavigationView.OnNavigationItemSelec
         loading_lottie?.loop(true)
 
         Handler().postDelayed({
-            getSQLData()
             progressDialog.dismiss()
         }, loadingTime)
     }
 
-    fun getSQLData() {
-        val db_helper = UserDatabaseHelper(this)
-        val page_list: ArrayList<User> = db_helper.selectData()
-
-        page_list.add(0, User("home", -1))
-
-        // 어댑터 생성
-        val pagerAdapter = ViewPagerAdapter(page_list)
-
-//        deprecated
-//        fragment_home.binding.viewpager.adapter = pagerAdapter
-//        binding.indicatorMain.setViewPager2(fragment_home.binding.viewpager)
-
-        // 어댑터와 뷰페이지 연결
-        binding.viewpager.adapter = pagerAdapter
-        binding.indicatorMain.setViewPager2(binding.viewpager)
-
-    }
-
     fun changeViewPagerPage(idx: Int) {
-        if(binding.viewpager.currentItem != idx)
-            binding.viewpager.currentItem = idx
+        if(fragment_home.binding.viewpager.currentItem != idx)
+            fragment_home.binding.viewpager.currentItem = idx
     }
 
-    fun setListViewHeightBasedOnChildren() {
+    private fun setListViewHeightBasedOnChildren() {
         val menu_list_adapter = binding.lvUser.adapter ?: return
 
         var totalHeight = 0
@@ -121,10 +101,8 @@ class MainActivity : AppCompatActivity()//, NavigationView.OnNavigationItemSelec
         binding.lvUser.requestLayout()
     }
 
-    fun initUserData() {
-        val db_helper = UserDatabaseHelper(binding.root.context)
-        val user_list: ArrayList<User> = db_helper.selectData()
-        binding.lvUser.adapter = MenuUserListViewAdapter(this, user_list)
+    fun initMenuListUserData(userList: ArrayList<User>) {
+        binding.lvUser.adapter = MenuUserListViewAdapter(this, userList)
         setListViewHeightBasedOnChildren()
     }
 
@@ -157,11 +135,11 @@ class MainActivity : AppCompatActivity()//, NavigationView.OnNavigationItemSelec
     }
 
 // deprecated
-//    fun initFrameLayout() {
-//        supportFragmentManager.beginTransaction()
-//            .replace(R.id.frame_main, fragment_home!!)
-//            .commit()
-//    }
+    fun initFrameLayout() {
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.frame_main, fragment_home!!)
+            .commit()
+    }
 
     fun initMenuButton() {
         binding.imgbtnBack.setOnClickListener {

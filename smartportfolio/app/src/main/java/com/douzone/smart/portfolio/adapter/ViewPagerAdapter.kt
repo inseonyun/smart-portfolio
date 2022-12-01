@@ -7,6 +7,8 @@ import com.douzone.smart.portfolio.data.ViewType
 import com.douzone.smart.portfolio.data.User
 import com.douzone.smart.portfolio.databinding.ViewPagerCardBinding
 import com.douzone.smart.portfolio.databinding.ViewPagerMainBinding
+import com.douzone.smart.portfolio.databinding.ViewPagerTimelineBinding
+import com.douzone.smart.portfolio.viewholder.PortfolioTimelineViewHolder
 import com.douzone.smart.portfolio.viewholder.homeMainViewHolder
 import com.douzone.smart.portfolio.viewholder.portfolioCardViewHolder
 
@@ -17,6 +19,14 @@ class ViewPagerAdapter(var items: ArrayList<User>): RecyclerView.Adapter<Recycle
                 val binding =
                     ViewPagerCardBinding.inflate(LayoutInflater.from(parent.context), parent, false)
                 return portfolioCardViewHolder(binding)
+            }
+            ViewType.TIMELINE -> {
+                val binding =
+                    ViewPagerTimelineBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+                return PortfolioTimelineViewHolder(binding)
+            }
+            ViewType.MESSENGER -> {
+                TODO()
             }
             else -> {
                 val binding =
@@ -30,6 +40,12 @@ class ViewPagerAdapter(var items: ArrayList<User>): RecyclerView.Adapter<Recycle
         when(items[position].viewType) {
             ViewType.CARDVIEW -> {
                 (holder as portfolioCardViewHolder).onBind(items[position])
+            }
+            ViewType.TIMELINE -> {
+                (holder as PortfolioTimelineViewHolder).onBind(items[position])
+            }
+            ViewType.MESSENGER -> {
+                TODO()
             }
             else -> {
                 (holder as homeMainViewHolder).onBind()

@@ -32,11 +32,14 @@
         <entry key="..\:/github-repository/smart-portfolio/smartportfolio/app/src/main/res/layout/fragment_home_main.xml" value="0.3061594202898551" />
         <entry key="..\:/github-repository/smart-portfolio/smartportfolio/app/src/main/res/layout/listview_home_user.xml" value="0.3061594202898551" />
         <entry key="..\:/github-repository/smart-portfolio/smartportfolio/app/src/main/res/layout/listview_menu_user.xml" value="0.3061594202898551" />
+        <entry key="..\:/github-repository/smart-portfolio/smartportfolio/app/src/main/res/layout/listview_portfolio_card.xml" value="0.422554347826087" />
         <entry key="..\:/github-repository/smart-portfolio/smartportfolio/app/src/main/res/layout/loading_login.xml" value="0.3038949275362319" />
         <entry key="..\:/github-repository/smart-portfolio/smartportfolio/app/src/main/res/layout/menu_listview_user.xml" value="0.3061594202898551" />
         <entry key="..\:/github-repository/smart-portfolio/smartportfolio/app/src/main/res/layout/recyclerview_home_user.xml" value="0.25" />
+        <entry key="..\:/github-repository/smart-portfolio/smartportfolio/app/src/main/res/layout/recyclerview_portfolio_card.xml" value="0.422554347826087" />
         <entry key="..\:/github-repository/smart-portfolio/smartportfolio/app/src/main/res/layout/view_pager_card.xml" value="0.2662878787878788" />
         <entry key="..\:/github-repository/smart-portfolio/smartportfolio/app/src/main/res/layout/view_pager_main.xml" value="0.3061594202898551" />
+        <entry key="..\:/github-repository/smart-portfolio/smartportfolio/app/src/main/res/layout/view_pager_timeline.xml" value="0.25" />
         <entry key="..\:/github-repository/smart-portfolio/smartportfolio/app/src/main/res/menu/menu_bottom.xml" value="0.36614583333333334" />
       </map>
     </option>

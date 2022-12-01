@@ -11,7 +11,7 @@
         android:layout_height="65dp"
         android:layout_margin="5dp"
         app:cardCornerRadius="10dp"
-        app:cardElevation="5dp">
+        app:cardElevation="2dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -23,7 +23,7 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 app:cardCornerRadius="20dp"
-                app:cardElevation="5dp"
+                app:cardElevation="0dp"
                 android:layout_gravity="center"
                 android:layout_marginLeft="5dp">
 
@@ -31,6 +31,7 @@
                     android:id="@+id/iv_user_image"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
+                    android:scaleType="centerCrop"
                     android:src="@drawable/ic_listview_user"/>
 
             </androidx.cardview.widget.CardView>
