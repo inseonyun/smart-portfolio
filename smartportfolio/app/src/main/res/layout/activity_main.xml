@@ -51,7 +51,7 @@
             android:id="@+id/frame_main"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
+            app:layout_constraintBottom_toTopOf="@+id/bottomTabLayout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/appBarLayout" />
@@ -68,18 +68,32 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/indicator_main" />-->
 
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/bottomNavigationView"
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/bottomTabLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/white"
-            app:itemIconTint="@drawable/menu_bottom_select"
-            app:itemTextColor="@drawable/menu_bottom_select"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:menu="@menu/menu_bottom" />
+            app:tabMode="fixed"
+            app:tabIconTint="@color/menu_bottom_select"
+            app:tabSelectedTextColor="@color/menu_bottom_select"
+            app:tabIndicatorGravity="top"
+            app:tabIndicatorColor="@color/user_button">
 
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="홈"
+                android:icon="@drawable/ic_menu_bottom_home" />
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="이력서 추가"
+                android:icon="@drawable/ic_menu_bottom_add" />
+
+        </com.google.android.material.tabs.TabLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <!-- drawer screen -->

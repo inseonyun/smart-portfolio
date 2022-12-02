@@ -5,6 +5,7 @@ import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
@@ -19,6 +20,7 @@ import com.douzone.smart.portfolio.databinding.ActivityMainBinding
 import com.douzone.smart.portfolio.db.UserDatabaseHelper
 import com.douzone.smart.portfolio.fragment.Fragment_Home
 import com.google.android.material.navigation.NavigationView
+import com.google.android.material.tabs.TabLayout
 import kotlin.random.Random
 
 class MainActivity : AppCompatActivity()//, NavigationView.OnNavigationItemSelectedListener {
@@ -107,11 +109,31 @@ class MainActivity : AppCompatActivity()//, NavigationView.OnNavigationItemSelec
     }
 
     fun initBottomNavigation() {
-        binding.bottomNavigationView.setOnNavigationItemReselectedListener {
-            when(it.itemId) {
-                R.id.action_home -> changeViewPagerPage(0)
+        binding.bottomTabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener{
+            // 탭 선택 됐을 때 이벤트
+            override fun onTabSelected(tab: TabLayout.Tab?) {
+                when(tab?.text) {
+                    "홈" -> {
+//                        supportFragmentManager.beginTransaction()
+//                            .replace(R.id.frame_main, fragment_home)
+//                            .commit()
+                    }
+                    "이력서 추가" -> {
+                    }
+                }
             }
-        }
+
+            // 선택된 탭이 아닌 다른 탭을 선택 했을 때 이벤트
+            override fun onTabUnselected(tab: TabLayout.Tab?) {
+            }
+
+            // 선택된 탭을 다시 선택 했을 때 이벤트
+            override fun onTabReselected(tab: TabLayout.Tab?) {
+                when(tab?.text) {
+                    "홈" -> changeViewPagerPage(0)
+                }
+            }
+        })
     }
 
     fun initSlidingDrawer() {
