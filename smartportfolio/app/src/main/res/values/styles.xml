@@ -38,6 +38,12 @@
         <item name="android:textAlignment">textEnd</item>
     </style>
 
+    <style name="portfolio_messenger_textView_link">
+        <item name="android:textSize">18dp</item>
+        <item name="android:textColor">@color/messenger_text_color</item>
+        <item name="android:textAlignment">textEnd</item>
+    </style>
+
     <style name="home_textView_title">
         <item name="android:textSize">24dp</item>
         <item name="android:textColor">@color/black</item>
