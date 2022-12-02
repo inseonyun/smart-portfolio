@@ -18,4 +18,8 @@
     <color name="user_progress">#568bfc</color>
     <color name="main_color">#6aa2fc</color>
     <color name="timeline_gray">#707070</color>
+    <color name="messenger_gray">#B8B8B8</color>
+    <color name="messenger_blue">#87ADFB</color>
+    <color name="messenger_text_color">#FFFFFF</color>
+
 </resources>
