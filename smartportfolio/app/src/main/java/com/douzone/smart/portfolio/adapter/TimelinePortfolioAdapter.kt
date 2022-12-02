@@ -27,7 +27,13 @@ class TimelinePortfolioAdapter(val context: Context, var items: ArrayList<Timeli
 
         binding.tvTitle.text = items[p0].title
         binding.tvContents.text = items[p0].contents
-        binding.tvLink.text = items[p0].url
+
+        // url이 없다면 표시하지 않음
+        if(items[p0].url.isNullOrEmpty()) {
+            binding.tvLink.visibility = View.GONE
+        } else {
+            binding.tvLink.text = items[p0].url
+        }
 
         // 타임라인 서클 default : blue
         when(items[p0].circleColor) {

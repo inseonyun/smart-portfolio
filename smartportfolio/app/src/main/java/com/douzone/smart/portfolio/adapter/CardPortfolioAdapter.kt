@@ -20,6 +20,12 @@ class CardPortfolioAdapter(val context: Context, var items: ArrayList<Portfolio>
         // 이미지 넣음
         //if(!items[p0].image.isNullOrEmpty())
 
+        if(items[p0].url.isNullOrEmpty()) {
+            binding.tvLink.visibility = View.GONE
+        } else {
+            binding.tvLink.text = items[p0].url
+        }
+
         return binding.root
     }
 

@@ -14,7 +14,12 @@ class MessengerPortfolioAdapter(val context: Context, var items: ArrayList<Messe
 
         binding.tvTitle.text = items[p0].title
         binding.tvContents.text = items[p0].contents
-        binding.tvLink.text = items[p0].url
+
+        if(items[p0].url.isNullOrEmpty()) {
+            binding.tvLink.visibility = View.GONE
+        } else {
+            binding.tvLink.text = items[p0].url
+        }
 
         // 이미지 넣음
         //if(!items[p0].image.isNullOrEmpty())
