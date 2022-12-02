@@ -1,5 +1,6 @@
 package com.douzone.smart.portfolio
 
+import android.animation.ValueAnimator
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
@@ -14,16 +15,14 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.airbnb.lottie.LottieAnimationView
 import com.douzone.smart.portfolio.adapter.MenuUserListViewAdapter
-import com.douzone.smart.portfolio.adapter.ViewPagerAdapter
 import com.douzone.smart.portfolio.data.User
 import com.douzone.smart.portfolio.databinding.ActivityMainBinding
-import com.douzone.smart.portfolio.db.UserDatabaseHelper
 import com.douzone.smart.portfolio.fragment.Fragment_Home
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.tabs.TabLayout
 import kotlin.random.Random
 
-class MainActivity : AppCompatActivity()//, NavigationView.OnNavigationItemSelectedListener {
+class MainActivity : AppCompatActivity()
 {
     private var _binding: ActivityMainBinding? = null
     private val binding get() = _binding!!
@@ -58,9 +57,6 @@ class MainActivity : AppCompatActivity()//, NavigationView.OnNavigationItemSelec
 
         initBottomNavigation()
         initSlidingDrawer()
-
-        //deprecated
-        //initUserData()
     }
 
     fun startLoading() {
@@ -71,7 +67,7 @@ class MainActivity : AppCompatActivity()//, NavigationView.OnNavigationItemSelec
         progressDialog.show()
         var loading_lottie = progressDialog.findViewById<LottieAnimationView>(R.id.loading_lottie)
         loading_lottie?.playAnimation()
-        loading_lottie?.loop(true)
+        loading_lottie?.repeatCount = ValueAnimator.INFINITE
 
         Handler().postDelayed({
             progressDialog.dismiss()
@@ -153,7 +149,6 @@ class MainActivity : AppCompatActivity()//, NavigationView.OnNavigationItemSelec
         supportActionBar?.setDisplayHomeAsUpEnabled(true) // 드로어를 꺼낼 홈 버튼 활성화
         supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_toolbar_button_menu) // 홈버튼 이미지 변경
         supportActionBar?.setDisplayShowTitleEnabled(false) // 툴바에 타이틀 안보이게
-        //navigationView.setNavigationItemSelectedListener(this) //navigation 리스너
     }
 
 // deprecated
@@ -179,13 +174,6 @@ class MainActivity : AppCompatActivity()//, NavigationView.OnNavigationItemSelec
         }
         return super.onOptionsItemSelected(item)
     }
-// deprecated
-//    override fun onNavigationItemSelected(item: MenuItem): Boolean {
-//        when(item.itemId) {
-//
-//        }
-//        return false
-//    }
 
     override fun onBackPressed() {
         if(drawer_layout.isDrawerOpen(GravityCompat.START)){
