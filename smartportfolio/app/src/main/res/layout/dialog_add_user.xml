@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="20dp">
+
+    <!-- name -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="유저 이름"
+            style="@style/dialog_add_textView_title"/>
+
+        <EditText
+            android:id="@+id/et_name"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:paddingLeft="10dp"
+            android:hint="이름을 입력해주세요"
+            android:background="@drawable/custom_edit_text" />
+    </LinearLayout>
+
+    <!-- viewType -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="포트폴리오 형태"
+            style="@style/dialog_add_textView_title"/>
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp">
+
+            <RadioButton
+                android:id="@+id/rbt_card"
+                android:text="카드형 포트폴리오"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:checked="true"
+                style="@style/dialog_add_textView_radio"/>
+
+            <RadioButton
+                android:id="@+id/rbt_timeline"
+                android:text="타임라인형 포트폴리오"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                style="@style/dialog_add_textView_radio"/>
+
+            <RadioButton
+                android:id="@+id/rbt_messenger"
+                android:text="메신저형 포트폴리오"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                style="@style/dialog_add_textView_radio"/>
+
+        </RadioGroup>
+
+    </LinearLayout>
+
+</LinearLayout>
