@@ -63,4 +63,21 @@
         <item name="android:textSize">16dp</item>
     </style>
 
+    <style name="dialog_add_textView_title">
+        <item name="android:textSize">18dp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="dialog_add_textView_radio">
+        <item name="android:textSize">16dp</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textAlignment">center</item>
+    </style>
+
+    <style name="portfolio_add_textView_userName">
+        <item name="android:textSize">18dp</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textAlignment">center</item>
+    </style>
+
 </resources>

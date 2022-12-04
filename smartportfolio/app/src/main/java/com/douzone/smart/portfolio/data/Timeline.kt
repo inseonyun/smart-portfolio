@@ -1,5 +1,7 @@
 package com.douzone.smart.portfolio.data
 
+import java.io.Serializable
+
 class Timeline (
     var id: Int,
     var name: String,
@@ -9,4 +11,4 @@ class Timeline (
     var image: String?,
     var url: String?,
     var circleColor: Int,
-)
+) : Serializable

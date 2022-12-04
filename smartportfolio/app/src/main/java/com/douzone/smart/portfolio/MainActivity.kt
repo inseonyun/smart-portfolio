@@ -1,6 +1,8 @@
 package com.douzone.smart.portfolio
 
 import android.animation.ValueAnimator
+import android.content.DialogInterface
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
@@ -10,13 +12,21 @@ import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatDialog
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.airbnb.lottie.LottieAnimationView
 import com.douzone.smart.portfolio.adapter.MenuUserListViewAdapter
-import com.douzone.smart.portfolio.data.User
+import com.douzone.smart.portfolio.data.*
 import com.douzone.smart.portfolio.databinding.ActivityMainBinding
+import com.douzone.smart.portfolio.databinding.DialogAddUserBinding
+import com.douzone.smart.portfolio.db.MessengerPortfolioDatabaseHelper
+import com.douzone.smart.portfolio.db.PortfolioDatabaseHelper
+import com.douzone.smart.portfolio.db.TimelinePortfolioDatabaseHelper
+import com.douzone.smart.portfolio.db.UserDatabaseHelper
 import com.douzone.smart.portfolio.fragment.Fragment_Home
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.tabs.TabLayout
@@ -40,6 +50,16 @@ class MainActivity : AppCompatActivity()
     private lateinit var progressDialog: AppCompatDialog
 
     private var loadingTime = Random.nextLong(1000, 3000)
+
+    private val addPortfolioRequestLauncher: ActivityResultLauncher<Intent> = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()) { activityResult ->
+        if(activityResult.resultCode == RESULT_OK) {
+            // 데이터 갱신
+            fragment_home.initUserData()
+            fragment_home.initMenuList()
+            fragment_home.initPages()
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -162,6 +182,42 @@ class MainActivity : AppCompatActivity()
         binding.imgbtnBack.setOnClickListener {
             if(drawer_layout.isDrawerOpen(GravityCompat.START)){
                 drawer_layout.closeDrawers()
+            }
+        }
+
+        binding.tvPortfolioAdd.setOnClickListener {
+            // 포트폴리오 추가 기능 구현
+            val bindingDialogUserAdd = DialogAddUserBinding.inflate(layoutInflater)
+            AlertDialog.Builder(this).run {
+                setTitle("${binding.tvPortfolioAdd.text}")
+                setView(bindingDialogUserAdd.root)
+                setPositiveButton("추가", DialogInterface.OnClickListener { dialogInterface, _ ->
+                    if(bindingDialogUserAdd.etName.text.isNullOrEmpty())
+                        Toast.makeText(context, "이름을 입력해주세요", Toast.LENGTH_SHORT).show()
+                    else {
+                        val userViewType = when(bindingDialogUserAdd.radioGroup.checkedRadioButtonId) {
+                            bindingDialogUserAdd.rbtTimeline.id -> ViewType.TIMELINE
+                            bindingDialogUserAdd.rbtMessenger.id -> ViewType.MESSENGER
+                            else -> ViewType.CARDVIEW
+                        }
+                        val intent = Intent(this@MainActivity, AddPortfolioActivity::class.java)
+                        intent.putExtra("name", bindingDialogUserAdd.etName.text.toString().trim())
+                        intent.putExtra("viewType", userViewType)
+                        addPortfolioRequestLauncher.launch(intent)
+                    /*
+                        val user = User(bindingDialogUserAdd.etName.text.toString().trim(), userViewType)
+                        val userDB = UserDatabaseHelper(this@MainActivity)
+                        userDB.insertData(user)
+                        fragment_home.initUserData()
+                        fragment_home.initMenuList()
+                        fragment_home.initPages()*/
+                    }
+                    dialogInterface.dismiss()
+                })
+                setNegativeButton("취소", DialogInterface.OnClickListener { dialogInterface, _ ->
+                    dialogInterface.dismiss()
+                })
+                show()
             }
         }
     }

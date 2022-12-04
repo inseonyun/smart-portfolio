@@ -24,7 +24,7 @@ class MessengerPortfolioDatabaseHelper(context: Context): SQLiteOpenHelper(conte
         onCreate(db)
     }
 
-    fun insertData(data: Portfolio) {
+    fun insertData(data: Messenger) {
         val query = "INSERT INTO MessengerPortfolio('name', 'title', 'contents', 'image', 'url') values('${data.name}', '${data.title}', '${data.contents}','${data.image}', '${data.url}');"
         val db = this.writableDatabase
         db.execSQL(query)

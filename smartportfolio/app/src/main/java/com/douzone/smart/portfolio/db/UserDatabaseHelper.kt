@@ -8,11 +8,7 @@ import com.douzone.smart.portfolio.data.User
 class UserDatabaseHelper(context: Context) : SQLiteOpenHelper(context, "userDatabase.db", null, 1) {
     override fun onCreate(db: SQLiteDatabase?) {
         val sql = "CREATE TABLE if not exists user(" +
-                "name text primary key," +
-                "title text," +
-                "contents text," +
-                "image text," +
-                "url text," +
+                "name text primary key,"+
                 "viewType integer);"
         db?.execSQL(sql)
     }
@@ -24,7 +20,7 @@ class UserDatabaseHelper(context: Context) : SQLiteOpenHelper(context, "userData
     }
 
     fun insertData(data: User) {
-        val query = "INSERT INTO user('name', 'title', 'contents', 'image', 'url', 'viewType') values('${data.name}', '${data.viewType}');"
+        val query = "INSERT INTO user('name', 'viewType') values('${data.name}', '${data.viewType}');"
         val db = this.writableDatabase
         db.execSQL(query)
         db.close()

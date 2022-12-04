@@ -1,5 +1,7 @@
 package com.douzone.smart.portfolio.data
 
+import java.io.Serializable
+
 class Messenger (
     var id: Int,
     var name: String,
@@ -7,4 +9,4 @@ class Messenger (
     var contents: String,
     var image: String?,
     var url: String?
-)
+) : Serializable

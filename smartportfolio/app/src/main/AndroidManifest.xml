@@ -14,21 +14,21 @@
         android:theme="@style/Theme.Smartportfolio"
         tools:targetApi="31">
         <activity
+            android:name=".AddPortfolioActivity"
+            android:theme="@style/Theme.add.portfolio"
+            android:exported="true" />
+        <activity
             android:name=".LoginActivity"
             android:exported="true">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
         <activity
             android:name=".MainActivity"
-            android:exported="true">
-
-        </activity>
+            android:exported="true"></activity>
     </application>
 
 </manifest>
