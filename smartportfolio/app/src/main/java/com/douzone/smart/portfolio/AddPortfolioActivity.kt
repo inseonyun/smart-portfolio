@@ -64,9 +64,11 @@ class AddPortfolioActivity : AppCompatActivity() {
 
     fun initEvent() {
         timelineDialogBinding.tvDate.setOnClickListener {
-            DatePickerDialog(this@AddPortfolioActivity, {_, year, month, day ->
+            val datePickerDialog = DatePickerDialog(this@AddPortfolioActivity, {_, year, month, day ->
                 timelineDialogBinding.tvDate.text = "$year-${month + 1}-$day"
-            }, year, month, day).show()
+            }, year, month, day)
+            datePickerDialog.datePicker.maxDate = System.currentTimeMillis()
+            datePickerDialog.show()
         }
 
         binding.btnAdd.setOnClickListener {
