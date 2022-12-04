@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="20dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Date"
+            style="@style/dialog_add_textView_title"/>
+
+        <TextView
+            android:id="@+id/tv_date"
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Date"
+            android:textSize="16dp"
+            android:layout_marginLeft="5dp"/>
+
+    </LinearLayout>
+
+    <!-- title -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Title"
+            style="@style/dialog_add_textView_title"/>
+
+        <EditText
+            android:id="@+id/et_title"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:paddingLeft="10dp"
+            android:hint="제목을 입력해주세요"
+            android:inputType="text"
+            android:background="@drawable/custom_edit_text" />
+    </LinearLayout>
+
+    <!-- contents -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Contents"
+            style="@style/dialog_add_textView_title"/>
+
+        <EditText
+            android:id="@+id/et_contents"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:paddingLeft="10dp"
+            android:hint="내용을 입력해주세요"
+            android:textAlignment="textStart"
+            android:background="@drawable/custom_edit_text" />
+    </LinearLayout>
+
+    <!-- url -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="URL"
+            style="@style/dialog_add_textView_title" />
+
+        <EditText
+            android:id="@+id/et_url"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:paddingLeft="10dp"
+            android:hint="URL을 입력해주세요"
+            android:inputType="text"
+            android:background="@drawable/custom_edit_text" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_image"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="이미지가 추가되지 않았습니다."/>
+
+    <Button
+        android:id="@+id/btn_image"
+        android:layout_width="120dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="10dp"
+        android:text="이미지 추가"
+        android:textColor="@color/white"
+        android:background="@drawable/custom_button_round"
+        android:backgroundTint="@color/user_button"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Circle Color"
+        style="@style/dialog_add_textView_title"/>
+
+    <RadioGroup
+        android:id="@+id/rbt_circleColor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/rbt_blue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="파랑"/>
+
+        <RadioButton
+            android:id="@+id/rbt_green"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="녹색"/>
+
+        <RadioButton
+            android:id="@+id/rbt_orange"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="오렌지"/>
+
+    </RadioGroup>
+
+</LinearLayout>

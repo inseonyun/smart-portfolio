@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="20dp">
+
+    <!-- title -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Title"
+            style="@style/dialog_add_textView_title"/>
+
+        <EditText
+            android:id="@+id/et_title"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:paddingLeft="10dp"
+            android:hint="제목을 입력해주세요"
+            android:inputType="text"
+            android:background="@drawable/custom_edit_text" />
+    </LinearLayout>
+
+    <!-- contents -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Contents"
+            style="@style/dialog_add_textView_title"/>
+
+        <EditText
+            android:id="@+id/et_contents"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:paddingLeft="10dp"
+            android:hint="내용을 입력해주세요"
+            android:textAlignment="textStart"
+            android:background="@drawable/custom_edit_text" />
+    </LinearLayout>
+
+    <!-- url -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="URL"
+            style="@style/dialog_add_textView_title" />
+
+        <EditText
+            android:id="@+id/et_url"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:paddingLeft="10dp"
+            android:hint="URL을 입력해주세요"
+            android:inputType="text"
+            android:background="@drawable/custom_edit_text" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_image"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="이미지가 추가되지 않았습니다."/>
+
+    <Button
+        android:id="@+id/btn_image"
+        android:layout_width="120dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="10dp"
+        android:text="이미지 추가"
+        android:textColor="@color/white"
+        android:background="@drawable/custom_button_round"
+        android:backgroundTint="@color/user_button"/>
+
+</LinearLayout>
