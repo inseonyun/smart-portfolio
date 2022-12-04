@@ -164,6 +164,10 @@ class MainActivity : AppCompatActivity()
                 drawer_layout.closeDrawers()
             }
         }
+
+        binding.tvPortfolioAdd.setOnClickListener {
+            // 포트폴리오 추가 기능 구현
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
