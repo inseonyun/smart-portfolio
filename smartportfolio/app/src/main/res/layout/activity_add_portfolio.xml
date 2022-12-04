@@ -62,7 +62,9 @@
         <ListView
             android:id="@+id/lv_portfolio"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"
+            android:dividerHeight="0px"
+            android:divider="#FFFFFF"/>
 
         <Button
             android:layout_width="140dp"

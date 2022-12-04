@@ -3,13 +3,16 @@ package com.douzone.smart.portfolio
 import android.app.Activity
 import android.app.DatePickerDialog
 import android.content.DialogInterface
-import android.graphics.Color
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.DatePicker
+import android.view.Menu
+import android.view.MenuItem
+import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import androidx.core.view.GravityCompat
+import androidx.appcompat.app.AppCompatActivity
+import com.douzone.smart.portfolio.adapter.CardPortfolioAdapter
+import com.douzone.smart.portfolio.adapter.MessengerPortfolioAdapter
+import com.douzone.smart.portfolio.adapter.TimelinePortfolioAdapter
 import com.douzone.smart.portfolio.data.*
 import com.douzone.smart.portfolio.databinding.ActivityAddPortfolioBinding
 import com.douzone.smart.portfolio.databinding.DialogAddPortfolioCardBinding
@@ -18,8 +21,9 @@ import com.douzone.smart.portfolio.databinding.DialogAddPortfolioTimelineBinding
 import com.douzone.smart.portfolio.db.MessengerPortfolioDatabaseHelper
 import com.douzone.smart.portfolio.db.PortfolioDatabaseHelper
 import com.douzone.smart.portfolio.db.TimelinePortfolioDatabaseHelper
-import java.sql.Time
+import com.douzone.smart.portfolio.db.UserDatabaseHelper
 import java.util.*
+
 
 class AddPortfolioActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAddPortfolioBinding
@@ -31,6 +35,14 @@ class AddPortfolioActivity : AppCompatActivity() {
     private var year = calendar.get(Calendar.YEAR)
     private var month = calendar.get(Calendar.MONTH)
     private var day = calendar.get(Calendar.DAY_OF_MONTH)
+
+    private val cardPortfolio = ArrayList<Portfolio>()
+    private val timelinePortfolio = ArrayList<Timeline>()
+    private val messengerPortfolio = ArrayList<Messenger>()
+
+    private val cardPortfolioAdapter = CardPortfolioAdapter(this@AddPortfolioActivity, cardPortfolio)
+    private val timelinePortfolioAdapter = TimelinePortfolioAdapter(this@AddPortfolioActivity, timelinePortfolio)
+    private val messengerPortfolioAdapter = MessengerPortfolioAdapter(this@AddPortfolioActivity, messengerPortfolio)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,6 +64,12 @@ class AddPortfolioActivity : AppCompatActivity() {
 
     fun initView() {
         setContentView(binding.root)
+
+        when(intent.getIntExtra("viewType", 1)) {
+            ViewType.CARDVIEW -> binding.lvPortfolio.adapter = cardPortfolioAdapter
+            ViewType.TIMELINE -> binding.lvPortfolio.adapter = timelinePortfolioAdapter
+            ViewType.MESSENGER -> binding.lvPortfolio.adapter = messengerPortfolioAdapter
+        }
     }
 
     fun initToolbar() {
@@ -62,7 +80,7 @@ class AddPortfolioActivity : AppCompatActivity() {
         binding.tvUserName.text = intent.getStringExtra("name")
     }
 
-    fun initEvent() {
+    fun initDialogEvent() {
         timelineDialogBinding.tvDate.setOnClickListener {
             val datePickerDialog = DatePickerDialog(this@AddPortfolioActivity, {_, year, month, day ->
                 timelineDialogBinding.tvDate.text = "$year-${month + 1}-$day"
@@ -70,8 +88,11 @@ class AddPortfolioActivity : AppCompatActivity() {
             datePickerDialog.datePicker.maxDate = System.currentTimeMillis()
             datePickerDialog.show()
         }
+    }
 
+    fun initEvent() {
         binding.btnAdd.setOnClickListener {
+            initDialogEvent()
             AlertDialog.Builder(this).run {
                 setTitle("포트폴리오 추가")
 
@@ -82,21 +103,23 @@ class AddPortfolioActivity : AppCompatActivity() {
                             if(cardDialogBinding.etTitle.text.isNullOrEmpty() || cardDialogBinding.etContents.text.isNullOrEmpty())
                                 Toast.makeText(this@AddPortfolioActivity, "입력 값이 비었습니다.", Toast.LENGTH_SHORT).show()
                             else {
-                                intent.putExtra("name", intent.getStringExtra("name"))
-                                intent.putExtra("viewType", intent.getIntExtra("viewType", 1))
-
                                 // 이미지 구현 해야함
-                                val cardPortfolio = Portfolio(0,
+                                val rowCardPortfolio = Portfolio(0,
                                     intent.getStringExtra("name").toString(),
                                     cardDialogBinding.etTitle.text.toString(),
                                     cardDialogBinding.etContents.text.toString(),
                                     "",
                                     cardDialogBinding.etUrl.text.toString().trim()
                                 )
-                                intent.putExtra("portfolio", cardPortfolio)
 
-                                setResult(Activity.RESULT_OK, intent)
-                                finish()
+                                cardPortfolio.add(rowCardPortfolio)
+                                cardPortfolioAdapter.notifyDataSetChanged()
+
+                                // 뷰 제거 후 다시 바인딩
+                                if(cardDialogBinding.root.parent != null)
+                                    (cardDialogBinding.root.parent as ViewGroup).removeView(cardDialogBinding.root)
+
+                                cardDialogBinding = DialogAddPortfolioCardBinding.inflate(layoutInflater)
                             }
 
                             dialogInterface.dismiss()
@@ -108,9 +131,6 @@ class AddPortfolioActivity : AppCompatActivity() {
                             if(timelineDialogBinding.etTitle.text.isNullOrEmpty() || timelineDialogBinding.etContents.text.isNullOrEmpty())
                                 Toast.makeText(this@AddPortfolioActivity, "입력 값이 비었습니다.", Toast.LENGTH_SHORT).show()
                             else {
-                                intent.putExtra("name", intent.getStringExtra("name"))
-                                intent.putExtra("viewType", intent.getIntExtra("viewType", 1))
-
                                 // 라디오 선택된 컬러값으로 circleColor 조정
                                 val circleColor: Int = when(timelineDialogBinding.rbtCircleColor.checkedRadioButtonId) {
                                     timelineDialogBinding.rbtGreen.id -> CircleType.GREEN
@@ -119,7 +139,7 @@ class AddPortfolioActivity : AppCompatActivity() {
                                 }
 
                                 // 이미지 구현 해야함
-                                val timelinePortfolio = Timeline(0,
+                                val rowTimelinePortfolio = Timeline(0,
                                     intent.getStringExtra("name").toString(),
                                     timelineDialogBinding.etTitle.text.toString(),
                                     timelineDialogBinding.etContents.text.toString(),
@@ -128,10 +148,13 @@ class AddPortfolioActivity : AppCompatActivity() {
                                     timelineDialogBinding.etUrl.text.toString().trim(),
                                     circleColor
                                 )
-                                intent.putExtra("portfolio", timelinePortfolio)
+                                timelinePortfolio.add(rowTimelinePortfolio)
+                                timelinePortfolioAdapter.notifyDataSetChanged()
 
-                                setResult(Activity.RESULT_OK, intent)
-                                finish()
+                                // 뷰 제거 후 다시 바인딩
+                                if(timelineDialogBinding.root.parent != null)
+                                    (timelineDialogBinding.root.parent as ViewGroup).removeView(timelineDialogBinding.root)
+                                timelineDialogBinding = DialogAddPortfolioTimelineBinding.inflate(layoutInflater)
                             }
 
                             dialogInterface.dismiss()
@@ -143,21 +166,21 @@ class AddPortfolioActivity : AppCompatActivity() {
                             if(messengerDialogBinding.etTitle.text.isNullOrEmpty() || messengerDialogBinding.etContents.text.isNullOrEmpty())
                                 Toast.makeText(this@AddPortfolioActivity, "입력 값이 비었습니다.", Toast.LENGTH_SHORT).show()
                             else {
-                                intent.putExtra("name", intent.getStringExtra("name"))
-                                intent.putExtra("viewType", intent.getIntExtra("viewType", 1))
-
                                 // 이미지 구현 해야함
-                                val messengerPortfolio = Messenger(0,
+                                val rowMessengerPortfolio = Messenger(0,
                                     intent.getStringExtra("name").toString(),
                                     messengerDialogBinding.etTitle.text.toString(),
                                     messengerDialogBinding.etContents.text.toString(),
                                     "",
                                     messengerDialogBinding.etUrl.text.toString().trim()
                                 )
-                                intent.putExtra("portfolio", messengerPortfolio)
+                                messengerPortfolio.add(rowMessengerPortfolio)
+                                messengerPortfolioAdapter.notifyDataSetChanged()
 
-                                setResult(Activity.RESULT_OK, intent)
-                                finish()
+                                // 뷰 제거 후 다시 바인딩
+                                if(messengerDialogBinding.root.parent != null)
+                                    (messengerDialogBinding.root.parent as ViewGroup).removeView(messengerDialogBinding.root)
+                                messengerDialogBinding = DialogAddPortfolioMessengerBinding.inflate(layoutInflater)
                             }
 
                             dialogInterface.dismiss()
@@ -171,6 +194,53 @@ class AddPortfolioActivity : AppCompatActivity() {
                 show()
             }
         }
+    }
+
+    fun insertPortfolio() {
+        val userName = intent.getStringExtra("name")
+        val userViewType = intent.getIntExtra("viewType", 1)
+
+        // add user
+        val user = User(userName!!, userViewType)
+        val userDB = UserDatabaseHelper(this@AddPortfolioActivity)
+        userDB.insertData(user)
+
+        // add portfolio
+        when(userViewType) {
+            ViewType.CARDVIEW -> {
+                val portfolioDB = PortfolioDatabaseHelper(this@AddPortfolioActivity)
+                cardPortfolio.forEach {
+                    portfolioDB.insertData(it)
+                }
+            }
+            ViewType.TIMELINE -> {
+                val portfolioDB = TimelinePortfolioDatabaseHelper(this@AddPortfolioActivity)
+                timelinePortfolio.forEach {
+                    portfolioDB.insertData(it)
+                }
+            }
+            ViewType.MESSENGER -> {
+                val portfolioDB = MessengerPortfolioDatabaseHelper(this@AddPortfolioActivity)
+                messengerPortfolio.forEach {
+                    portfolioDB.insertData(it)
+                }
+            }
+        }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean = when(item.itemId) {
+        R.id.menu_save -> {
+            insertPortfolio()
+            setResult(Activity.RESULT_OK, intent)
+            finish()
+            true
+        }
+        else -> true
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.menu_portfolio_save, menu)
+        return super.onCreateOptionsMenu(menu)
     }
 
     override fun onBackPressed() {

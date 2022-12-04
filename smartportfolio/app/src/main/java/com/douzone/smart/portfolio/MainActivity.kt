@@ -54,31 +54,7 @@ class MainActivity : AppCompatActivity()
     private val addPortfolioRequestLauncher: ActivityResultLauncher<Intent> = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()) { activityResult ->
         if(activityResult.resultCode == RESULT_OK) {
-            val userName = activityResult.data!!.getStringExtra("name")
-            val viewType = activityResult.data!!.getIntExtra("viewType", 1)
-
-            // add user
-            val user = User(userName!!, viewType)
-            val userDB = UserDatabaseHelper(this@MainActivity)
-            userDB.insertData(user)
-
-            // add portfolio
-            val portfolio = activityResult.data!!.getSerializableExtra("portfolio")
-            when(viewType) {
-                ViewType.CARDVIEW -> {
-                    val portfolioDB = PortfolioDatabaseHelper(this@MainActivity)
-                    portfolioDB.insertData((portfolio as Portfolio))
-                }
-                ViewType.TIMELINE -> {
-                    val portfolioDB = TimelinePortfolioDatabaseHelper(this@MainActivity)
-                    portfolioDB.insertData((portfolio as Timeline))
-                }
-                ViewType.MESSENGER -> {
-                    val portfolioDB = MessengerPortfolioDatabaseHelper(this@MainActivity)
-                    portfolioDB.insertData((portfolio as Messenger))
-                }
-            }
-
+            // 데이터 갱신
             fragment_home.initUserData()
             fragment_home.initMenuList()
             fragment_home.initPages()
