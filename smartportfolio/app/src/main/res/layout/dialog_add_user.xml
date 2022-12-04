@@ -21,9 +21,11 @@
             android:id="@+id/et_name"
             android:layout_marginTop="10dp"
             android:layout_width="match_parent"
-            android:layout_height="35dp"
+            android:layout_height="45dp"
             android:paddingLeft="10dp"
             android:hint="이름을 입력해주세요"
+            android:inputType="text"
+            android:maxLength="10"
             android:background="@drawable/custom_edit_text" />
     </LinearLayout>
 
@@ -41,6 +43,7 @@
             style="@style/dialog_add_textView_title"/>
 
         <RadioGroup
+            android:id="@+id/radio_group"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp">
