@@ -22,6 +22,8 @@ class Fragment_Home : Fragment() {
     // 유저를 나타내는 리스트
     private var userList = ArrayList<User>()
 
+    private var pagerAdapter = ViewPagerAdapter(pageList)
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -31,8 +33,11 @@ class Fragment_Home : Fragment() {
         // 유저 데이터 가져옴
         getSQLData()
 
+        // 어댑터와 뷰페이지 연결
+        initPages()
+
         // 드로어 메뉴에 유저 리스트 갱신
-        (activity as MainActivity).initMenuListUserData(userList)
+        initMenuList()
 
         return binding.root
     }
@@ -40,16 +45,24 @@ class Fragment_Home : Fragment() {
     fun getSQLData() {
         val dbHelper = UserDatabaseHelper(requireContext() as MainActivity)
         userList = dbHelper.selectData()
+    }
 
+    fun initUserData() {
+        val dbHelper = UserDatabaseHelper(requireContext() as MainActivity)
+        userList.clear()
+        userList = dbHelper.selectData()
+    }
+
+    fun initMenuList() {
+        (activity as MainActivity).initMenuListUserData(userList)
+    }
+
+    fun initPages() {
+        pageList.clear()
         pageList.add(0, User("home", -1))
         userList.forEach { pageList.add(it) }
-
-        // 어댑터 생성
-        val pagerAdapter = ViewPagerAdapter(pageList)
-
-        // 어댑터와 뷰페이지 연결
+        pagerAdapter.notifyDataSetChanged()
         binding.viewpager.adapter = pagerAdapter
         binding.indicatorMain.setViewPager2(binding.viewpager)
-
     }
 }
