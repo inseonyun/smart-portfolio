@@ -34,14 +34,14 @@ class TimelinePortfolioDatabaseHelper(context: Context): SQLiteOpenHelper(contex
     }
 
     fun deletePortfolio(id: Int) {
-        val query = "DELETE TimelinePortfolio WHERE id = '${id}';"
+        val query = "DELETE FROM TimelinePortfolio WHERE id = '${id}';"
         val db = this.writableDatabase
         db.execSQL(query)
         db.close()
     }
 
     fun deleteData(name: String) {
-        val query = "DELETE TimelinePortfolio WHERE name = '${name}';"
+        val query = "DELETE FROM TimelinePortfolio WHERE name = '${name}';"
         val db = this.writableDatabase
         db.execSQL(query)
         db.close()

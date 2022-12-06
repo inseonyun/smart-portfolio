@@ -32,21 +32,21 @@ class MessengerPortfolioDatabaseHelper(context: Context): SQLiteOpenHelper(conte
     }
 
     fun deletePortfolio(id: Int) {
-        val query = "DELETE MessengerPortfolio WHERE id = '${id}';"
+        val query = "DELETE FROM MessengerPortfolio WHERE id = '${id}';"
         val db = this.writableDatabase
         db.execSQL(query)
         db.close()
     }
 
     fun deleteData(name: String) {
-        val query = "DELETE MessengerPortfolio WHERE name = '${name}';"
+        val query = "DELETE FROM MessengerPortfolio WHERE name = '${name}';"
         val db = this.writableDatabase
         db.execSQL(query)
         db.close()
     }
 
     fun updateData(data: Messenger) {
-        val query = "UPDATE MessengerPortfolio set name = '${data.name}', title = '${data.title}', contents = '${data.contents}', image = '${data.image}', url = '${data.url}'"
+        val query = "UPDATE FROM MessengerPortfolio set name = '${data.name}', title = '${data.title}', contents = '${data.contents}', image = '${data.image}', url = '${data.url}'"
         val db = this.writableDatabase
         db.execSQL(query)
         db.close()

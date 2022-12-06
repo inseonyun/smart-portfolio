@@ -32,14 +32,14 @@ class PortfolioDatabaseHelper(context: Context): SQLiteOpenHelper(context, "user
     }
 
     fun deletePortfolio(id: Int) {
-        val query = "DELETE portfolio WHERE id = '${id}';"
+        val query = "DELETE FROM portfolio WHERE id = '${id}';"
         val db = this.writableDatabase
         db.execSQL(query)
         db.close()
     }
 
     fun deleteData(name: String) {
-        val query = "DELETE portfolio WHERE name = '${name}';"
+        val query = "DELETE FROM portfolio WHERE name = '${name}';"
         val db = this.writableDatabase
         db.execSQL(query)
         db.close()

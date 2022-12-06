@@ -27,14 +27,14 @@ class UserDatabaseHelper(context: Context) : SQLiteOpenHelper(context, "userData
     }
 
     fun deleteData(name: String) {
-        val query = "DELETE user WHERE name = '${name}';"
+        val query = "DELETE FROM user WHERE name = '${name}';"
         val db = this.writableDatabase
         db.execSQL(query)
         db.close()
     }
 
     fun updateData(data: User) {
-        val query = "UPDATE user set name = '${data.name}', viewType = '${data.viewType}'"
+        val query = "UPDATE FROM user set name = '${data.name}', viewType = '${data.viewType}'"
         val db = this.writableDatabase
         db.execSQL(query)
         db.close()
