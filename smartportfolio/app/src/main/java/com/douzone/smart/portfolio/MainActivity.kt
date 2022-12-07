@@ -25,6 +25,7 @@ import com.douzone.smart.portfolio.data.*
 import com.douzone.smart.portfolio.databinding.ActivityMainBinding
 import com.douzone.smart.portfolio.databinding.DialogAddUserBinding
 import com.douzone.smart.portfolio.databinding.DialogDeletePortfolioBinding
+import com.douzone.smart.portfolio.db.UserDatabaseHelper
 import com.douzone.smart.portfolio.fragment.Fragment_Home
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.tabs.TabLayout
@@ -216,15 +217,22 @@ class MainActivity : AppCompatActivity(), DialogDeleteUserOnItemClick
                     if(bindingDialogUserAdd.etName.text.isNullOrEmpty())
                         Toast.makeText(context, "이름을 입력해주세요", Toast.LENGTH_SHORT).show()
                     else {
-                        val userViewType = when(bindingDialogUserAdd.radioGroup.checkedRadioButtonId) {
-                            bindingDialogUserAdd.rbtTimeline.id -> ViewType.TIMELINE
-                            bindingDialogUserAdd.rbtMessenger.id -> ViewType.MESSENGER
-                            else -> ViewType.CARDVIEW
+                        val userName = bindingDialogUserAdd.etName.text.toString().trim()
+                        val checkDB = UserDatabaseHelper(this@MainActivity)
+
+                        if(checkDB.checkUser(userName))
+                            Toast.makeText(context, "이미 있는 유저입니다.", Toast.LENGTH_SHORT).show()
+                        else {
+                            val userViewType = when(bindingDialogUserAdd.radioGroup.checkedRadioButtonId) {
+                                bindingDialogUserAdd.rbtTimeline.id -> ViewType.TIMELINE
+                                bindingDialogUserAdd.rbtMessenger.id -> ViewType.MESSENGER
+                                else -> ViewType.CARDVIEW
+                            }
+                            val intent = Intent(this@MainActivity, AddPortfolioActivity::class.java)
+                            intent.putExtra("name", bindingDialogUserAdd.etName.text.toString().trim())
+                            intent.putExtra("viewType", userViewType)
+                            addPortfolioRequestLauncher.launch(intent)
                         }
-                        val intent = Intent(this@MainActivity, AddPortfolioActivity::class.java)
-                        intent.putExtra("name", bindingDialogUserAdd.etName.text.toString().trim())
-                        intent.putExtra("viewType", userViewType)
-                        addPortfolioRequestLauncher.launch(intent)
                     }
                     dialogInterface.dismiss()
                 })

@@ -40,6 +40,15 @@ class UserDatabaseHelper(context: Context) : SQLiteOpenHelper(context, "userData
         db.close()
     }
 
+    fun checkUser(name: String): Boolean {
+        val db = this.readableDatabase
+        val cursor = db.rawQuery("SELECT * FROM user WHERE name = '$name'", null)
+        while(cursor.moveToNext()) {
+            return true
+        }
+        return false
+    }
+
     fun selectData(): ArrayList<User> {
         val db = this.readableDatabase
         val result = ArrayList<User>()
