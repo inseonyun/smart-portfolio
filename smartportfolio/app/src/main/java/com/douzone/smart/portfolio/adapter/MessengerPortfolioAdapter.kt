@@ -1,12 +1,15 @@
 package com.douzone.smart.portfolio.adapter
 
 import android.content.Context
+import android.content.DialogInterface
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
+import androidx.appcompat.app.AlertDialog
 import com.douzone.smart.portfolio.data.Messenger
 import com.douzone.smart.portfolio.databinding.ListviewPortfolioMessengerBinding
+import com.douzone.smart.portfolio.db.MessengerPortfolioDatabaseHelper
 
 class MessengerPortfolioAdapter(val context: Context, var items: ArrayList<Messenger>): BaseAdapter() {
     override fun getView(p0: Int, p1: View?, p2: ViewGroup?): View {
@@ -23,6 +26,27 @@ class MessengerPortfolioAdapter(val context: Context, var items: ArrayList<Messe
 
         // 이미지 넣음
         //if(!items[p0].image.isNullOrEmpty())
+
+        // 불려온 context가 delete라면 삭제 이벤트 처리
+        if(context.toString().contains("DeletePortfolio")) {
+            binding.layout.setOnClickListener {
+                AlertDialog.Builder(context).run {
+                    setTitle("포트폴리오 삭제")
+                    setMessage("해당 포트폴리오를 삭제할까요?")
+                    setPositiveButton("예", DialogInterface.OnClickListener { dialogInterface, _ ->
+                        val dbHelper = MessengerPortfolioDatabaseHelper(context)
+                        dbHelper.deletePortfolio(items[p0].id)
+                        this@MessengerPortfolioAdapter.items.removeAt(p0)
+                        this@MessengerPortfolioAdapter.notifyDataSetChanged()
+                        dialogInterface.dismiss()
+                    })
+                    setNegativeButton("취소", DialogInterface.OnClickListener { dialogInterface, _ ->
+                        dialogInterface.dismiss()
+                    })
+                    show()
+                }
+            }
+        }
 
         return binding.root
     }

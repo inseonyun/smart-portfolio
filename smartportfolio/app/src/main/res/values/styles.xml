@@ -80,4 +80,9 @@
         <item name="android:textAlignment">center</item>
     </style>
 
+    <style name="dialog_delete_textView_title">
+        <item name="android:textSize">18dp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
 </resources>

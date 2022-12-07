@@ -8,7 +8,6 @@ import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
-import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
@@ -19,20 +18,19 @@ import androidx.appcompat.app.AppCompatDialog
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.airbnb.lottie.LottieAnimationView
+import com.douzone.smart.portfolio.`interface`.DialogDeleteUserOnItemClick
+import com.douzone.smart.portfolio.adapter.DialogDeleteListViewAdapter
 import com.douzone.smart.portfolio.adapter.MenuUserListViewAdapter
 import com.douzone.smart.portfolio.data.*
 import com.douzone.smart.portfolio.databinding.ActivityMainBinding
 import com.douzone.smart.portfolio.databinding.DialogAddUserBinding
-import com.douzone.smart.portfolio.db.MessengerPortfolioDatabaseHelper
-import com.douzone.smart.portfolio.db.PortfolioDatabaseHelper
-import com.douzone.smart.portfolio.db.TimelinePortfolioDatabaseHelper
-import com.douzone.smart.portfolio.db.UserDatabaseHelper
+import com.douzone.smart.portfolio.databinding.DialogDeletePortfolioBinding
 import com.douzone.smart.portfolio.fragment.Fragment_Home
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.tabs.TabLayout
 import kotlin.random.Random
 
-class MainActivity : AppCompatActivity()
+class MainActivity : AppCompatActivity(), DialogDeleteUserOnItemClick
 {
     private var _binding: ActivityMainBinding? = null
     private val binding get() = _binding!!
@@ -47,9 +45,20 @@ class MainActivity : AppCompatActivity()
     //duplicate
     private lateinit var fragment_home: Fragment_Home
 
+    private lateinit var bindingDialogUserDelete: DialogDeletePortfolioBinding
+    private lateinit var dialogDeleteUserAdapter: DialogDeleteListViewAdapter
+
     private lateinit var progressDialog: AppCompatDialog
 
     private var loadingTime = Random.nextLong(1000, 3000)
+
+    override fun onClick(userName: String, viewType: Int) {
+        // 포트폴리오 삭제 -> activityResultLauncher
+        val intent = Intent(this@MainActivity, DeletePortfolioActivity::class.java)
+        intent.putExtra("name", userName)
+        intent.putExtra("viewType", viewType)
+        deletePortfolioRequestLauncher.launch(intent)
+    }
 
     private val addPortfolioRequestLauncher: ActivityResultLauncher<Intent> = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()) { activityResult ->
@@ -60,6 +69,17 @@ class MainActivity : AppCompatActivity()
             fragment_home.initPages()
         }
     }
+
+    private val deletePortfolioRequestLauncher: ActivityResultLauncher<Intent> = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()) { activityResult ->
+        // 데이터 갱신
+        fragment_home.initUserData()
+        fragment_home.initMenuList()
+        fragment_home.initPages()
+        dialogDeleteUserAdapter.notifyDataSetChanged()
+        bindingDialogUserDelete.lvUser.adapter = dialogDeleteUserAdapter
+    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -121,6 +141,7 @@ class MainActivity : AppCompatActivity()
 
     fun initMenuListUserData(userList: ArrayList<User>) {
         binding.lvUser.adapter = MenuUserListViewAdapter(this, userList)
+        dialogDeleteUserAdapter = DialogDeleteListViewAdapter(this, userList, this)
         setListViewHeightBasedOnChildren()
     }
 
@@ -204,16 +225,32 @@ class MainActivity : AppCompatActivity()
                         intent.putExtra("name", bindingDialogUserAdd.etName.text.toString().trim())
                         intent.putExtra("viewType", userViewType)
                         addPortfolioRequestLauncher.launch(intent)
-                    /*
-                        val user = User(bindingDialogUserAdd.etName.text.toString().trim(), userViewType)
-                        val userDB = UserDatabaseHelper(this@MainActivity)
-                        userDB.insertData(user)
-                        fragment_home.initUserData()
-                        fragment_home.initMenuList()
-                        fragment_home.initPages()*/
                     }
                     dialogInterface.dismiss()
                 })
+                setNegativeButton("취소", DialogInterface.OnClickListener { dialogInterface, _ ->
+                    dialogInterface.dismiss()
+                })
+                show()
+            }
+        }
+
+        binding.tvPortfolioDelete.setOnClickListener {
+            //포트폴리오 삭제 기능 구현
+            bindingDialogUserDelete = DialogDeletePortfolioBinding.inflate(layoutInflater)
+
+            // 유저 포트폴리오가 존재해야 띄워주도록 함
+            if(dialogDeleteUserAdapter.count == 0) {
+                Toast.makeText(this@MainActivity, "삭제할 포트폴리오가 없습니다.", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            // 다이얼로그 리스트뷰 연결
+            bindingDialogUserDelete.lvUser.adapter = dialogDeleteUserAdapter
+
+            AlertDialog.Builder(this).run {
+                setTitle("포트폴리오 삭제")
+                setView(bindingDialogUserDelete.root)
                 setNegativeButton("취소", DialogInterface.OnClickListener { dialogInterface, _ ->
                     dialogInterface.dismiss()
                 })
