@@ -18,20 +18,22 @@ import androidx.appcompat.app.AppCompatDialog
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.airbnb.lottie.LottieAnimationView
-import com.douzone.smart.portfolio.`interface`.DialogDeleteUserOnItemClick
+import com.douzone.smart.portfolio.`interface`.DialogUserOnItemClick
+import com.douzone.smart.portfolio.adapter.DialogAddPortfolioListViewAdapter
 import com.douzone.smart.portfolio.adapter.DialogDeleteListViewAdapter
 import com.douzone.smart.portfolio.adapter.MenuUserListViewAdapter
 import com.douzone.smart.portfolio.data.*
 import com.douzone.smart.portfolio.databinding.ActivityMainBinding
 import com.douzone.smart.portfolio.databinding.DialogAddUserBinding
 import com.douzone.smart.portfolio.databinding.DialogDeletePortfolioBinding
+import com.douzone.smart.portfolio.databinding.TabDialogAddPortfolioBinding
 import com.douzone.smart.portfolio.db.UserDatabaseHelper
 import com.douzone.smart.portfolio.fragment.Fragment_Home
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.tabs.TabLayout
 import kotlin.random.Random
 
-class MainActivity : AppCompatActivity(), DialogDeleteUserOnItemClick
+class MainActivity : AppCompatActivity(), DialogUserOnItemClick
 {
     private var _binding: ActivityMainBinding? = null
     private val binding get() = _binding!!
@@ -49,17 +51,32 @@ class MainActivity : AppCompatActivity(), DialogDeleteUserOnItemClick
     private lateinit var bindingDialogUserDelete: DialogDeletePortfolioBinding
     private lateinit var dialogDeleteUserAdapter: DialogDeleteListViewAdapter
 
+    private lateinit var bindingDialogAddPortfolio: TabDialogAddPortfolioBinding
+    private lateinit var dialogAddPortfolioAdapter: DialogAddPortfolioListViewAdapter
+
     private lateinit var progressDialog: AppCompatDialog
 
     private var loadingTime = Random.nextLong(1000, 3000)
 
-    override fun onClick(userName: String, viewType: Int) {
-        // 포트폴리오 삭제 -> activityResultLauncher
-        val intent = Intent(this@MainActivity, DeletePortfolioActivity::class.java)
-        intent.putExtra("name", userName)
-        intent.putExtra("viewType", viewType)
-        deletePortfolioRequestLauncher.launch(intent)
+    override fun onClick(userName: String, viewType: Int, addDelete: Int) {
+        when(addDelete) {
+            AddDelete.ADD -> {
+                // 포트폴리오 추가
+                val intent = Intent(this@MainActivity, AddPortfolioActivity::class.java)
+                intent.putExtra("name", userName)
+                intent.putExtra("viewType", viewType)
+                addPortfolioRequestLauncher.launch(intent)
+            }
+            AddDelete.DELETE -> {
+                // 포트폴리오 삭제 -> activityResultLauncher
+                val intent = Intent(this@MainActivity, DeletePortfolioActivity::class.java)
+                intent.putExtra("name", userName)
+                intent.putExtra("viewType", viewType)
+                deletePortfolioRequestLauncher.launch(intent)
+            }
+        }
     }
+
 
     private val addPortfolioRequestLauncher: ActivityResultLauncher<Intent> = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()) { activityResult ->
@@ -77,8 +94,12 @@ class MainActivity : AppCompatActivity(), DialogDeleteUserOnItemClick
         fragment_home.initUserData()
         fragment_home.initMenuList()
         fragment_home.initPages()
+
         dialogDeleteUserAdapter.notifyDataSetChanged()
+        dialogAddPortfolioAdapter.notifyDataSetChanged()
+
         bindingDialogUserDelete.lvUser.adapter = dialogDeleteUserAdapter
+        bindingDialogAddPortfolio.lvUser.adapter = dialogAddPortfolioAdapter
     }
 
 
@@ -143,6 +164,7 @@ class MainActivity : AppCompatActivity(), DialogDeleteUserOnItemClick
     fun initMenuListUserData(userList: ArrayList<User>) {
         binding.lvUser.adapter = MenuUserListViewAdapter(this, userList)
         dialogDeleteUserAdapter = DialogDeleteListViewAdapter(this, userList, this)
+        dialogAddPortfolioAdapter = DialogAddPortfolioListViewAdapter(this, userList, this)
         setListViewHeightBasedOnChildren()
     }
 
@@ -156,7 +178,29 @@ class MainActivity : AppCompatActivity(), DialogDeleteUserOnItemClick
 //                            .replace(R.id.frame_main, fragment_home)
 //                            .commit()
                     }
-                    "이력서 추가" -> {
+                    "포트폴리오 추가" -> {
+                        bindingDialogAddPortfolio = TabDialogAddPortfolioBinding.inflate(layoutInflater)
+
+                        // 탭 변경
+                        binding.bottomTabLayout.selectTab(binding.bottomTabLayout.getTabAt(0))
+
+                        // 유저 포트폴리오가 존재해야 띄워주도록 함
+                        if(dialogAddPortfolioAdapter.count == 0) {
+                            Toast.makeText(this@MainActivity, "포트폴리오를 추가할 유저가 없습니다.", Toast.LENGTH_SHORT).show()
+                            return
+                        }
+
+                        // 다이얼로그 리스트뷰 연결
+                        bindingDialogAddPortfolio.lvUser.adapter = dialogAddPortfolioAdapter
+
+                        AlertDialog.Builder(this@MainActivity).run {
+                            setTitle("포트폴리오 추가")
+                            setView(bindingDialogAddPortfolio.root)
+                            setNegativeButton("취소", DialogInterface.OnClickListener { dialogInterface, _ ->
+                                dialogInterface.dismiss()
+                            })
+                            show()
+                        }
                     }
                 }
             }
