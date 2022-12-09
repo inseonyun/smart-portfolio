@@ -44,6 +44,8 @@ class AddPortfolioActivity : AppCompatActivity() {
     private val timelinePortfolioAdapter = TimelinePortfolioAdapter(this@AddPortfolioActivity, timelinePortfolio)
     private val messengerPortfolioAdapter = MessengerPortfolioAdapter(this@AddPortfolioActivity, messengerPortfolio)
 
+    private var checkUser = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -51,6 +53,7 @@ class AddPortfolioActivity : AppCompatActivity() {
         initView()
         initToolbar()
         initUser()
+        initData()
         initEvent()
     }
 
@@ -78,6 +81,32 @@ class AddPortfolioActivity : AppCompatActivity() {
 
     fun initUser() {
         binding.tvUserName.text = intent.getStringExtra("name")
+    }
+
+    fun initData() {
+        val userName = intent.getStringExtra("name")
+        val viewType = intent.getIntExtra("viewType", 1)
+        
+        // 해당 유저가 DB에 있는지 확인
+        val dbHelper = UserDatabaseHelper(this@AddPortfolioActivity)
+        checkUser = dbHelper.checkUser(userName!!)
+        if(checkUser) {
+            // 있으면 해당 유저의 포트폴리오 정보 가져옴
+            when(viewType) {
+                ViewType.CARDVIEW -> {
+                    val cardDB = PortfolioDatabaseHelper(this@AddPortfolioActivity)
+                    cardDB.selectData(userName).forEach { cardPortfolio.add(it) }
+                }
+                ViewType.TIMELINE -> {
+                    val timelineDB = TimelinePortfolioDatabaseHelper(this@AddPortfolioActivity)
+                    timelineDB.selectData(userName).forEach { timelinePortfolio.add(it) }
+                }
+                ViewType.MESSENGER -> {
+                    val messengerDB = MessengerPortfolioDatabaseHelper(this@AddPortfolioActivity)
+                    messengerDB.selectData(userName).forEach { messengerPortfolio.add(it) }
+                }
+            }
+        }
     }
 
     fun initDialogEvent() {
@@ -228,9 +257,54 @@ class AddPortfolioActivity : AppCompatActivity() {
         }
     }
 
+    fun updatePortfolio() {
+        val userName = intent.getStringExtra("name")
+
+        // update portfolio
+        when(intent.getIntExtra("viewType", 1)) {
+            ViewType.CARDVIEW -> {
+                val portfolioDB = PortfolioDatabaseHelper(this@AddPortfolioActivity)
+                
+                // 이미 있는 데이터가 안 들어가도록 삭제 후 넣음
+                portfolioDB.deleteData(userName!!)
+                
+                cardPortfolio.forEach {
+                    portfolioDB.insertData(it)
+                }
+            }
+            ViewType.TIMELINE -> {
+                val portfolioDB = TimelinePortfolioDatabaseHelper(this@AddPortfolioActivity)
+
+                // 이미 있는 데이터가 안 들어가도록 삭제 후 넣음
+                portfolioDB.deleteData(userName!!)
+
+                timelinePortfolio.forEach {
+                    portfolioDB.insertData(it)
+                }
+            }
+            ViewType.MESSENGER -> {
+                val portfolioDB = MessengerPortfolioDatabaseHelper(this@AddPortfolioActivity)
+
+                // 이미 있는 데이터가 안 들어가도록 삭제 후 넣음
+                portfolioDB.deleteData(userName!!)
+
+                messengerPortfolio.forEach {
+                    portfolioDB.insertData(it)
+                }
+            }
+        }
+
+    }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean = when(item.itemId) {
         R.id.menu_save -> {
-            insertPortfolio()
+            if(checkUser) {
+                // 이미 있는 유저면 업데이트
+                updatePortfolio()
+            } else {
+                // 없는 유저면 삽입
+                insertPortfolio()
+            }
             setResult(Activity.RESULT_OK, intent)
             finish()
             true

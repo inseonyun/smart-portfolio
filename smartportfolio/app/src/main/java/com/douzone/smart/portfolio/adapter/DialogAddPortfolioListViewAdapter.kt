@@ -13,7 +13,7 @@ import com.douzone.smart.portfolio.data.AddDelete
 import com.douzone.smart.portfolio.data.User
 import com.douzone.smart.portfolio.databinding.ListviewDialogUserBinding
 
-class DialogDeleteListViewAdapter(val context: Context, var items: ArrayList<User>, private val listener: DialogUserOnItemClick) : BaseAdapter() {
+class DialogAddPortfolioListViewAdapter(val context: Context, var items: ArrayList<User>, private val listener: DialogUserOnItemClick) : BaseAdapter() {
 
     override fun getView(p0: Int, p1: View?, p2: ViewGroup?): View {
         val binding = ListviewDialogUserBinding.inflate(LayoutInflater.from(context))
@@ -22,12 +22,12 @@ class DialogDeleteListViewAdapter(val context: Context, var items: ArrayList<Use
 
         binding.cvUser.setOnClickListener {
             (context as MainActivity)
-            // 삭제 액티비티로 이동
+            // 추가 액티비티로 이동
             AlertDialog.Builder(context).run {
-                setTitle("포트폴리오 삭제")
-                setMessage("${items[p0].name}를 삭제하시겠습니까?")
+                setTitle("포트폴리오 추가")
+                setMessage("${items[p0].name}의 포트폴리오를 추가하시겠습니까?")
                 setPositiveButton("예", DialogInterface.OnClickListener { dialogInterface, _ ->
-                    listener.onClick(items[p0].name, items[p0].viewType, AddDelete.DELETE)
+                    listener.onClick(items[p0].name, items[p0].viewType, AddDelete.ADD)
                     dialogInterface.dismiss()
                 })
                 setNegativeButton("아니오", DialogInterface.OnClickListener { dialogInterface, _ ->
