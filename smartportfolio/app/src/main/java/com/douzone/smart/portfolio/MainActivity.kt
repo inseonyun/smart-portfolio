@@ -198,6 +198,12 @@ class MainActivity : AppCompatActivity(), DialogUserOnItemClick
                             }
                         }
                     }
+                    "포트폴리오 삭제" -> {
+                        // 탭 변경
+                        binding.bottomTabLayout.selectTab(binding.bottomTabLayout.getTabAt(0))
+
+                        binding.tvPortfolioDelete.callOnClick()
+                    }
                 }
             }
 

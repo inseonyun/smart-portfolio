@@ -93,6 +93,12 @@
                 android:text="포트폴리오 추가"
                 android:icon="@drawable/ic_menu_bottom_add" />
 
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="포트폴리오 삭제"
+                android:icon="@drawable/ic_menu_bottom_delete"/>
+
         </com.google.android.material.tabs.TabLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
