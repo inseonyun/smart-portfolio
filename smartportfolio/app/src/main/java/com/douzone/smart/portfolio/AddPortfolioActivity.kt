@@ -305,6 +305,7 @@ class AddPortfolioActivity : AppCompatActivity() {
                 // 없는 유저면 삽입
                 insertPortfolio()
             }
+            Toast.makeText(this@AddPortfolioActivity, "저장되었습니다.", Toast.LENGTH_SHORT).show()
             setResult(Activity.RESULT_OK, intent)
             finish()
             true

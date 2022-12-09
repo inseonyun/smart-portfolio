@@ -176,6 +176,7 @@ class DeletePortfolioActivity : AppCompatActivity() {
                 setPositiveButton("예", DialogInterface.OnClickListener { dialogInterface, _ ->
                     deleteUser()
                     setResult(Activity.RESULT_OK, intent)
+                    Toast.makeText(this@DeletePortfolioActivity, "유저가 삭제 되었습니다.", Toast.LENGTH_SHORT).show()
                     dialogInterface.dismiss()
                     finish()
                     true
@@ -194,6 +195,7 @@ class DeletePortfolioActivity : AppCompatActivity() {
                 setPositiveButton("예", DialogInterface.OnClickListener { dialogInterface, _ ->
                     deletePortfolio()
                     setResult(Activity.RESULT_OK, intent)
+                    Toast.makeText(this@DeletePortfolioActivity, "변경사항이 저장되었습니다.", Toast.LENGTH_SHORT).show()
                     dialogInterface.dismiss()
                     finish()
                     true
