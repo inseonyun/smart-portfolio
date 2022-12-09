@@ -5,10 +5,10 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import com.douzone.smart.portfolio.data.Timeline
 
-class TimelinePortfolioDatabaseHelper(context: Context): SQLiteOpenHelper(context, "userDatabase.db", null, 1) {
+class TimelinePortfolioDatabaseHelper(context: Context): SQLiteOpenHelper(context, "TimelinePortfolio.db", null, 1) {
     override fun onCreate(db: SQLiteDatabase?) {
         val sql = "CREATE TABLE if not exists TimelinePortfolio(" +
-                "id primary key autoincrement," +
+                "id integer primary key autoincrement," +
                 "name text," +
                 "title text," +
                 "contents text," +

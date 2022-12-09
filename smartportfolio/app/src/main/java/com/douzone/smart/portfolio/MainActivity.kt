@@ -184,22 +184,21 @@ class MainActivity : AppCompatActivity(), DialogUserOnItemClick
                         // 탭 변경
                         binding.bottomTabLayout.selectTab(binding.bottomTabLayout.getTabAt(0))
 
-                        // 유저 포트폴리오가 존재해야 띄워주도록 함
+                        // 유저 포트폴리오가 존재하지 않으면, 메뉴바 다이얼로그를 띄워줌
                         if(dialogAddPortfolioAdapter.count == 0) {
-                            Toast.makeText(this@MainActivity, "포트폴리오를 추가할 유저가 없습니다.", Toast.LENGTH_SHORT).show()
-                            return
-                        }
+                            binding.tvPortfolioAdd.callOnClick()
+                        } else {
+                            // 다이얼로그 리스트뷰 연결
+                            bindingDialogAddPortfolio.lvUser.adapter = dialogAddPortfolioAdapter
 
-                        // 다이얼로그 리스트뷰 연결
-                        bindingDialogAddPortfolio.lvUser.adapter = dialogAddPortfolioAdapter
-
-                        AlertDialog.Builder(this@MainActivity).run {
-                            setTitle("포트폴리오 추가")
-                            setView(bindingDialogAddPortfolio.root)
-                            setNegativeButton("취소", DialogInterface.OnClickListener { dialogInterface, _ ->
-                                dialogInterface.dismiss()
-                            })
-                            show()
+                            AlertDialog.Builder(this@MainActivity).run {
+                                setTitle("포트폴리오 추가")
+                                setView(bindingDialogAddPortfolio.root)
+                                setNegativeButton("취소", DialogInterface.OnClickListener { dialogInterface, _ ->
+                                    dialogInterface.dismiss()
+                                })
+                                show()
+                            }
                         }
                     }
                 }

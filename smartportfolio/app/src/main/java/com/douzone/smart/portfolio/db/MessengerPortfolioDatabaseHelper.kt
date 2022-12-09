@@ -6,10 +6,10 @@ import android.database.sqlite.SQLiteOpenHelper
 import com.douzone.smart.portfolio.data.Messenger
 import com.douzone.smart.portfolio.data.Portfolio
 
-class MessengerPortfolioDatabaseHelper(context: Context): SQLiteOpenHelper(context, "userDatabase.db", null, 1) {
+class MessengerPortfolioDatabaseHelper(context: Context): SQLiteOpenHelper(context, "MessengerPortfolio.db", null, 1) {
     override fun onCreate(db: SQLiteDatabase?) {
         val sql = "CREATE TABLE if not exists MessengerPortfolio(" +
-                "id primary key autoincrement," +
+                "id integer primary key autoincrement," +
                 "name text," +
                 "title text," +
                 "contents text," +

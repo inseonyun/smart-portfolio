@@ -6,10 +6,10 @@ import android.database.sqlite.SQLiteOpenHelper
 import com.douzone.smart.portfolio.data.Portfolio
 import com.douzone.smart.portfolio.data.User
 
-class PortfolioDatabaseHelper(context: Context): SQLiteOpenHelper(context, "userDatabase.db", null, 1) {
+class PortfolioDatabaseHelper(context: Context): SQLiteOpenHelper(context, "CardPortfolio.db", null, 1) {
     override fun onCreate(db: SQLiteDatabase?) {
         val sql = "CREATE TABLE if not exists portfolio(" +
-                "id primary key autoincrement," +
+                "id integer primary key autoincrement," +
                 "name text," +
                 "title text," +
                 "contents text," +
