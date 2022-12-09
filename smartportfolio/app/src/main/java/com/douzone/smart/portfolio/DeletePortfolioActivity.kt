@@ -143,6 +143,31 @@ class DeletePortfolioActivity : AppCompatActivity() {
         userDBHelper.deleteData(userName!!)
     }
 
+    fun deletePortfolio() {
+        val userName = intent.getStringExtra("name")
+
+        when(intent.getIntExtra("viewType", 1)) {
+            ViewType.CARDVIEW -> {
+                val dbHelper = PortfolioDatabaseHelper(this@DeletePortfolioActivity)
+                // 다 제거하고 현재 list의 내용 넣음
+                dbHelper.deleteData(userName!!)
+                cardPortfolioAdapter.items.forEach { dbHelper.insertData(it) }
+            }
+            ViewType.MESSENGER -> {
+                val dbHelper = MessengerPortfolioDatabaseHelper(this@DeletePortfolioActivity)
+                // 다 제거하고 현재 list의 내용 넣음
+                dbHelper.deleteData(userName!!)
+                messengerPortfolioAdapter.items.forEach { dbHelper.insertData(it) }
+            }
+            ViewType.TIMELINE -> {
+                val dbHelper = TimelinePortfolioDatabaseHelper(this@DeletePortfolioActivity)
+                // 다 제거하고 현재 list의 내용 넣음
+                dbHelper.deleteData(userName!!)
+                timelinePortfolioAdapter.items.forEach { dbHelper.insertData(it) }
+            }
+        }
+    }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean = when(item.itemId) {
         R.id.menu_delete -> {
             AlertDialog.Builder(this).run {
@@ -164,9 +189,10 @@ class DeletePortfolioActivity : AppCompatActivity() {
         }
         R.id.menu_return -> {
             AlertDialog.Builder(this).run {
-                setTitle("돌아가기")
-                setMessage("홈화면으로 돌아가시겠습니까?")
+                setTitle("저장")
+                setMessage("변경사항을 저장하시겠습니까?")
                 setPositiveButton("예", DialogInterface.OnClickListener { dialogInterface, _ ->
+                    deletePortfolio()
                     setResult(Activity.RESULT_OK, intent)
                     dialogInterface.dismiss()
                     finish()

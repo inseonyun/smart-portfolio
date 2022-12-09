@@ -9,7 +9,6 @@ import android.widget.BaseAdapter
 import androidx.appcompat.app.AlertDialog
 import com.douzone.smart.portfolio.data.Messenger
 import com.douzone.smart.portfolio.databinding.ListviewPortfolioMessengerBinding
-import com.douzone.smart.portfolio.db.MessengerPortfolioDatabaseHelper
 
 class MessengerPortfolioAdapter(val context: Context, var items: ArrayList<Messenger>): BaseAdapter() {
     override fun getView(p0: Int, p1: View?, p2: ViewGroup?): View {
@@ -34,8 +33,7 @@ class MessengerPortfolioAdapter(val context: Context, var items: ArrayList<Messe
                     setTitle("포트폴리오 삭제")
                     setMessage("해당 포트폴리오를 삭제할까요?")
                     setPositiveButton("예", DialogInterface.OnClickListener { dialogInterface, _ ->
-                        val dbHelper = MessengerPortfolioDatabaseHelper(context)
-                        dbHelper.deletePortfolio(items[p0].id)
+                        // 사용자가 삭제 취소를 할 수 있도록 DB에 바로 제거하지는 않음
                         this@MessengerPortfolioAdapter.items.removeAt(p0)
                         this@MessengerPortfolioAdapter.notifyDataSetChanged()
                         dialogInterface.dismiss()

@@ -96,10 +96,7 @@ class MainActivity : AppCompatActivity(), DialogUserOnItemClick
         fragment_home.initPages()
 
         dialogDeleteUserAdapter.notifyDataSetChanged()
-        dialogAddPortfolioAdapter.notifyDataSetChanged()
-
         bindingDialogUserDelete.lvUser.adapter = dialogDeleteUserAdapter
-        bindingDialogAddPortfolio.lvUser.adapter = dialogAddPortfolioAdapter
     }
 
 

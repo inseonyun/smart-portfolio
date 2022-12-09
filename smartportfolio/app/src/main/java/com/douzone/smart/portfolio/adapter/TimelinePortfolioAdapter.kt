@@ -2,7 +2,6 @@ package com.douzone.smart.portfolio.adapter
 
 import android.content.Context
 import android.content.DialogInterface
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,7 +11,6 @@ import com.douzone.smart.portfolio.R
 import com.douzone.smart.portfolio.data.CircleType
 import com.douzone.smart.portfolio.data.Timeline
 import com.douzone.smart.portfolio.databinding.ListviewPortfolioTimelineBinding
-import com.douzone.smart.portfolio.db.TimelinePortfolioDatabaseHelper
 import java.time.LocalDate
 
 class TimelinePortfolioAdapter(val context: Context, var items: ArrayList<Timeline>): BaseAdapter() {
@@ -53,8 +51,7 @@ class TimelinePortfolioAdapter(val context: Context, var items: ArrayList<Timeli
                     setTitle("포트폴리오 삭제")
                     setMessage("해당 포트폴리오를 삭제할까요?")
                     setPositiveButton("예", DialogInterface.OnClickListener { dialogInterface, _ ->
-                        val dbHelper = TimelinePortfolioDatabaseHelper(context)
-                        dbHelper.deletePortfolio(items[p0].id)
+                        // 사용자가 삭제 취소를 할 수 있도록 DB에 바로 제거하지는 않음
                         this@TimelinePortfolioAdapter.items.removeAt(p0)
                         this@TimelinePortfolioAdapter.notifyDataSetChanged()
                         dialogInterface.dismiss()
