@@ -57,7 +57,7 @@ class AddPortfolioActivity : AppCompatActivity() {
 
     private var checkUser = false
 
-    private var changedUserImage: ByteArray ?= null
+    private var changedUserImage: ByteArray = byteArrayOf()
     private var postImage: ByteArray = byteArrayOf()
 
     private val getUserProfileImage: ActivityResultLauncher<Intent> = registerForActivityResult(
@@ -156,7 +156,7 @@ class AddPortfolioActivity : AppCompatActivity() {
             val userData = dbHelper.selecetUser(userName)
             if(userData != null) {
                 if(userData.profileImage != null && userData.profileImage!!.isNotEmpty()) {
-                    changedUserImage = userData.profileImage
+                    changedUserImage = userData.profileImage!!
 
                     try {
                         val bitmap = BitmapFactory.decodeByteArray(changedUserImage, 0, changedUserImage!!.size)
