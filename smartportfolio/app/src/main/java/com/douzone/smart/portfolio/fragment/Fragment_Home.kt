@@ -59,7 +59,7 @@ class Fragment_Home : Fragment() {
 
     fun initPages() {
         pageList.clear()
-        pageList.add(0, User("home", -1))
+        pageList.add(0, User("home", null,-1))
         userList.forEach { pageList.add(it) }
         pagerAdapter.notifyDataSetChanged()
         binding.viewpager.adapter = pagerAdapter
