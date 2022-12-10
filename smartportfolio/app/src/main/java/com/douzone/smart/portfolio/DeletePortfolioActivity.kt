@@ -3,6 +3,7 @@ package com.douzone.smart.portfolio
 import android.animation.ValueAnimator
 import android.app.Activity
 import android.content.DialogInterface
+import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
@@ -26,6 +27,7 @@ import com.douzone.smart.portfolio.db.MessengerPortfolioDatabaseHelper
 import com.douzone.smart.portfolio.db.PortfolioDatabaseHelper
 import com.douzone.smart.portfolio.db.TimelinePortfolioDatabaseHelper
 import com.douzone.smart.portfolio.db.UserDatabaseHelper
+import java.lang.Exception
 import java.util.ArrayList
 import kotlin.random.Random
 
@@ -92,6 +94,21 @@ class DeletePortfolioActivity : AppCompatActivity() {
                 val dbHelper = TimelinePortfolioDatabaseHelper(this@DeletePortfolioActivity)
                 dbHelper.selectData(userName!!).forEach { timelinePortfolio.add(it) }
                 initAdapter()
+            }
+        }
+
+        val dbHelper = UserDatabaseHelper(this@DeletePortfolioActivity)
+        val userData = dbHelper.selecetUser(userName!!)
+        if(userData != null) {
+            if(userData.profileImage != null && userData.profileImage!!.isNotEmpty()) {
+                try {
+                    val bitmap = BitmapFactory.decodeByteArray(userData.profileImage, 0, userData.profileImage!!.size)
+                    bitmap?.let {
+                        binding.ivUserImage.setImageBitmap(bitmap)
+                    }
+                }catch (e: Exception) {
+
+                }
             }
         }
     }

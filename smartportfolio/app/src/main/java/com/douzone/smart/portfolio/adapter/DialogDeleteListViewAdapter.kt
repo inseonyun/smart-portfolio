@@ -2,6 +2,7 @@ package com.douzone.smart.portfolio.adapter
 
 import android.content.Context
 import android.content.DialogInterface
+import android.graphics.BitmapFactory
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +13,7 @@ import com.douzone.smart.portfolio.`interface`.DialogUserOnItemClick
 import com.douzone.smart.portfolio.data.AddDelete
 import com.douzone.smart.portfolio.data.User
 import com.douzone.smart.portfolio.databinding.ListviewDialogUserBinding
+import java.lang.Exception
 
 class DialogDeleteListViewAdapter(val context: Context, var items: ArrayList<User>, private val listener: DialogUserOnItemClick) : BaseAdapter() {
 
@@ -19,6 +21,17 @@ class DialogDeleteListViewAdapter(val context: Context, var items: ArrayList<Use
         val binding = ListviewDialogUserBinding.inflate(LayoutInflater.from(context))
 
         binding.tvUserName.text = items[p0].name
+
+        if(items[p0].profileImage != null && items[p0].profileImage!!.isNotEmpty()) {
+            try {
+                val bitmap = BitmapFactory.decodeByteArray(items[p0].profileImage, 0, items[p0].profileImage!!.size)
+                bitmap?.let {
+                    binding.ivUserImage.setImageBitmap(bitmap)
+                }
+            }catch (e: Exception) {
+
+            }
+        }
 
         binding.cvUser.setOnClickListener {
             (context as MainActivity)
