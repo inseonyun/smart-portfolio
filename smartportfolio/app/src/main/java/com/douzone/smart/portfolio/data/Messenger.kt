@@ -7,6 +7,6 @@ class Messenger (
     var name: String,
     var title: String,
     var contents: String,
-    var image: String?,
+    var image: ByteArray?,
     var url: String?
 ) : Serializable

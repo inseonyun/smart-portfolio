@@ -13,7 +13,7 @@ class TimelinePortfolioDatabaseHelper(context: Context): SQLiteOpenHelper(contex
                 "title text," +
                 "contents text," +
                 "date text," +
-                "image text," +
+                "image blob," +
                 "url text," +
                 "circleColor integer);"
         db?.execSQL(sql)
@@ -26,10 +26,13 @@ class TimelinePortfolioDatabaseHelper(context: Context): SQLiteOpenHelper(contex
     }
 
     fun insertData(data: Timeline) {
-        val query = "INSERT INTO TimelinePortfolio('name', 'title', 'contents', 'date', 'image', 'url', 'circleColor') " +
-                "values('${data.name}', '${data.title}', '${data.contents}', '${data.date}', '${data.image}', '${data.url}', '${data.circleColor}');"
         val db = this.writableDatabase
-        db.execSQL(query)
+        val query = "INSERT INTO TimelinePortfolio('name', 'title', 'contents', 'date', 'image', 'url', 'circleColor') " +
+                "values('${data.name}', '${data.title}', '${data.contents}', '${data.date}', ?, '${data.url}', '${data.circleColor}');"
+        val p = db.compileStatement(query)
+        p.bindBlob(1, data.image)
+        p.execute()
+        p.close()
         db.close()
     }
 
@@ -48,9 +51,12 @@ class TimelinePortfolioDatabaseHelper(context: Context): SQLiteOpenHelper(contex
     }
 
     fun updateData(data: Timeline) {
-        val query = "UPDATE TimelinePortfolio set name = '${data.name}', title = '${data.title}', contents = '${data.contents}', date = '${data.date}', image = '${data.image}', url = '${data.url}', circleColor = '${data.circleColor}'"
         val db = this.writableDatabase
-        db.execSQL(query)
+        val query = "UPDATE TimelinePortfolio set name = '${data.name}', title = '${data.title}', contents = '${data.contents}', date = '${data.date}', image = ?, url = '${data.url}', circleColor = '${data.circleColor}' WHERE id = '${data.id}'"
+        val p = db.compileStatement(query)
+        p.bindBlob(1, data.image)
+        p.execute()
+        p.close()
         db.close()
     }
 
@@ -60,7 +66,7 @@ class TimelinePortfolioDatabaseHelper(context: Context): SQLiteOpenHelper(contex
 
         val cursor = db.rawQuery("SELECT * FROM TimelinePortfolio WHERE name = '${name}'", null)
         while(cursor.moveToNext()) {
-            val rowData = Timeline(cursor.getInt(0), cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getString(5), cursor.getString(6), cursor.getInt(7))
+            val rowData = Timeline(cursor.getInt(0), cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getBlob(5), cursor.getString(6), cursor.getInt(7))
             result.add(rowData)
         }
         cursor.close()

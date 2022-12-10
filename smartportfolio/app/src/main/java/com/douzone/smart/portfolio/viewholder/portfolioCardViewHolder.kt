@@ -5,7 +5,7 @@ import com.douzone.smart.portfolio.MainActivity
 import com.douzone.smart.portfolio.adapter.CardPortfolioAdapter
 import com.douzone.smart.portfolio.data.User
 import com.douzone.smart.portfolio.databinding.ViewPagerCardBinding
-import com.douzone.smart.portfolio.db.PortfolioDatabaseHelper
+import com.douzone.smart.portfolio.db.CardPortfolioDatabaseHelper
 
 class portfolioCardViewHolder(private val binding: ViewPagerCardBinding): RecyclerView.ViewHolder(binding.root) {
     var data: User? = null
@@ -14,7 +14,7 @@ class portfolioCardViewHolder(private val binding: ViewPagerCardBinding): Recycl
         this.data = data
 
         // 여기서 해당 유저 이름을 갖고 db 탐색함
-        val portfolioDbHelper = PortfolioDatabaseHelper(binding.root.context as MainActivity)
+        val portfolioDbHelper = CardPortfolioDatabaseHelper(binding.root.context as MainActivity)
         val nowUserPortfolio = portfolioDbHelper.selectData(this.data!!.name)
 
         binding.lvPortfolio.adapter = CardPortfolioAdapter(binding.root.context as MainActivity, nowUserPortfolio)

@@ -2,15 +2,16 @@ package com.douzone.smart.portfolio.adapter
 
 import android.content.Context
 import android.content.DialogInterface
+import android.graphics.BitmapFactory
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import androidx.appcompat.app.AlertDialog
-import com.douzone.smart.portfolio.data.Portfolio
+import com.douzone.smart.portfolio.data.Card
 import com.douzone.smart.portfolio.databinding.ListviewPortfolioCardBinding
 
-class CardPortfolioAdapter(val context: Context, var items: ArrayList<Portfolio>): BaseAdapter() {
+class CardPortfolioAdapter(val context: Context, var items: ArrayList<Card>): BaseAdapter() {
     override fun getView(p0: Int, p1: View?, p2: ViewGroup?): View {
         val binding = ListviewPortfolioCardBinding.inflate(LayoutInflater.from(context))
 
@@ -19,7 +20,16 @@ class CardPortfolioAdapter(val context: Context, var items: ArrayList<Portfolio>
         binding.tvLink.text = items[p0].url
 
         // 이미지 넣음
-        //if(!items[p0].image.isNullOrEmpty())
+        if(items[p0].image != null && items[p0].image!!.isNotEmpty()) {
+            try {
+                val bitmap = BitmapFactory.decodeByteArray(items[p0].image, 0, items[p0].image!!.size)
+                bitmap?.let {
+                    binding.ivMain.setImageBitmap(bitmap)
+                }
+            }catch (e: Exception) {
+
+            }
+        }
 
         if(items[p0].url.isNullOrEmpty()) {
             binding.tvLink.visibility = View.GONE

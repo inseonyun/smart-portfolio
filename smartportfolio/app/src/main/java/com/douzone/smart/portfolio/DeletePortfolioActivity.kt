@@ -19,12 +19,12 @@ import com.douzone.smart.portfolio.adapter.CardPortfolioAdapter
 import com.douzone.smart.portfolio.adapter.MessengerPortfolioAdapter
 import com.douzone.smart.portfolio.adapter.TimelinePortfolioAdapter
 import com.douzone.smart.portfolio.data.Messenger
-import com.douzone.smart.portfolio.data.Portfolio
+import com.douzone.smart.portfolio.data.Card
 import com.douzone.smart.portfolio.data.Timeline
 import com.douzone.smart.portfolio.data.ViewType
 import com.douzone.smart.portfolio.databinding.ActivityDeleteBinding
 import com.douzone.smart.portfolio.db.MessengerPortfolioDatabaseHelper
-import com.douzone.smart.portfolio.db.PortfolioDatabaseHelper
+import com.douzone.smart.portfolio.db.CardPortfolioDatabaseHelper
 import com.douzone.smart.portfolio.db.TimelinePortfolioDatabaseHelper
 import com.douzone.smart.portfolio.db.UserDatabaseHelper
 import java.lang.Exception
@@ -34,7 +34,7 @@ import kotlin.random.Random
 class DeletePortfolioActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDeleteBinding
 
-    private var cardPortfolio = ArrayList<Portfolio>()
+    private var cardPortfolio = ArrayList<Card>()
     private var timelinePortfolio = ArrayList<Timeline>()
     private var messengerPortfolio = ArrayList<Messenger>()
 
@@ -81,7 +81,7 @@ class DeletePortfolioActivity : AppCompatActivity() {
 
         when(intent.getIntExtra("viewType", 1)) {
             ViewType.CARDVIEW -> {
-                val dbHelper = PortfolioDatabaseHelper(this@DeletePortfolioActivity)
+                val dbHelper = CardPortfolioDatabaseHelper(this@DeletePortfolioActivity)
                 dbHelper.selectData(userName!!).forEach { cardPortfolio.add(it) }
                 initAdapter()
             }
@@ -144,7 +144,7 @@ class DeletePortfolioActivity : AppCompatActivity() {
 
         when(intent.getIntExtra("viewType", 1)) {
             ViewType.CARDVIEW -> {
-                val dbHelper = PortfolioDatabaseHelper(this@DeletePortfolioActivity)
+                val dbHelper = CardPortfolioDatabaseHelper(this@DeletePortfolioActivity)
                 dbHelper.deleteData(userName!!)
             }
             ViewType.MESSENGER -> {
@@ -165,7 +165,7 @@ class DeletePortfolioActivity : AppCompatActivity() {
 
         when(intent.getIntExtra("viewType", 1)) {
             ViewType.CARDVIEW -> {
-                val dbHelper = PortfolioDatabaseHelper(this@DeletePortfolioActivity)
+                val dbHelper = CardPortfolioDatabaseHelper(this@DeletePortfolioActivity)
                 // 다 제거하고 현재 list의 내용 넣음
                 dbHelper.deleteData(userName!!)
                 cardPortfolioAdapter.items.forEach { dbHelper.insertData(it) }

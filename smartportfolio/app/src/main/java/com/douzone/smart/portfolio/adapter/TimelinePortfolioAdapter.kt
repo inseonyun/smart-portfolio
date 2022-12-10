@@ -2,6 +2,7 @@ package com.douzone.smart.portfolio.adapter
 
 import android.content.Context
 import android.content.DialogInterface
+import android.graphics.BitmapFactory
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -29,6 +30,18 @@ class TimelinePortfolioAdapter(val context: Context, var items: ArrayList<Timeli
 
         binding.tvTitle.text = items[p0].title
         binding.tvContents.text = items[p0].contents
+
+        // 이미지 넣음
+        if(items[p0].image != null && items[p0].image!!.isNotEmpty()) {
+            try {
+                val bitmap = BitmapFactory.decodeByteArray(items[p0].image, 0, items[p0].image!!.size)
+                bitmap?.let {
+                    binding.ivMain.setImageBitmap(bitmap)
+                }
+            }catch (e: Exception) {
+
+            }
+        }
 
         // url이 없다면 표시하지 않음
         if(items[p0].url.isNullOrEmpty()) {
@@ -63,9 +76,6 @@ class TimelinePortfolioAdapter(val context: Context, var items: ArrayList<Timeli
                 }
             }
         }
-
-        // 이미지 넣음
-        //if(!items[p0].image.isNullOrEmpty())
 
         return binding.root
     }

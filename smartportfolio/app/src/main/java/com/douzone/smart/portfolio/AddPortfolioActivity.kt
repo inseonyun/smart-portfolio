@@ -18,7 +18,6 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.net.toUri
 import com.douzone.smart.portfolio.adapter.CardPortfolioAdapter
 import com.douzone.smart.portfolio.adapter.MessengerPortfolioAdapter
 import com.douzone.smart.portfolio.adapter.TimelinePortfolioAdapter
@@ -28,12 +27,11 @@ import com.douzone.smart.portfolio.databinding.DialogAddPortfolioCardBinding
 import com.douzone.smart.portfolio.databinding.DialogAddPortfolioMessengerBinding
 import com.douzone.smart.portfolio.databinding.DialogAddPortfolioTimelineBinding
 import com.douzone.smart.portfolio.db.MessengerPortfolioDatabaseHelper
-import com.douzone.smart.portfolio.db.PortfolioDatabaseHelper
+import com.douzone.smart.portfolio.db.CardPortfolioDatabaseHelper
 import com.douzone.smart.portfolio.db.TimelinePortfolioDatabaseHelper
 import com.douzone.smart.portfolio.db.UserDatabaseHelper
 import java.io.ByteArrayOutputStream
 import java.io.FileNotFoundException
-import java.io.InputStream
 import java.lang.Exception
 import java.util.*
 
@@ -49,7 +47,7 @@ class AddPortfolioActivity : AppCompatActivity() {
     private var month = calendar.get(Calendar.MONTH)
     private var day = calendar.get(Calendar.DAY_OF_MONTH)
 
-    private val cardPortfolio = ArrayList<Portfolio>()
+    private val cardPortfolio = ArrayList<Card>()
     private val timelinePortfolio = ArrayList<Timeline>()
     private val messengerPortfolio = ArrayList<Messenger>()
 
@@ -60,11 +58,37 @@ class AddPortfolioActivity : AppCompatActivity() {
     private var checkUser = false
 
     private var changedUserImage: ByteArray ?= null
+    private var postImage: ByteArray = byteArrayOf()
 
     private val getUserProfileImage: ActivityResultLauncher<Intent> = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()) { activityResult ->
         if(activityResult.resultCode == RESULT_OK && activityResult.data != null) {
             setBitmapImage(activityResult.data!!.data!!)
+        }
+    }
+
+    private val getPostImage: ActivityResultLauncher<Intent> = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()) { activityResult ->
+        if(activityResult.resultCode == RESULT_OK && activityResult.data != null) {
+            try {
+                val inputStream = contentResolver.openInputStream(activityResult.data!!.data!!)
+                val bitmap = BitmapFactory.decodeStream(inputStream, null, null)
+                val outputStream = ByteArrayOutputStream()
+                bitmap!!.compress(Bitmap.CompressFormat.PNG, 100, outputStream)
+                inputStream!!.close()
+                outputStream.close()
+
+                postImage = outputStream.toByteArray()
+
+                when(intent.getIntExtra("viewType", 1)) {
+                    ViewType.CARDVIEW-> cardDialogBinding.tvImage.text = "이미지가 설정되었습니다."
+                    ViewType.TIMELINE-> timelineDialogBinding.tvImage.text = "이미지가 설정되었습니다."
+                    ViewType.MESSENGER-> messengerDialogBinding.tvImage.text = "이미지가 설정되었습니다."
+                }
+
+            } catch(e: FileNotFoundException) {
+                Log.e("UserImage ERROR", "${e.printStackTrace()}")
+            }
         }
     }
 
@@ -116,7 +140,7 @@ class AddPortfolioActivity : AppCompatActivity() {
             // 있으면 해당 유저의 포트폴리오 정보 가져옴
             when(viewType) {
                 ViewType.CARDVIEW -> {
-                    val cardDB = PortfolioDatabaseHelper(this@AddPortfolioActivity)
+                    val cardDB = CardPortfolioDatabaseHelper(this@AddPortfolioActivity)
                     cardDB.selectData(userName).forEach { cardPortfolio.add(it) }
                 }
                 ViewType.TIMELINE -> {
@@ -170,12 +194,11 @@ class AddPortfolioActivity : AppCompatActivity() {
                             if(cardDialogBinding.etTitle.text.isNullOrEmpty() || cardDialogBinding.etContents.text.isNullOrEmpty())
                                 Toast.makeText(this@AddPortfolioActivity, "입력 값이 비었습니다.", Toast.LENGTH_SHORT).show()
                             else {
-                                // 이미지 구현 해야함
-                                val rowCardPortfolio = Portfolio(0,
+                                val rowCardPortfolio = Card(0,
                                     intent.getStringExtra("name").toString(),
                                     cardDialogBinding.etTitle.text.toString(),
                                     cardDialogBinding.etContents.text.toString(),
-                                    "",
+                                    postImage,
                                     cardDialogBinding.etUrl.text.toString().trim()
                                 )
 
@@ -187,6 +210,8 @@ class AddPortfolioActivity : AppCompatActivity() {
                                     (cardDialogBinding.root.parent as ViewGroup).removeView(cardDialogBinding.root)
 
                                 cardDialogBinding = DialogAddPortfolioCardBinding.inflate(layoutInflater)
+                                postImage = byteArrayOf()
+                                initEvent()
                             }
 
                             dialogInterface.dismiss()
@@ -205,13 +230,12 @@ class AddPortfolioActivity : AppCompatActivity() {
                                     else -> CircleType.BLUE
                                 }
 
-                                // 이미지 구현 해야함
                                 val rowTimelinePortfolio = Timeline(0,
                                     intent.getStringExtra("name").toString(),
                                     timelineDialogBinding.etTitle.text.toString(),
                                     timelineDialogBinding.etContents.text.toString(),
                                     timelineDialogBinding.tvDate.text.toString(),
-                                    "",
+                                    postImage,
                                     timelineDialogBinding.etUrl.text.toString().trim(),
                                     circleColor
                                 )
@@ -222,6 +246,8 @@ class AddPortfolioActivity : AppCompatActivity() {
                                 if(timelineDialogBinding.root.parent != null)
                                     (timelineDialogBinding.root.parent as ViewGroup).removeView(timelineDialogBinding.root)
                                 timelineDialogBinding = DialogAddPortfolioTimelineBinding.inflate(layoutInflater)
+                                postImage = byteArrayOf()
+                                initEvent()
                             }
 
                             dialogInterface.dismiss()
@@ -233,12 +259,11 @@ class AddPortfolioActivity : AppCompatActivity() {
                             if(messengerDialogBinding.etTitle.text.isNullOrEmpty() || messengerDialogBinding.etContents.text.isNullOrEmpty())
                                 Toast.makeText(this@AddPortfolioActivity, "입력 값이 비었습니다.", Toast.LENGTH_SHORT).show()
                             else {
-                                // 이미지 구현 해야함
                                 val rowMessengerPortfolio = Messenger(0,
                                     intent.getStringExtra("name").toString(),
                                     messengerDialogBinding.etTitle.text.toString(),
                                     messengerDialogBinding.etContents.text.toString(),
-                                    "",
+                                    postImage,
                                     messengerDialogBinding.etUrl.text.toString().trim()
                                 )
                                 messengerPortfolio.add(rowMessengerPortfolio)
@@ -248,6 +273,8 @@ class AddPortfolioActivity : AppCompatActivity() {
                                 if(messengerDialogBinding.root.parent != null)
                                     (messengerDialogBinding.root.parent as ViewGroup).removeView(messengerDialogBinding.root)
                                 messengerDialogBinding = DialogAddPortfolioMessengerBinding.inflate(layoutInflater)
+                                postImage = byteArrayOf()
+                                initEvent()
                             }
 
                             dialogInterface.dismiss()
@@ -268,6 +295,27 @@ class AddPortfolioActivity : AppCompatActivity() {
             intent.type = "image/*"
             getUserProfileImage.launch(intent)
         }
+
+        // 각 뷰의 이미지 추가 눌렀을 때의 이벤트
+        cardDialogBinding.btnImage.setOnClickListener {
+            // 이미지 선택할 수 있게 함
+            getPostImage()
+        }
+        timelineDialogBinding.btnImage.setOnClickListener {
+            // 이미지 선택할 수 있게 함
+            getPostImage()
+        }
+        messengerDialogBinding.btnImage.setOnClickListener {
+            // 이미지 선택할 수 있게 함
+            getPostImage()
+        }
+    }
+
+    fun getPostImage() {
+        // 이미지 선택할 수 있게 함
+        val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+        intent.type = "image/*"
+        getPostImage.launch(intent)
     }
 
     fun insertPortfolio() {
@@ -282,7 +330,7 @@ class AddPortfolioActivity : AppCompatActivity() {
         // add portfolio
         when(userViewType) {
             ViewType.CARDVIEW -> {
-                val portfolioDB = PortfolioDatabaseHelper(this@AddPortfolioActivity)
+                val portfolioDB = CardPortfolioDatabaseHelper(this@AddPortfolioActivity)
                 cardPortfolio.forEach {
                     portfolioDB.insertData(it)
                 }
@@ -314,7 +362,7 @@ class AddPortfolioActivity : AppCompatActivity() {
         // update portfolio
         when(userViewType) {
             ViewType.CARDVIEW -> {
-                val portfolioDB = PortfolioDatabaseHelper(this@AddPortfolioActivity)
+                val portfolioDB = CardPortfolioDatabaseHelper(this@AddPortfolioActivity)
                 
                 // 이미 있는 데이터가 안 들어가도록 삭제 후 넣음
                 portfolioDB.deleteData(userName!!)
