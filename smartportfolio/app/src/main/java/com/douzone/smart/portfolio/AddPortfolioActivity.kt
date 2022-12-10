@@ -3,13 +3,22 @@ package com.douzone.smart.portfolio
 import android.app.Activity
 import android.app.DatePickerDialog
 import android.content.DialogInterface
+import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.net.toUri
 import com.douzone.smart.portfolio.adapter.CardPortfolioAdapter
 import com.douzone.smart.portfolio.adapter.MessengerPortfolioAdapter
 import com.douzone.smart.portfolio.adapter.TimelinePortfolioAdapter
@@ -22,6 +31,10 @@ import com.douzone.smart.portfolio.db.MessengerPortfolioDatabaseHelper
 import com.douzone.smart.portfolio.db.PortfolioDatabaseHelper
 import com.douzone.smart.portfolio.db.TimelinePortfolioDatabaseHelper
 import com.douzone.smart.portfolio.db.UserDatabaseHelper
+import java.io.ByteArrayOutputStream
+import java.io.FileNotFoundException
+import java.io.InputStream
+import java.lang.Exception
 import java.util.*
 
 
@@ -45,6 +58,15 @@ class AddPortfolioActivity : AppCompatActivity() {
     private val messengerPortfolioAdapter = MessengerPortfolioAdapter(this@AddPortfolioActivity, messengerPortfolio)
 
     private var checkUser = false
+
+    private var changedUserImage: ByteArray ?= null
+
+    private val getUserProfileImage: ActivityResultLauncher<Intent> = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()) { activityResult ->
+        if(activityResult.resultCode == RESULT_OK && activityResult.data != null) {
+            setBitmapImage(activityResult.data!!.data!!)
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -104,6 +126,22 @@ class AddPortfolioActivity : AppCompatActivity() {
                 ViewType.MESSENGER -> {
                     val messengerDB = MessengerPortfolioDatabaseHelper(this@AddPortfolioActivity)
                     messengerDB.selectData(userName).forEach { messengerPortfolio.add(it) }
+                }
+            }
+            // 있는 유저면 프로필 사진이 있는지 확인하고, 있다면 가져옴
+            val userData = dbHelper.selecetUser(userName)
+            if(userData != null) {
+                if(userData.profileImage != null && userData.profileImage!!.isNotEmpty()) {
+                    changedUserImage = userData.profileImage
+
+                    try {
+                        val bitmap = BitmapFactory.decodeByteArray(changedUserImage, 0, changedUserImage!!.size)
+                        bitmap?.let {
+                            binding.ivUserImage.setImageBitmap(bitmap)
+                        }
+                    }catch (e: Exception) {
+
+                    }
                 }
             }
         }
@@ -223,6 +261,13 @@ class AddPortfolioActivity : AppCompatActivity() {
                 show()
             }
         }
+
+        binding.cardViewUser.setOnClickListener {
+            // 이미지 선택할 수 있게 함
+            val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+            intent.type = "image/*"
+            getUserProfileImage.launch(intent)
+        }
     }
 
     fun insertPortfolio() {
@@ -230,7 +275,7 @@ class AddPortfolioActivity : AppCompatActivity() {
         val userViewType = intent.getIntExtra("viewType", 1)
 
         // add user
-        val user = User(userName!!, userViewType)
+        val user = User(userName!!, changedUserImage, userViewType)
         val userDB = UserDatabaseHelper(this@AddPortfolioActivity)
         userDB.insertData(user)
 
@@ -259,9 +304,15 @@ class AddPortfolioActivity : AppCompatActivity() {
 
     fun updatePortfolio() {
         val userName = intent.getStringExtra("name")
+        val userViewType = intent.getIntExtra("viewType", 1)
+
+        // update userProfileImage
+        val user = User(userName!!, changedUserImage, userViewType)
+        val userDB = UserDatabaseHelper(this@AddPortfolioActivity)
+        userDB.updateData(user)
 
         // update portfolio
-        when(intent.getIntExtra("viewType", 1)) {
+        when(userViewType) {
             ViewType.CARDVIEW -> {
                 val portfolioDB = PortfolioDatabaseHelper(this@AddPortfolioActivity)
                 
@@ -293,7 +344,24 @@ class AddPortfolioActivity : AppCompatActivity() {
                 }
             }
         }
+    }
 
+    fun setBitmapImage(uri: Uri) {
+        try {
+            val inputStream = contentResolver.openInputStream(uri!!)
+            val bitmap = BitmapFactory.decodeStream(inputStream, null, null)
+            val outputStream = ByteArrayOutputStream()
+            bitmap!!.compress(Bitmap.CompressFormat.PNG, 100, outputStream)
+            changedUserImage = outputStream.toByteArray()
+            inputStream!!.close()
+            outputStream.close()
+
+            bitmap?.let {
+                binding.ivUserImage.setImageBitmap(bitmap)
+            }
+        } catch(e: FileNotFoundException) {
+            Log.e("UserImage ERROR", "${e.printStackTrace()}")
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean = when(item.itemId) {

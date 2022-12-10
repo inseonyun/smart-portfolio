@@ -85,6 +85,11 @@ class MainActivity : AppCompatActivity(), DialogUserOnItemClick
             fragment_home.initUserData()
             fragment_home.initMenuList()
             fragment_home.initPages()
+
+            if(!dialogAddPortfolioAdapter.isEmpty && ::bindingDialogAddPortfolio.isInitialized) {
+                dialogAddPortfolioAdapter.notifyDataSetChanged()
+                bindingDialogAddPortfolio.lvUser.adapter = dialogAddPortfolioAdapter
+            }
         }
     }
 
