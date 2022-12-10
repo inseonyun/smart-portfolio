@@ -86,8 +86,10 @@ class MainActivity : AppCompatActivity(), DialogUserOnItemClick
             fragment_home.initMenuList()
             fragment_home.initPages()
 
-            dialogAddPortfolioAdapter.notifyDataSetChanged()
-            bindingDialogAddPortfolio.lvUser.adapter = dialogAddPortfolioAdapter
+            if(!dialogAddPortfolioAdapter.isEmpty && ::bindingDialogAddPortfolio.isInitialized) {
+                dialogAddPortfolioAdapter.notifyDataSetChanged()
+                bindingDialogAddPortfolio.lvUser.adapter = dialogAddPortfolioAdapter
+            }
         }
     }
 
@@ -179,6 +181,8 @@ class MainActivity : AppCompatActivity(), DialogUserOnItemClick
 //                            .commit()
                     }
                     "포트폴리오 추가" -> {
+                        bindingDialogAddPortfolio = TabDialogAddPortfolioBinding.inflate(layoutInflater)
+
                         // 탭 변경
                         binding.bottomTabLayout.selectTab(binding.bottomTabLayout.getTabAt(0))
 
@@ -186,8 +190,6 @@ class MainActivity : AppCompatActivity(), DialogUserOnItemClick
                         if(dialogAddPortfolioAdapter.count == 0) {
                             binding.tvPortfolioAdd.callOnClick()
                         } else {
-                            bindingDialogAddPortfolio = TabDialogAddPortfolioBinding.inflate(layoutInflater)
-
                             // 다이얼로그 리스트뷰 연결
                             bindingDialogAddPortfolio.lvUser.adapter = dialogAddPortfolioAdapter
 
