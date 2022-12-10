@@ -1,13 +1,13 @@
 package com.douzone.smart.portfolio
 
 import android.animation.ValueAnimator
-import android.content.DialogInterface
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import android.os.Looper
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
@@ -39,14 +39,14 @@ class MainActivity : AppCompatActivity(), DialogUserOnItemClick
     private val binding get() = _binding!!
 
     // back button event
-    var backTime = 0L
+    private var backTime = 0L
 
     // menubar
     private lateinit var navigationView : NavigationView
-    private lateinit var drawer_layout : DrawerLayout
+    private lateinit var drawerLayout : DrawerLayout
 
     //duplicate
-    private lateinit var fragment_home: Fragment_Home
+    private lateinit var fragmentHome: Fragment_Home
 
     private lateinit var bindingDialogUserDelete: DialogDeletePortfolioBinding
     private lateinit var dialogDeleteUserAdapter: DialogDeleteListViewAdapter
@@ -82,9 +82,9 @@ class MainActivity : AppCompatActivity(), DialogUserOnItemClick
         ActivityResultContracts.StartActivityForResult()) { activityResult ->
         if(activityResult.resultCode == RESULT_OK) {
             // 데이터 갱신
-            fragment_home.initUserData()
-            fragment_home.initMenuList()
-            fragment_home.initPages()
+            fragmentHome.initUserData()
+            fragmentHome.initMenuList()
+            fragmentHome.initPages()
 
             if(!dialogAddPortfolioAdapter.isEmpty && ::bindingDialogAddPortfolio.isInitialized) {
                 dialogAddPortfolioAdapter.notifyDataSetChanged()
@@ -94,11 +94,11 @@ class MainActivity : AppCompatActivity(), DialogUserOnItemClick
     }
 
     private val deletePortfolioRequestLauncher: ActivityResultLauncher<Intent> = registerForActivityResult(
-        ActivityResultContracts.StartActivityForResult()) { activityResult ->
+        ActivityResultContracts.StartActivityForResult()) {
         // 데이터 갱신
-        fragment_home.initUserData()
-        fragment_home.initMenuList()
-        fragment_home.initPages()
+        fragmentHome.initUserData()
+        fragmentHome.initMenuList()
+        fragmentHome.initPages()
 
         dialogDeleteUserAdapter.notifyDataSetChanged()
         bindingDialogUserDelete.lvUser.adapter = dialogDeleteUserAdapter
@@ -111,7 +111,7 @@ class MainActivity : AppCompatActivity(), DialogUserOnItemClick
         val view = binding.root
         setContentView(view)
 
-        fragment_home = Fragment_Home()
+        fragmentHome = Fragment_Home()
         initFrameLayout()
 
         initToolBar()
@@ -126,36 +126,36 @@ class MainActivity : AppCompatActivity(), DialogUserOnItemClick
     fun startLoading() {
         progressDialog = AppCompatDialog(this)
         progressDialog.setCancelable(false)
-        progressDialog.getWindow()?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        progressDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         progressDialog.setContentView(R.layout.loading_login)
         progressDialog.show()
-        var loading_lottie = progressDialog.findViewById<LottieAnimationView>(R.id.loading_lottie)
-        loading_lottie?.playAnimation()
-        loading_lottie?.repeatCount = ValueAnimator.INFINITE
+        val loadingLottie = progressDialog.findViewById<LottieAnimationView>(R.id.loading_lottie)
+        loadingLottie?.playAnimation()
+        loadingLottie?.repeatCount = ValueAnimator.INFINITE
 
-        Handler().postDelayed({
+        Handler(Looper.getMainLooper()).postDelayed({
             progressDialog.dismiss()
         }, loadingTime)
     }
 
     fun changeViewPagerPage(idx: Int) {
-        if(fragment_home.binding.viewpager.currentItem != idx)
-            fragment_home.binding.viewpager.currentItem = idx
+        if(fragmentHome.binding.viewpager.currentItem != idx)
+            fragmentHome.binding.viewpager.currentItem = idx
     }
 
     private fun setListViewHeightBasedOnChildren() {
-        val menu_list_adapter = binding.lvUser.adapter ?: return
+        val menuListAdapter = binding.lvUser.adapter ?: return
 
         var totalHeight = 0
 
-        for(i in 0 until menu_list_adapter.count) {
-            val listItem = menu_list_adapter.getView(i, null, binding.lvUser)
+        for(i in 0 until menuListAdapter.count) {
+            val listItem = menuListAdapter.getView(i, null, binding.lvUser)
             val px = 500 * binding.lvUser.resources.displayMetrics.density
             listItem.measure(View.MeasureSpec.makeMeasureSpec( px.toInt(), View.MeasureSpec.AT_MOST), View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED))
             totalHeight += listItem.measuredHeight
         }
 
-        val totalDividersHeight = binding.lvUser.dividerHeight * (menu_list_adapter.count - 1)
+        val totalDividersHeight = binding.lvUser.dividerHeight * (menuListAdapter.count - 1)
         val totalPadding = binding.lvUser.paddingTop + binding.lvUser.paddingBottom + 50
         val params = binding.lvUser.layoutParams
         params.height = totalHeight + totalDividersHeight + totalPadding
@@ -196,9 +196,9 @@ class MainActivity : AppCompatActivity(), DialogUserOnItemClick
                             AlertDialog.Builder(this@MainActivity).run {
                                 setTitle("포트폴리오 추가")
                                 setView(bindingDialogAddPortfolio.root)
-                                setNegativeButton("취소", DialogInterface.OnClickListener { dialogInterface, _ ->
+                                setNegativeButton("취소") { dialogInterface, _ ->
                                     dialogInterface.dismiss()
-                                })
+                                }
                                 show()
                             }
                         }
@@ -235,7 +235,7 @@ class MainActivity : AppCompatActivity(), DialogUserOnItemClick
         val toolbar = binding.toolbar
 
         // menubar
-        drawer_layout = findViewById(R.id.drawerLayout)
+        drawerLayout = findViewById(R.id.drawerLayout)
         navigationView = findViewById(R.id.navigation_view)
 
         setSupportActionBar(toolbar)// 툴바를 액티비티의 앱바로 지정
@@ -247,14 +247,14 @@ class MainActivity : AppCompatActivity(), DialogUserOnItemClick
 // deprecated
     fun initFrameLayout() {
         supportFragmentManager.beginTransaction()
-            .replace(R.id.frame_main, fragment_home!!)
+            .replace(R.id.frame_main, fragmentHome)
             .commit()
     }
 
     fun initMenuButton() {
         binding.imgbtnBack.setOnClickListener {
-            if(drawer_layout.isDrawerOpen(GravityCompat.START)){
-                drawer_layout.closeDrawers()
+            if(drawerLayout.isDrawerOpen(GravityCompat.START)){
+                drawerLayout.closeDrawers()
             }
         }
 
@@ -264,32 +264,36 @@ class MainActivity : AppCompatActivity(), DialogUserOnItemClick
             AlertDialog.Builder(this).run {
                 setTitle("${binding.tvPortfolioAdd.text}")
                 setView(bindingDialogUserAdd.root)
-                setPositiveButton("추가", DialogInterface.OnClickListener { dialogInterface, _ ->
-                    if(bindingDialogUserAdd.etName.text.isNullOrEmpty())
+                setPositiveButton("추가") { dialogInterface, _ ->
+                    if (bindingDialogUserAdd.etName.text.isNullOrEmpty())
                         Toast.makeText(context, "이름을 입력해주세요", Toast.LENGTH_SHORT).show()
                     else {
                         val userName = bindingDialogUserAdd.etName.text.toString().trim()
                         val checkDB = UserDatabaseHelper(this@MainActivity)
 
-                        if(checkDB.checkUser(userName))
+                        if (checkDB.checkUser(userName))
                             Toast.makeText(context, "이미 있는 유저입니다.", Toast.LENGTH_SHORT).show()
                         else {
-                            val userViewType = when(bindingDialogUserAdd.radioGroup.checkedRadioButtonId) {
-                                bindingDialogUserAdd.rbtTimeline.id -> ViewType.TIMELINE
-                                bindingDialogUserAdd.rbtMessenger.id -> ViewType.MESSENGER
-                                else -> ViewType.CARDVIEW
-                            }
+                            val userViewType =
+                                when (bindingDialogUserAdd.radioGroup.checkedRadioButtonId) {
+                                    bindingDialogUserAdd.rbtTimeline.id -> ViewType.TIMELINE
+                                    bindingDialogUserAdd.rbtMessenger.id -> ViewType.MESSENGER
+                                    else -> ViewType.CARDVIEW
+                                }
                             val intent = Intent(this@MainActivity, AddPortfolioActivity::class.java)
-                            intent.putExtra("name", bindingDialogUserAdd.etName.text.toString().trim())
+                            intent.putExtra(
+                                "name",
+                                bindingDialogUserAdd.etName.text.toString().trim()
+                            )
                             intent.putExtra("viewType", userViewType)
                             addPortfolioRequestLauncher.launch(intent)
                         }
                     }
                     dialogInterface.dismiss()
-                })
-                setNegativeButton("취소", DialogInterface.OnClickListener { dialogInterface, _ ->
+                }
+                setNegativeButton("취소") { dialogInterface, _ ->
                     dialogInterface.dismiss()
-                })
+                }
                 show()
             }
         }
@@ -310,26 +314,26 @@ class MainActivity : AppCompatActivity(), DialogUserOnItemClick
             AlertDialog.Builder(this).run {
                 setTitle("포트폴리오 삭제")
                 setView(bindingDialogUserDelete.root)
-                setNegativeButton("취소", DialogInterface.OnClickListener { dialogInterface, _ ->
+                setNegativeButton("취소") { dialogInterface, _ ->
                     dialogInterface.dismiss()
-                })
+                }
                 show()
             }
         }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item!!.itemId){
+        when(item.itemId){
             android.R.id.home->{ // 메뉴 버튼
-                drawer_layout.openDrawer(GravityCompat.START)    // 네비게이션 드로어 열기
+                drawerLayout.openDrawer(GravityCompat.START)    // 네비게이션 드로어 열기
             }
         }
         return super.onOptionsItemSelected(item)
     }
 
     override fun onBackPressed() {
-        if(drawer_layout.isDrawerOpen(GravityCompat.START)){
-            drawer_layout.closeDrawers()
+        if(drawerLayout.isDrawerOpen(GravityCompat.START)){
+            drawerLayout.closeDrawers()
         }else {
             if(System.currentTimeMillis() - backTime > 3000) {
                 Toast.makeText(applicationContext, R.string.back_toast_message, Toast.LENGTH_SHORT).show()
