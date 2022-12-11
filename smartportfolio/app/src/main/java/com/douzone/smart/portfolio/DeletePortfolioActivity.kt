@@ -136,7 +136,7 @@ class DeletePortfolioActivity : AppCompatActivity() {
     }
 
     fun initToolbar() {
-        title = "포트폴리오 삭제"
+        title = getString(R.string.activityMain_tab_item_delete)
     }
 
     fun deleteUser() {
@@ -188,17 +188,17 @@ class DeletePortfolioActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean = when(item.itemId) {
         R.id.menu_delete -> {
             AlertDialog.Builder(this).run {
-                setTitle("유저 삭제")
-                setMessage("${intent.getStringExtra("name")}의 모든 데이터가 삭제됩니다. \r\n삭제하시겠습니까?")
-                setPositiveButton("예", DialogInterface.OnClickListener { dialogInterface, _ ->
+                setTitle(getString(R.string.dialog_title_delete_user))
+                setMessage(intent.getStringExtra("name") + getString(R.string.dialog_message_delete_user))
+                setPositiveButton(getString(R.string.dialog_button_yes), DialogInterface.OnClickListener { dialogInterface, _ ->
                     deleteUser()
                     setResult(Activity.RESULT_OK, intent)
-                    Toast.makeText(this@DeletePortfolioActivity, "유저가 삭제 되었습니다.", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@DeletePortfolioActivity, getString(R.string.toast_deleted_user), Toast.LENGTH_SHORT).show()
                     dialogInterface.dismiss()
                     finish()
                     true
                 })
-                setNegativeButton("아니오", DialogInterface.OnClickListener { dialogInterface, _ ->
+                setNegativeButton(getString(R.string.dialog_button_no), DialogInterface.OnClickListener { dialogInterface, _ ->
                     dialogInterface.dismiss()
                 })
                 show()
@@ -207,17 +207,17 @@ class DeletePortfolioActivity : AppCompatActivity() {
         }
         R.id.menu_return -> {
             AlertDialog.Builder(this).run {
-                setTitle("저장")
-                setMessage("변경사항을 저장하시겠습니까?")
-                setPositiveButton("예", DialogInterface.OnClickListener { dialogInterface, _ ->
+                setTitle(getString(R.string.dialog_title_save))
+                setMessage(getString(R.string.dialog_message_save_changed))
+                setPositiveButton(getString(R.string.dialog_button_yes), DialogInterface.OnClickListener { dialogInterface, _ ->
                     deletePortfolio()
                     setResult(Activity.RESULT_OK, intent)
-                    Toast.makeText(this@DeletePortfolioActivity, "변경사항이 저장되었습니다.", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@DeletePortfolioActivity, getString(R.string.toast_saved_changing), Toast.LENGTH_SHORT).show()
                     dialogInterface.dismiss()
                     finish()
                     true
                 })
-                setNegativeButton("아니오", DialogInterface.OnClickListener { dialogInterface, _ ->
+                setNegativeButton(getString(R.string.dialog_button_no), DialogInterface.OnClickListener { dialogInterface, _ ->
                     dialogInterface.dismiss()
                 })
                 show()
@@ -234,14 +234,14 @@ class DeletePortfolioActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
         AlertDialog.Builder(this).run {
-            setTitle("종료")
-            setMessage("포트폴리오 수정을 취소하시겠습니까?")
-            setPositiveButton("예", DialogInterface.OnClickListener { dialogInterface, _ ->
+            setTitle(getString(R.string.dialog_title_cancel_delete_portfolio))
+            setMessage(getString(R.string.dialog_message_cancel_delete_portfolio))
+            setPositiveButton(getString(R.string.dialog_button_yes), DialogInterface.OnClickListener { dialogInterface, _ ->
                 dialogInterface.dismiss()
                 setResult(Activity.RESULT_CANCELED, intent)
                 super.onBackPressed()
             })
-            setNegativeButton("아니오", DialogInterface.OnClickListener { dialogInterface, _ ->
+            setNegativeButton(getString(R.string.dialog_button_no), DialogInterface.OnClickListener { dialogInterface, _ ->
                 dialogInterface.dismiss()
             })
             show()

@@ -99,4 +99,38 @@
     <string name="toolbar_menu_save">저장</string>
     <string name="toolbar_menu_delete_user">유저 삭제</string>
 
+    <!-- 토스트 메시지 -->
+    <string name="toast_input_name">이름을 입력해주세요</string>
+    <string name="toast_exist_name">이미 있는 유저입니다</string>
+    <string name="toast_notExist_portfolio">삭제할 포트폴리오가 없습니다</string>
+    <string name="toast_empty_input_value">입력 값이 비었습니다</string>
+    <string name="toast_saved">저장되었습니다</string>
+    <string name="toast_saved_changing">변경사항이 저장되었습니다</string>
+    <string name="toast_deleted_user">유저가 삭제되었습니다</string>
+
+
+    <!-- 다이얼로그 타이틀 및 메시지  -->
+    <string name="dialog_title_cancel_add_portfolio">종료</string>
+    <string name="dialog_title_cancel_delete_portfolio">종료</string>
+    <string name="dialog_title_add_portfolio">포트폴리오 추가</string>
+    <string name="dialog_title_delete_portfolio">포트폴리오 삭제</string>
+    <string name="dialog_title_delete_user">유저 삭제</string>
+    <string name="dialog_title_save">저장</string>
+
+    <string name="dialog_message_cancel_add_portfolio">포트폴리오 추가를 취소하시겠습니까?</string>
+    <string name="dialog_message_cancel_delete_portfolio">포트폴리오 삭제를 취소하시겠습니까?</string>
+    <string name="dialog_message_add_portfolio">의 포트폴리오를 추가하시겠습니까?</string>
+    <string name="dialog_message_delete_user_portfolio">의 포트폴리오를 삭제하시겠습니까?</string>
+    <string name="dialog_message_delete_user">
+        의 모든 데이터가 삭제됩니다.
+        삭제하시겠습니까?
+    </string>
+    <string name="dialog_message_delete_portfolio">해당 포트폴리오를 삭제하시겠습니까?</string>
+    <string name="dialog_message_save_changed">변경사항을 저장하시겠습니까?</string>
+
+    <string name="dialog_button_yes">예</string>
+    <string name="dialog_button_no">아니오</string>
+    <string name="dialog_button_add">추가</string>
+    <string name="dialog_button_cancel">취소</string>
+
 </resources>

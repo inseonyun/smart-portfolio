@@ -81,9 +81,9 @@ class AddPortfolioActivity : AppCompatActivity() {
                 postImage = outputStream.toByteArray()
 
                 when(intent.getIntExtra("viewType", 1)) {
-                    ViewType.CARDVIEW-> cardDialogBinding.tvImage.text = "이미지가 설정되었습니다."
-                    ViewType.TIMELINE-> timelineDialogBinding.tvImage.text = "이미지가 설정되었습니다."
-                    ViewType.MESSENGER-> messengerDialogBinding.tvImage.text = "이미지가 설정되었습니다."
+                    ViewType.CARDVIEW-> cardDialogBinding.tvImage.text = getString(R.string.dialog_add_portfolio_added_image)
+                    ViewType.TIMELINE-> timelineDialogBinding.tvImage.text = getString(R.string.dialog_add_portfolio_added_image)
+                    ViewType.MESSENGER-> messengerDialogBinding.tvImage.text = getString(R.string.dialog_add_portfolio_added_image)
                 }
 
             } catch(e: FileNotFoundException) {
@@ -122,7 +122,7 @@ class AddPortfolioActivity : AppCompatActivity() {
     }
 
     fun initToolbar() {
-        title = "포트폴리오 추가"
+        title = getString(R.string.activityMain_tab_item_add)
     }
 
     fun initUser() {
@@ -185,14 +185,14 @@ class AddPortfolioActivity : AppCompatActivity() {
         binding.btnAdd.setOnClickListener {
             initDialogEvent()
             AlertDialog.Builder(this).run {
-                setTitle("포트폴리오 추가")
+                setTitle(getString(R.string.activityMain_tab_item_add))
 
                 when(intent.getIntExtra("viewType", 1)) {
                     ViewType.CARDVIEW -> {
                         setView(cardDialogBinding.root)
-                        setPositiveButton("추가", DialogInterface.OnClickListener { dialogInterface, _ ->
+                        setPositiveButton(getString(R.string.dialog_button_add), DialogInterface.OnClickListener { dialogInterface, _ ->
                             if(cardDialogBinding.etTitle.text.isNullOrEmpty() || cardDialogBinding.etContents.text.isNullOrEmpty())
-                                Toast.makeText(this@AddPortfolioActivity, "입력 값이 비었습니다.", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(this@AddPortfolioActivity, getString(R.string.toast_empty_input_value), Toast.LENGTH_SHORT).show()
                             else {
                                 val rowCardPortfolio = Card(0,
                                     intent.getStringExtra("name").toString(),
@@ -219,9 +219,9 @@ class AddPortfolioActivity : AppCompatActivity() {
                     }
                     ViewType.TIMELINE -> {
                         setView(timelineDialogBinding.root)
-                        setPositiveButton("추가", DialogInterface.OnClickListener { dialogInterface, _ ->
+                        setPositiveButton(getString(R.string.dialog_button_add), DialogInterface.OnClickListener { dialogInterface, _ ->
                             if(timelineDialogBinding.etTitle.text.isNullOrEmpty() || timelineDialogBinding.etContents.text.isNullOrEmpty())
-                                Toast.makeText(this@AddPortfolioActivity, "입력 값이 비었습니다.", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(this@AddPortfolioActivity, getString(R.string.toast_empty_input_value), Toast.LENGTH_SHORT).show()
                             else {
                                 // 라디오 선택된 컬러값으로 circleColor 조정
                                 val circleColor: Int = when(timelineDialogBinding.rbtCircleColor.checkedRadioButtonId) {
@@ -255,9 +255,9 @@ class AddPortfolioActivity : AppCompatActivity() {
                     }
                     ViewType.MESSENGER -> {
                         setView(messengerDialogBinding.root)
-                        setPositiveButton("추가", DialogInterface.OnClickListener { dialogInterface, _ ->
+                        setPositiveButton(getString(R.string.dialog_button_add), DialogInterface.OnClickListener { dialogInterface, _ ->
                             if(messengerDialogBinding.etTitle.text.isNullOrEmpty() || messengerDialogBinding.etContents.text.isNullOrEmpty())
-                                Toast.makeText(this@AddPortfolioActivity, "입력 값이 비었습니다.", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(this@AddPortfolioActivity, getString(R.string.toast_empty_input_value), Toast.LENGTH_SHORT).show()
                             else {
                                 val rowMessengerPortfolio = Messenger(0,
                                     intent.getStringExtra("name").toString(),
@@ -282,7 +282,7 @@ class AddPortfolioActivity : AppCompatActivity() {
                     }
                 }
 
-                setNegativeButton("취소", DialogInterface.OnClickListener { dialogInterface, _ ->
+                setNegativeButton(getString(R.string.dialog_button_cancel), DialogInterface.OnClickListener { dialogInterface, _ ->
                     dialogInterface.dismiss()
                 })
                 show()
@@ -421,7 +421,7 @@ class AddPortfolioActivity : AppCompatActivity() {
                 // 없는 유저면 삽입
                 insertPortfolio()
             }
-            Toast.makeText(this@AddPortfolioActivity, "저장되었습니다.", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this@AddPortfolioActivity, getString(R.string.toast_saved), Toast.LENGTH_SHORT).show()
             setResult(Activity.RESULT_OK, intent)
             finish()
             true
@@ -436,14 +436,14 @@ class AddPortfolioActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
         AlertDialog.Builder(this).run {
-            setTitle("종료")
-            setMessage("포트폴리오 추가를 취소하시겠습니까?")
-            setPositiveButton("예", DialogInterface.OnClickListener { dialogInterface, _ ->
+            setTitle(getString(R.string.dialog_title_cancel_add_portfolio))
+            setMessage(getString(R.string.dialog_message_cancel_add_portfolio))
+            setPositiveButton(getString(R.string.dialog_button_yes), DialogInterface.OnClickListener { dialogInterface, _ ->
                 dialogInterface.dismiss()
                 setResult(Activity.RESULT_CANCELED, intent)
                 super.onBackPressed()
             })
-            setNegativeButton("아니오", DialogInterface.OnClickListener { dialogInterface, _ ->
+            setNegativeButton(getString(R.string.dialog_button_no), DialogInterface.OnClickListener { dialogInterface, _ ->
                 dialogInterface.dismiss()
             })
             show()

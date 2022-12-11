@@ -14,7 +14,7 @@ class MenuUserListViewAdapter (val context: Context, var items: ArrayList<User>)
     override fun getView(p0: Int, p1: View?, p2: ViewGroup?): View {
         val binding = ListviewMenuUserBinding.inflate(LayoutInflater.from(context))
 
-        binding.tvUserName.setText(items[p0].name)
+        binding.tvUserName.text = items[p0].name
 
         binding.tvUserName.setOnClickListener {
             (context as MainActivity).changeViewPagerPage(p0 + 1)

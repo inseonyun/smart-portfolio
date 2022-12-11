@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import androidx.appcompat.app.AlertDialog
+import com.douzone.smart.portfolio.R
 import com.douzone.smart.portfolio.data.Card
 import com.douzone.smart.portfolio.databinding.ListviewPortfolioCardBinding
 
@@ -41,15 +42,15 @@ class CardPortfolioAdapter(val context: Context, var items: ArrayList<Card>): Ba
         if(context.toString().contains("DeletePortfolio")) {
             binding.cardView.setOnClickListener {
                 AlertDialog.Builder(context).run {
-                    setTitle("포트폴리오 삭제")
-                    setMessage("해당 포트폴리오를 삭제할까요?")
-                    setPositiveButton("예", DialogInterface.OnClickListener { dialogInterface, _ ->
+                    setTitle(context.getString(R.string.dialog_title_delete_portfolio))
+                    setMessage(context.getString(R.string.dialog_message_delete_portfolio))
+                    setPositiveButton(context.getString(R.string.dialog_button_yes), DialogInterface.OnClickListener { dialogInterface, _ ->
                         // 사용자가 삭제 취소를 할 수 있도록 DB에 바로 제거하지는 않음
                         this@CardPortfolioAdapter.items.removeAt(p0)
                         this@CardPortfolioAdapter.notifyDataSetChanged()
                         dialogInterface.dismiss()
                     })
-                    setNegativeButton("취소", DialogInterface.OnClickListener { dialogInterface, _ ->
+                    setNegativeButton(context.getString(R.string.dialog_button_no), DialogInterface.OnClickListener { dialogInterface, _ ->
                         dialogInterface.dismiss()
                     })
                     show()
