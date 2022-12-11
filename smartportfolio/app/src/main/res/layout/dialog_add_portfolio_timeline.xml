@@ -13,7 +13,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Date"
+            android:text="@string/dialog_add_portfolio_date"
             style="@style/dialog_add_textView_title"/>
 
         <TextView
@@ -21,7 +21,7 @@
             android:layout_marginTop="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Date"
+            android:text="@string/dialog_add_portfolio_text_date"
             android:textSize="16dp"
             android:layout_marginLeft="5dp"/>
 
@@ -37,7 +37,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Title"
+            android:text="@string/dialog_add_portfolio_title"
             style="@style/dialog_add_textView_title"/>
 
         <EditText
@@ -46,7 +46,7 @@
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:paddingLeft="10dp"
-            android:hint="제목을 입력해주세요"
+            android:hint="@string/dialog_add_portfolio_edit_title"
             android:inputType="text"
             android:background="@drawable/custom_edit_text" />
     </LinearLayout>
@@ -61,7 +61,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Contents"
+            android:text="@string/dialog_add_portfolio_contents"
             style="@style/dialog_add_textView_title"/>
 
         <EditText
@@ -70,7 +70,7 @@
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:paddingLeft="10dp"
-            android:hint="내용을 입력해주세요"
+            android:hint="@string/dialog_add_portfolio_edit_contents"
             android:textAlignment="textStart"
             android:background="@drawable/custom_edit_text" />
     </LinearLayout>
@@ -85,7 +85,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="URL"
+            android:text="@string/dialog_add_portfolio_url"
             style="@style/dialog_add_textView_title" />
 
         <EditText
@@ -94,7 +94,7 @@
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:paddingLeft="10dp"
-            android:hint="URL을 입력해주세요"
+            android:hint="@string/dialog_add_portfolio_edit_url"
             android:inputType="text"
             android:background="@drawable/custom_edit_text" />
     </LinearLayout>
@@ -104,14 +104,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="이미지가 추가되지 않았습니다."/>
+        android:text="@string/dialog_add_portfolio_notAdded_image"/>
 
     <Button
         android:id="@+id/btn_image"
         android:layout_width="120dp"
         android:layout_height="40dp"
         android:layout_marginTop="10dp"
-        android:text="이미지 추가"
+        android:text="@string/dialog_add_portfolio_button_image"
         android:textColor="@color/white"
         android:background="@drawable/custom_button_round"
         android:backgroundTint="@color/user_button"/>
@@ -120,7 +120,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="Circle Color"
+        android:text="@string/dialog_add_portfolio_circleType"
         style="@style/dialog_add_textView_title"/>
 
     <RadioGroup
@@ -134,19 +134,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:checked="true"
-            android:text="파랑"/>
+            android:text="@string/dialog_add_portfolio_circleBlue"/>
 
         <RadioButton
             android:id="@+id/rbt_green"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="녹색"/>
+            android:text="@string/dialog_add_portfolio_circleGreen"/>
 
         <RadioButton
             android:id="@+id/rbt_orange"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="오렌지"/>
+            android:text="@string/dialog_add_portfolio_circleOrange"/>
 
     </RadioGroup>
 

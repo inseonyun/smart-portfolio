@@ -14,7 +14,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="유저 이름"
+            android:text="@string/dialog_add_user_title"
             style="@style/dialog_add_textView_title"/>
 
         <EditText
@@ -23,7 +23,7 @@
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:paddingLeft="10dp"
-            android:hint="이름을 입력해주세요"
+            android:hint="@string/dialog_add_user_edit_name"
             android:inputType="text"
             android:maxLength="10"
             android:background="@drawable/custom_edit_text" />
@@ -39,7 +39,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="포트폴리오 형태"
+            android:text="@string/dialog_add_user_portfolio_title"
             style="@style/dialog_add_textView_title"/>
 
         <RadioGroup
@@ -50,7 +50,7 @@
 
             <RadioButton
                 android:id="@+id/rbt_card"
-                android:text="카드형 포트폴리오"
+                android:text="@string/card_portfolio"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
@@ -59,7 +59,7 @@
 
             <RadioButton
                 android:id="@+id/rbt_timeline"
-                android:text="타임라인형 포트폴리오"
+                android:text="@string/timeline_portfolio"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
@@ -67,7 +67,7 @@
 
             <RadioButton
                 android:id="@+id/rbt_messenger"
-                android:text="메신저형 포트폴리오"
+                android:text="@string/messenger_portfolio"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"

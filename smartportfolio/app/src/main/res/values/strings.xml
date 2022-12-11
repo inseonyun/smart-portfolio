@@ -2,6 +2,11 @@
     <string name="app_name">스마트 포트폴리오</string>
     <string name="back_toast_message">한 번 더 누르면 앱이 종료 됩니다</string>
 
+    <!-- portfolio 종류 -->
+    <string name="card_portfolio">카드형 포트폴리오</string>
+    <string name="timeline_portfolio">타임라인형 포트폴리오</string>
+    <string name="messenger_portfolio">메신저형 포트폴리오</string>
+
     <!-- activity_login -->
     <string name="activityLogin_edit_id">ID</string>
     <string name="activityLogin_edit_password">Password</string>
@@ -55,4 +60,32 @@
 
     <!-- listView_dialog_user 포트폴리오 추가 및 삭제 시 보여지는 유저 목록 -->
     <string name="listView_dialog_user_name">유저 이름</string>
+
+    <!-- dialog_add_user 드로어 메뉴 중 포트폴리오 추가 다이얼로그 뷰 -->
+    <string name="dialog_add_user_title">유저 추가</string>
+    <string name="dialog_add_user_name">유저 이름</string>
+    <string name="dialog_add_user_edit_name">이름을 입력해주세요</string>
+    <string name="dialog_add_user_portfolio_title">포트폴리오 형태</string>
+    
+    <!-- dialog_delete_portfolio 포트폴리오 삭제 메뉴 다이얼로그 뷰 -->
+    <string name="dialog_delete_portfolio_user_list">유저 목록</string>
+
+    <!-- dialog_add_portfolio 포트폴리오 추가 다이얼로그 뷰 공통사항! -->
+    <string name="dialog_add_portfolio_title">제목</string>
+    <string name="dialog_add_portfolio_edit_title">제목을 입력해주세요</string>
+    <string name="dialog_add_portfolio_contents">내용</string>
+    <string name="dialog_add_portfolio_edit_contents">내용을 입력해주세요</string>
+    <string name="dialog_add_portfolio_url">하이퍼링크</string>
+    <string name="dialog_add_portfolio_edit_url">URL을 입력해주세요</string>
+    <string name="dialog_add_portfolio_added_image">이미지가 설정되었습니다</string>
+    <string name="dialog_add_portfolio_notAdded_image">이미지가 추가되지 않았습니다</string>
+    <string name="dialog_add_portfolio_button_image">이미지 추가</string>
+
+    <!-- 타임라인 형태의 포트폴리오 추가 다이얼로그 뷰 -->
+    <string name="dialog_add_portfolio_date">날짜</string>
+    <string name="dialog_add_portfolio_text_date">여기를 클릭해 날짜를 선택해주세요</string>
+    <string name="dialog_add_portfolio_circleType">원 색깔</string>
+    <string name="dialog_add_portfolio_circleBlue">파란색</string>
+    <string name="dialog_add_portfolio_circleGreen">녹색</string>
+    <string name="dialog_add_portfolio_circleOrange">주황색</string>
 </resources>

@@ -31,7 +31,9 @@
         <entry key="..\:/github-repository/smart-portfolio/smartportfolio/app/src/main/res/layout/activity_loading.xml" value="0.3038949275362319" />
         <entry key="..\:/github-repository/smart-portfolio/smartportfolio/app/src/main/res/layout/activity_login.xml" value="0.22" />
         <entry key="..\:/github-repository/smart-portfolio/smartportfolio/app/src/main/res/layout/activity_main.xml" value="0.25" />
-        <entry key="..\:/github-repository/smart-portfolio/smartportfolio/app/src/main/res/layout/dialog_add_portfolio_messenger.xml" value="0.4913949275362319" />
+        <entry key="..\:/github-repository/smart-portfolio/smartportfolio/app/src/main/res/layout/dialog_add_portfolio_card.xml" value="0.25" />
+        <entry key="..\:/github-repository/smart-portfolio/smartportfolio/app/src/main/res/layout/dialog_add_portfolio_messenger.xml" value="0.4405010438413361" />
+        <entry key="..\:/github-repository/smart-portfolio/smartportfolio/app/src/main/res/layout/dialog_add_portfolio_timeline.xml" value="0.22871376811594202" />
         <entry key="..\:/github-repository/smart-portfolio/smartportfolio/app/src/main/res/layout/dialog_add_user.xml" value="0.2692502532928065" />
         <entry key="..\:/github-repository/smart-portfolio/smartportfolio/app/src/main/res/layout/dialog_delete_portfolio.xml" value="0.2692502532928065" />
         <entry key="..\:/github-repository/smart-portfolio/smartportfolio/app/src/main/res/layout/fragment__home.xml" value="0.358695652173913" />

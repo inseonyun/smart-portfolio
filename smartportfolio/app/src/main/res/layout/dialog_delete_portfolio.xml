@@ -8,7 +8,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="유저 목록"
+        android:text="@string/dialog_delete_portfolio_user_list"
         style="@style/dialog_delete_textView_title"/>
 
     <ListView
