@@ -175,12 +175,12 @@ class MainActivity : AppCompatActivity(), DialogUserOnItemClick
             // 탭 선택 됐을 때 이벤트
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 when(tab?.text) {
-                    "홈" -> {
+                    getString(R.string.activityMain_tab_item_home) -> {
 //                        supportFragmentManager.beginTransaction()
 //                            .replace(R.id.frame_main, fragment_home)
 //                            .commit()
                     }
-                    "포트폴리오 추가" -> {
+                    getString(R.string.activityMain_tab_item_add)-> {
                         bindingDialogAddPortfolio = TabDialogAddPortfolioBinding.inflate(layoutInflater)
 
                         // 탭 변경
@@ -194,16 +194,16 @@ class MainActivity : AppCompatActivity(), DialogUserOnItemClick
                             bindingDialogAddPortfolio.lvUser.adapter = dialogAddPortfolioAdapter
 
                             AlertDialog.Builder(this@MainActivity).run {
-                                setTitle("포트폴리오 추가")
+                                setTitle(getString(R.string.activityMain_tab_item_add))
                                 setView(bindingDialogAddPortfolio.root)
-                                setNegativeButton("취소") { dialogInterface, _ ->
+                                setNegativeButton(getString(R.string.dialog_button_cancel)) { dialogInterface, _ ->
                                     dialogInterface.dismiss()
                                 }
                                 show()
                             }
                         }
                     }
-                    "포트폴리오 삭제" -> {
+                    getString(R.string.activityMain_tab_item_delete) -> {
                         // 탭 변경
                         binding.bottomTabLayout.selectTab(binding.bottomTabLayout.getTabAt(0))
 
@@ -219,7 +219,7 @@ class MainActivity : AppCompatActivity(), DialogUserOnItemClick
             // 선택된 탭을 다시 선택 했을 때 이벤트
             override fun onTabReselected(tab: TabLayout.Tab?) {
                 when(tab?.text) {
-                    "홈" -> changeViewPagerPage(0)
+                    getString(R.string.activityMain_tab_item_home) -> changeViewPagerPage(0)
                 }
             }
         })
@@ -262,17 +262,17 @@ class MainActivity : AppCompatActivity(), DialogUserOnItemClick
             // 포트폴리오 추가 기능 구현
             val bindingDialogUserAdd = DialogAddUserBinding.inflate(layoutInflater)
             AlertDialog.Builder(this).run {
-                setTitle("${binding.tvPortfolioAdd.text}")
+                setTitle(getString(R.string.drawer_menu_add))
                 setView(bindingDialogUserAdd.root)
-                setPositiveButton("추가") { dialogInterface, _ ->
+                setPositiveButton(getString(R.string.dialog_button_add)) { dialogInterface, _ ->
                     if (bindingDialogUserAdd.etName.text.isNullOrEmpty())
-                        Toast.makeText(context, "이름을 입력해주세요", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context, getString(R.string.toast_input_name), Toast.LENGTH_SHORT).show()
                     else {
                         val userName = bindingDialogUserAdd.etName.text.toString().trim()
                         val checkDB = UserDatabaseHelper(this@MainActivity)
 
                         if (checkDB.checkUser(userName))
-                            Toast.makeText(context, "이미 있는 유저입니다.", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(context, getString(R.string.toast_exist_name), Toast.LENGTH_SHORT).show()
                         else {
                             val userViewType =
                                 when (bindingDialogUserAdd.radioGroup.checkedRadioButtonId) {
@@ -291,7 +291,7 @@ class MainActivity : AppCompatActivity(), DialogUserOnItemClick
                     }
                     dialogInterface.dismiss()
                 }
-                setNegativeButton("취소") { dialogInterface, _ ->
+                setNegativeButton(getString(R.string.dialog_button_cancel)) { dialogInterface, _ ->
                     dialogInterface.dismiss()
                 }
                 show()
@@ -304,7 +304,7 @@ class MainActivity : AppCompatActivity(), DialogUserOnItemClick
 
             // 유저 포트폴리오가 존재해야 띄워주도록 함
             if(dialogDeleteUserAdapter.count == 0) {
-                Toast.makeText(this@MainActivity, "삭제할 포트폴리오가 없습니다.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@MainActivity, getString(R.string.toast_notExist_portfolio), Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
@@ -312,9 +312,9 @@ class MainActivity : AppCompatActivity(), DialogUserOnItemClick
             bindingDialogUserDelete.lvUser.adapter = dialogDeleteUserAdapter
 
             AlertDialog.Builder(this).run {
-                setTitle("포트폴리오 삭제")
+                setTitle(getString(R.string.drawer_menu_delete))
                 setView(bindingDialogUserDelete.root)
-                setNegativeButton("취소") { dialogInterface, _ ->
+                setNegativeButton(getString(R.string.dialog_button_cancel)) { dialogInterface, _ ->
                     dialogInterface.dismiss()
                 }
                 show()

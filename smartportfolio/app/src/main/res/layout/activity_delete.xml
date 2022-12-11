@@ -40,7 +40,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="15dp"
-            android:text="user_name"
+            android:text="@string/addDelete_userName"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/cardView_user"
             app:layout_constraintStart_toStartOf="@+id/cardView_user"

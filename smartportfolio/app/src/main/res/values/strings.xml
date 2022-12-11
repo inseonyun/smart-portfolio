@@ -1,4 +1,137 @@
 <resources>
     <string name="app_name">스마트 포트폴리오</string>
     <string name="back_toast_message">한 번 더 누르면 앱이 종료 됩니다</string>
+
+    <!-- portfolio 종류 -->
+    <string name="card_portfolio">카드형 포트폴리오</string>
+    <string name="timeline_portfolio">타임라인형 포트폴리오</string>
+    <string name="messenger_portfolio">메신저형 포트폴리오</string>
+
+    <!-- activity_login -->
+    <string name="activityLogin_edit_id">ID</string>
+    <string name="activityLogin_edit_password">Password</string>
+    <string name="activityLogin_button_login">로그인</string>
+
+    <!-- activity_main -->
+    <string name="activityMain_tab_item_home">홈</string>
+    <string name="activityMain_tab_item_add">포트폴리오 추가</string>
+    <string name="activityMain_tab_item_delete">포트폴리오 삭제</string>
+
+    <!-- 포트폴리오 추가 및 삭제 화면 공통 사항-->
+    <string name="addDelete_userName">유저 이름</string>
+
+    <!-- 포트폴리오 추가 버튼 -->
+    <string name="button_add_portfolio">포트폴리오 추가</string>
+
+    <!-- drawer menu -->
+    <string name="drawer_menu_home">홈</string>
+    <string name="drawer_menu_screen">화면</string>
+    <string name="drawer_menu_setting">설정</string>
+    <string name="drawer_menu_add">포트폴리오 추가</string>
+    <string name="drawer_menu_delete">포트폴리오 삭제</string>
+
+    <!-- viewPager Main -->
+    <string name="viewMain_title">소개</string>
+    <string name="viewMain_description">지금 바로 멤버들의 역량, 이력을 관리 해보세요!</string>
+    <string name="viewMain_user_list">유저 목록</string>
+
+    <!-- tab_dialog_add -->
+    <string name="tabDialogAdd_title">포트폴리오 추가</string>
+    <string name="tabDialogAdd_description">포트폴리오를 추가 할 유저를 선택해주세요</string>
+    <string name="tabDialogAdd_user_list">유저 목록</string>
+
+    <!-- listview_card_portfolio -->
+    <string name="listView_CardPortfolio_title">This is title</string>
+    <string name="listView_CardPortfolio_contents">This is contents</string>
+    <string name="listView_CardPortfolio_link">Link</string>
+
+    <!-- listView_timeline_portfolio -->
+    <string name="listView_TimelinePortfolio_day">1</string>
+    <string name="listView_TimelinePortfolio_month">1</string>
+    <string name="listView_TimelinePortfolio_year">2022</string>
+    <string name="listView_TimelinePortfolio_title">This is title</string>
+    <string name="listView_TimelinePortfolio_contents">This is contents</string>
+    <string name="listView_TimelinePortfolio_link">Link</string>
+
+    <!-- listView_messenger_portfolio -->
+    <string name="listView_MessengerPortfolio_title">This is title</string>
+    <string name="listView_MessengerPortfolio_contents">This is contents</string>
+    <string name="listView_MessengerPortfolio_link">Link</string>
+
+    <!-- listView_home_user 홈 화면에 보여지는 유저 목록 -->
+    <string name="listView_home_userList_name">유저 이름</string>
+    <string name="listView_home_userList_title">유저 타이틀</string>
+
+    <!-- listView_menu_user 드로어 메뉴 화면에 보여지는 유저 목록 -->
+    <string name="listView_menu_userList_name">유저 이름</string>
+
+    <!-- listView_dialog_user 포트폴리오 추가 및 삭제 시 보여지는 유저 목록 -->
+    <string name="listView_dialog_user_name">유저 이름</string>
+
+    <!-- dialog_add_user 드로어 메뉴 중 포트폴리오 추가 다이얼로그 뷰 -->
+    <string name="dialog_add_user_title">유저 추가</string>
+    <string name="dialog_add_user_name">유저 이름</string>
+    <string name="dialog_add_user_edit_name">이름을 입력해주세요</string>
+    <string name="dialog_add_user_portfolio_title">포트폴리오 형태</string>
+    
+    <!-- dialog_delete_portfolio 포트폴리오 삭제 메뉴 다이얼로그 뷰 -->
+    <string name="dialog_delete_portfolio_user_list">유저 목록</string>
+
+    <!-- dialog_add_portfolio 포트폴리오 추가 다이얼로그 뷰 공통사항! -->
+    <string name="dialog_add_portfolio_title">제목</string>
+    <string name="dialog_add_portfolio_edit_title">제목을 입력해주세요</string>
+    <string name="dialog_add_portfolio_contents">내용</string>
+    <string name="dialog_add_portfolio_edit_contents">내용을 입력해주세요</string>
+    <string name="dialog_add_portfolio_url">하이퍼링크</string>
+    <string name="dialog_add_portfolio_edit_url">URL을 입력해주세요</string>
+    <string name="dialog_add_portfolio_added_image">이미지가 설정되었습니다</string>
+    <string name="dialog_add_portfolio_notAdded_image">이미지가 추가되지 않았습니다</string>
+    <string name="dialog_add_portfolio_button_image">이미지 추가</string>
+
+    <!-- 타임라인 형태의 포트폴리오 추가 다이얼로그 뷰 -->
+    <string name="dialog_add_portfolio_date">날짜</string>
+    <string name="dialog_add_portfolio_text_date">여기를 클릭해 날짜를 선택해주세요</string>
+    <string name="dialog_add_portfolio_circleType">원 색깔</string>
+    <string name="dialog_add_portfolio_circleBlue">파란색</string>
+    <string name="dialog_add_portfolio_circleGreen">녹색</string>
+    <string name="dialog_add_portfolio_circleOrange">주황색</string>
+
+    <!-- 포트폴리오 추가 및 삭제 화면 툴바 메뉴 -->
+    <string name="toolbar_menu_save">저장</string>
+    <string name="toolbar_menu_delete_user">유저 삭제</string>
+
+    <!-- 토스트 메시지 -->
+    <string name="toast_input_name">이름을 입력해주세요</string>
+    <string name="toast_exist_name">이미 있는 유저입니다</string>
+    <string name="toast_notExist_portfolio">삭제할 포트폴리오가 없습니다</string>
+    <string name="toast_empty_input_value">입력 값이 비었습니다</string>
+    <string name="toast_saved">저장되었습니다</string>
+    <string name="toast_saved_changing">변경사항이 저장되었습니다</string>
+    <string name="toast_deleted_user">유저가 삭제되었습니다</string>
+
+
+    <!-- 다이얼로그 타이틀 및 메시지  -->
+    <string name="dialog_title_cancel_add_portfolio">종료</string>
+    <string name="dialog_title_cancel_delete_portfolio">종료</string>
+    <string name="dialog_title_add_portfolio">포트폴리오 추가</string>
+    <string name="dialog_title_delete_portfolio">포트폴리오 삭제</string>
+    <string name="dialog_title_delete_user">유저 삭제</string>
+    <string name="dialog_title_save">저장</string>
+
+    <string name="dialog_message_cancel_add_portfolio">포트폴리오 추가를 취소하시겠습니까?</string>
+    <string name="dialog_message_cancel_delete_portfolio">포트폴리오 삭제를 취소하시겠습니까?</string>
+    <string name="dialog_message_add_portfolio">의 포트폴리오를 추가하시겠습니까?</string>
+    <string name="dialog_message_delete_user_portfolio">의 포트폴리오를 삭제하시겠습니까?</string>
+    <string name="dialog_message_delete_user">
+        의 모든 데이터가 삭제됩니다.
+        삭제하시겠습니까?
+    </string>
+    <string name="dialog_message_delete_portfolio">해당 포트폴리오를 삭제하시겠습니까?</string>
+    <string name="dialog_message_save_changed">변경사항을 저장하시겠습니까?</string>
+
+    <string name="dialog_button_yes">예</string>
+    <string name="dialog_button_no">아니오</string>
+    <string name="dialog_button_add">추가</string>
+    <string name="dialog_button_cancel">취소</string>
+
 </resources>

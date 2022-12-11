@@ -40,7 +40,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="15dp"
-            android:text="user_name"
+            android:text="@string/addDelete_userName"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/cardView_user"
             app:layout_constraintStart_toStartOf="@+id/cardView_user"
@@ -67,16 +67,19 @@
             android:divider="#FFFFFF"/>
 
         <Button
+            android:id="@+id/btn_add"
             android:layout_width="140dp"
             android:layout_height="wrap_content"
-            android:id="@+id/btn_add"
-            android:text="포트폴리오 추가"
-            android:textColor="@color/white"
-            android:layout_margin="20dp"
-            android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="20dp"
             android:background="@drawable/custom_button_round"
-            android:backgroundTint="@color/user_button"/>
+            android:backgroundTint="@color/user_button"
+            android:text="@string/button_add_portfolio"
+            android:textColor="@color/white" />
 
     </RelativeLayout>
 

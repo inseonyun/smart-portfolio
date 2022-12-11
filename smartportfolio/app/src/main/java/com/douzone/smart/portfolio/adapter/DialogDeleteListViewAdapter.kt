@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import androidx.appcompat.app.AlertDialog
 import com.douzone.smart.portfolio.MainActivity
+import com.douzone.smart.portfolio.R
 import com.douzone.smart.portfolio.`interface`.DialogUserOnItemClick
 import com.douzone.smart.portfolio.data.AddDelete
 import com.douzone.smart.portfolio.data.User
@@ -37,13 +38,13 @@ class DialogDeleteListViewAdapter(val context: Context, var items: ArrayList<Use
             (context as MainActivity)
             // 삭제 액티비티로 이동
             AlertDialog.Builder(context).run {
-                setTitle("포트폴리오 삭제")
-                setMessage("${items[p0].name}를 삭제하시겠습니까?")
-                setPositiveButton("예", DialogInterface.OnClickListener { dialogInterface, _ ->
+                setTitle(context.getString(R.string.dialog_title_delete_portfolio))
+                setMessage(items[p0].name + context.getString(R.string.dialog_message_delete_user_portfolio))
+                setPositiveButton(context.getString(R.string.dialog_button_yes), DialogInterface.OnClickListener { dialogInterface, _ ->
                     listener.onClick(items[p0].name, items[p0].viewType, AddDelete.DELETE)
                     dialogInterface.dismiss()
                 })
-                setNegativeButton("아니오", DialogInterface.OnClickListener { dialogInterface, _ ->
+                setNegativeButton(context.getString(R.string.dialog_button_no), DialogInterface.OnClickListener { dialogInterface, _ ->
                     dialogInterface.dismiss()
                 })
                 show()

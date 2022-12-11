@@ -84,19 +84,19 @@
             <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="홈"
+                android:text="@string/activityMain_tab_item_home"
                 android:icon="@drawable/ic_menu_bottom_home" />
 
             <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="포트폴리오 추가"
+                android:text="@string/activityMain_tab_item_add"
                 android:icon="@drawable/ic_menu_bottom_add" />
 
             <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="포트폴리오 삭제"
+                android:text="@string/activityMain_tab_item_delete"
                 android:icon="@drawable/ic_menu_bottom_delete"/>
 
         </com.google.android.material.tabs.TabLayout>
@@ -148,7 +148,7 @@
                     android:id="@+id/tv_home"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="홈"
+                    android:text="@string/drawer_menu_home"
                     style="slideBar_textView_size"
                     android:textColor="@color/black"
                     android:drawableStart="@drawable/ic_drawer_button_home"
@@ -173,7 +173,7 @@
 
             <!-- 설정 부분 -->
             <TextView
-                android:text="설정"
+                android:text="@string/drawer_menu_setting"
                 style="slideBar_textView_size"
                 android:textColor="@color/user_grey"
                 android:layout_margin="10dp"
@@ -190,7 +190,7 @@
                     android:id="@+id/tv_portfolio_add"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="포트폴리오 추가"
+                    android:text="@string/drawer_menu_add"
                     style="slideBar_textView_size"
                     android:textColor="@color/black"
                     android:drawableStart="@drawable/ic_drawer_button_portfolio_add"
@@ -202,7 +202,7 @@
                     android:id="@+id/tv_portfolio_delete"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="포트폴리오 삭제"
+                    android:text="@string/drawer_menu_delete"
                     style="slideBar_textView_size"
                     android:textColor="@color/black"
                     android:drawableStart="@drawable/ic_drawer_button_portfolio_delete"

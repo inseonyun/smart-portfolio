@@ -16,7 +16,7 @@ class HomeUserListViewAdapter(val context: Context, var items: ArrayList<User>) 
     override fun getView(p0: Int, p1: View?, p2: ViewGroup?): View {
         val binding = ListviewHomeUserBinding.inflate(LayoutInflater.from(context))
 
-        binding.tvUserName.setText(items[p0].name)
+        binding.tvUserName.text = items[p0].name
         //binding.tvUserTitle.setText(items[p0].title)
 
         if(items[p0].profileImage != null && items[p0].profileImage!!.isNotEmpty()) {

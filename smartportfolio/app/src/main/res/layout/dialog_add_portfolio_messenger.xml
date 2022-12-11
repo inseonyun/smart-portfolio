@@ -14,7 +14,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Title"
+            android:text="@string/dialog_add_portfolio_title"
             style="@style/dialog_add_textView_title"/>
 
         <EditText
@@ -23,7 +23,7 @@
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:paddingLeft="10dp"
-            android:hint="제목을 입력해주세요"
+            android:hint="@string/dialog_add_portfolio_edit_title"
             android:inputType="text"
             android:background="@drawable/custom_edit_text" />
     </LinearLayout>
@@ -38,7 +38,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Contents"
+            android:text="@string/dialog_add_portfolio_contents"
             style="@style/dialog_add_textView_title"/>
 
         <EditText
@@ -47,7 +47,7 @@
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:paddingLeft="10dp"
-            android:hint="내용을 입력해주세요"
+            android:hint="@string/dialog_add_portfolio_edit_contents"
             android:textAlignment="textStart"
             android:background="@drawable/custom_edit_text" />
     </LinearLayout>
@@ -62,7 +62,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="URL"
+            android:text="@string/dialog_add_portfolio_url"
             style="@style/dialog_add_textView_title" />
 
         <EditText
@@ -71,7 +71,7 @@
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:paddingLeft="10dp"
-            android:hint="URL을 입력해주세요"
+            android:hint="@string/dialog_add_portfolio_edit_url"
             android:inputType="text"
             android:background="@drawable/custom_edit_text" />
     </LinearLayout>
@@ -81,14 +81,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="이미지가 추가되지 않았습니다."/>
+        android:text="@string/dialog_add_portfolio_notAdded_image"/>
 
     <Button
         android:id="@+id/btn_image"
         android:layout_width="120dp"
         android:layout_height="40dp"
         android:layout_marginTop="10dp"
-        android:text="이미지 추가"
+        android:text="@string/dialog_add_portfolio_button_image"
         android:textColor="@color/white"
         android:background="@drawable/custom_button_round"
         android:backgroundTint="@color/user_button"/>

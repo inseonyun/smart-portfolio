@@ -4,10 +4,10 @@
     <item
         android:id="@+id/menu_delete"
         app:showAsAction="always"
-        android:title="유저 삭제"/>
+        android:title="@string/toolbar_menu_delete_user"/>
 
     <item
         android:id="@+id/menu_return"
         app:showAsAction="always"
-        android:title="저장"/>
+        android:title="@string/toolbar_menu_save"/>
 </menu>

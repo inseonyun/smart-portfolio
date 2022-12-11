@@ -46,14 +46,14 @@
                     android:id="@+id/tv_user_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="유저 이름"
+                    android:text="@string/listView_home_userList_name"
                     style="@style/home_recyclerview_user_name"/>
 
                 <TextView
                     android:id="@+id/tv_user_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="유저 타이틀"
+                    android:text="@string/listView_home_userList_title"
                     android:layout_marginLeft="10dp"
                     android:maxLines="1"
                     android:ellipsize="end"
