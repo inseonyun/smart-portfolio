@@ -95,4 +95,8 @@
     <string name="dialog_add_portfolio_circleGreen">녹색</string>
     <string name="dialog_add_portfolio_circleOrange">주황색</string>
 
+    <!-- 포트폴리오 추가 및 삭제 화면 툴바 메뉴 -->
+    <string name="toolbar_menu_save">저장</string>
+    <string name="toolbar_menu_delete_user">유저 삭제</string>
+
 </resources>
