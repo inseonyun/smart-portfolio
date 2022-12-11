@@ -2,6 +2,17 @@
     <string name="app_name">스마트 포트폴리오</string>
     <string name="back_toast_message">한 번 더 누르면 앱이 종료 됩니다</string>
 
+    <!-- activity_main -->
+    <string name="activityMain_tab_item_home">홈</string>
+    <string name="activityMain_tab_item_add">포트폴리오 추가</string>
+    <string name="activityMain_tab_item_delete">포트폴리오 삭제</string>
+
+    <!-- drawer menu -->
+    <string name="drawer_menu_home">홈</string>
+    <string name="drawer_menu_setting">설정</string>
+    <string name="drawer_menu_add">포트폴리오 추가</string>
+    <string name="drawer_menu_delete">포트폴리오 삭제</string>
+
     <!-- viewPager Main -->
     <string name="viewMain_title">소개</string>
     <string name="viewMain_description">지금 바로 멤버들의 역량, 이력을 관리 해보세요!</string>
