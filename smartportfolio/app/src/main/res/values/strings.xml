@@ -2,6 +2,11 @@
     <string name="app_name">스마트 포트폴리오</string>
     <string name="back_toast_message">한 번 더 누르면 앱이 종료 됩니다</string>
 
+    <!-- activity_login -->
+    <string name="activityLogin_edit_id">ID</string>
+    <string name="activityLogin_edit_password">Password</string>
+    <string name="activityLogin_button_login">로그인</string>
+
     <!-- activity_main -->
     <string name="activityMain_tab_item_home">홈</string>
     <string name="activityMain_tab_item_add">포트폴리오 추가</string>
