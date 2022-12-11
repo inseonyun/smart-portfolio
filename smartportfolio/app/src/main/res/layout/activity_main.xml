@@ -131,7 +131,7 @@
 
             <!-- 화면 부분 -->
             <TextView
-                android:text="화면"
+                android:text="@string/drawer_menu_screen"
                 style="slideBar_textView_size"
                 android:textColor="@color/user_grey"
                 android:layout_margin="10dp"
