@@ -47,7 +47,7 @@
                     android:id="@+id/tv_user_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="유저 이름"
+                    android:text="@string/listView_dialog_user_name"
                     style="@style/home_recyclerview_user_name"/>
 
             </LinearLayout>

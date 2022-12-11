@@ -22,4 +22,37 @@
     <string name="viewMain_title">소개</string>
     <string name="viewMain_description">지금 바로 멤버들의 역량, 이력을 관리 해보세요!</string>
     <string name="viewMain_user_list">유저 목록</string>
+
+    <!-- tab_dialog_add -->
+    <string name="tabDialogAdd_title">포트폴리오 추가</string>
+    <string name="tabDialogAdd_description">포트폴리오를 추가 할 유저를 선택해주세요</string>
+    <string name="tabDialogAdd_user_list">유저 목록</string>
+
+    <!-- listview_card_portfolio -->
+    <string name="listView_CardPortfolio_title">This is title</string>
+    <string name="listView_CardPortfolio_contents">This is contents</string>
+    <string name="listView_CardPortfolio_link">Link</string>
+
+    <!-- listView_timeline_portfolio -->
+    <string name="listView_TimelinePortfolio_day">1</string>
+    <string name="listView_TimelinePortfolio_month">1</string>
+    <string name="listView_TimelinePortfolio_year">2022</string>
+    <string name="listView_TimelinePortfolio_title">This is title</string>
+    <string name="listView_TimelinePortfolio_contents">This is contents</string>
+    <string name="listView_TimelinePortfolio_link">Link</string>
+
+    <!-- listView_messenger_portfolio -->
+    <string name="listView_MessengerPortfolio_title">This is title</string>
+    <string name="listView_MessengerPortfolio_contents">This is contents</string>
+    <string name="listView_MessengerPortfolio_link">Link</string>
+
+    <!-- listView_home_user 홈 화면에 보여지는 유저 목록 -->
+    <string name="listView_home_userList_name">유저 이름</string>
+    <string name="listView_home_userList_title">유저 타이틀</string>
+
+    <!-- listView_menu_user 드로어 메뉴 화면에 보여지는 유저 목록 -->
+    <string name="listView_menu_userList_name">유저 이름</string>
+
+    <!-- listView_dialog_user 포트폴리오 추가 및 삭제 시 보여지는 유저 목록 -->
+    <string name="listView_dialog_user_name">유저 이름</string>
 </resources>

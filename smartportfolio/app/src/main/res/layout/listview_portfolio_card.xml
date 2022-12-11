@@ -44,7 +44,7 @@
                 android:id="@+id/tv_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="This is title"
+                android:text="@string/listView_CardPortfolio_title"
                 android:layout_marginTop="5dp"
                 style="@style/portfolio_textView_title"/>
 
@@ -52,14 +52,14 @@
                 android:id="@+id/tv_contents"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="This is contents"
+                android:text="@string/listView_CardPortfolio_contents"
                 style="@style/portfolio_textView_contents" />
 
             <TextView
                 android:id="@+id/tv_link"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="link"
+                android:text="@string/listView_CardPortfolio_link"
                 android:autoLink="web"
                 style="@style/portfolio_textView_link"/>
 

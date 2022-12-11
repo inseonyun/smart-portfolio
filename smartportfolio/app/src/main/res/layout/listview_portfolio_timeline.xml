@@ -16,7 +16,7 @@
             android:layout_width="40dp"
             android:layout_height="25dp"
             android:id="@+id/tv_day"
-            android:text="날짜"
+            android:text="@string/listView_TimelinePortfolio_day"
             android:textStyle="bold"
             android:textColor="@color/black"
             android:textAlignment="center"/>
@@ -25,14 +25,14 @@
             android:layout_width="40dp"
             android:layout_height="25dp"
             android:id="@+id/tv_month"
-            android:text="월"
+            android:text="@string/listView_TimelinePortfolio_month"
             android:textAlignment="center"/>
 
         <TextView
             android:layout_width="40dp"
             android:layout_height="25dp"
             android:id="@+id/tv_year"
-            android:text="2022"
+            android:text="@string/listView_TimelinePortfolio_year"
             android:textStyle="italic"
             android:textAlignment="center"/>
 
@@ -106,21 +106,21 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:text="This is title"
+                android:text="@string/listView_TimelinePortfolio_title"
                 style="@style/portfolio_textView_title"/>
 
             <TextView
                 android:id="@+id/tv_contents"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="This is contents"
+                android:text="@string/listView_TimelinePortfolio_contents"
                 style="@style/portfolio_textView_contents" />
 
             <TextView
                 android:id="@+id/tv_link"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="link"
+                android:text="@string/listView_TimelinePortfolio_link"
                 android:autoLink="web"
                 style="@style/portfolio_textView_link"/>
 

@@ -32,7 +32,7 @@
                 android:id="@+id/tv_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="This is title"
+                android:text="@string/listView_MessengerPortfolio_title"
                 android:textColor="@color/messenger_text_color"/>
         </LinearLayout>
 
@@ -103,7 +103,7 @@
                 android:id="@+id/tv_contents"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="This is contents"
+                android:text="@string/listView_MessengerPortfolio_contents"
                 android:textColor="@color/messenger_text_color"
                 style="@style/portfolio_textView_contents" />
 
@@ -111,7 +111,7 @@
                 android:id="@+id/tv_link"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="link"
+                android:text="@string/listView_MessengerPortfolio_link"
                 android:autoLink="web"
                 style="@style/portfolio_messenger_textView_link"/>
 

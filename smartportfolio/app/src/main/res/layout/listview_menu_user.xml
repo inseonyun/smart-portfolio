@@ -6,7 +6,7 @@
 
     <TextView
         android:id="@+id/tv_user_name"
-        android:text="유저 이름"
+        android:text="@string/listView_menu_userList_name"
         style="slideBar_textView_size"
         android:gravity="center_vertical"
         android:textColor="@color/black"
