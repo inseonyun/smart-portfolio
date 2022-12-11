@@ -196,7 +196,7 @@ class MainActivity : AppCompatActivity(), DialogUserOnItemClick
                             AlertDialog.Builder(this@MainActivity).run {
                                 setTitle(getString(R.string.activityMain_tab_item_add))
                                 setView(bindingDialogAddPortfolio.root)
-                                setNegativeButton("취소") { dialogInterface, _ ->
+                                setNegativeButton(getString(R.string.dialog_button_cancel)) { dialogInterface, _ ->
                                     dialogInterface.dismiss()
                                 }
                                 show()
@@ -264,7 +264,7 @@ class MainActivity : AppCompatActivity(), DialogUserOnItemClick
             AlertDialog.Builder(this).run {
                 setTitle(getString(R.string.drawer_menu_add))
                 setView(bindingDialogUserAdd.root)
-                setPositiveButton("추가") { dialogInterface, _ ->
+                setPositiveButton(getString(R.string.dialog_button_add)) { dialogInterface, _ ->
                     if (bindingDialogUserAdd.etName.text.isNullOrEmpty())
                         Toast.makeText(context, getString(R.string.toast_input_name), Toast.LENGTH_SHORT).show()
                     else {
@@ -291,7 +291,7 @@ class MainActivity : AppCompatActivity(), DialogUserOnItemClick
                     }
                     dialogInterface.dismiss()
                 }
-                setNegativeButton("취소") { dialogInterface, _ ->
+                setNegativeButton(getString(R.string.dialog_button_cancel)) { dialogInterface, _ ->
                     dialogInterface.dismiss()
                 }
                 show()
@@ -314,7 +314,7 @@ class MainActivity : AppCompatActivity(), DialogUserOnItemClick
             AlertDialog.Builder(this).run {
                 setTitle(getString(R.string.drawer_menu_delete))
                 setView(bindingDialogUserDelete.root)
-                setNegativeButton("취소") { dialogInterface, _ ->
+                setNegativeButton(getString(R.string.dialog_button_cancel)) { dialogInterface, _ ->
                     dialogInterface.dismiss()
                 }
                 show()

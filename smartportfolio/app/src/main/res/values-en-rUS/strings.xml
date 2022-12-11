@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Smart Portfolio</string>
+    <string name="back_toast_message">If you press it one more time, the app will end</string>
+
+    <!-- portfolio 종류 -->
+    <string name="card_portfolio">Card Portfolio</string>
+    <string name="timeline_portfolio">Timeline Portfolio</string>
+    <string name="messenger_portfolio">Messenger Portfolio</string>
+
+    <!-- activity_login -->
+    <string name="activityLogin_edit_id">ID</string>
+    <string name="activityLogin_edit_password">Password</string>
+    <string name="activityLogin_button_login">Login</string>
+
+    <!-- activity_main -->
+    <string name="activityMain_tab_item_home">Home</string>
+    <string name="activityMain_tab_item_add">Add Portfolio</string>
+    <string name="activityMain_tab_item_delete">Delete Portfolio</string>
+
+    <!-- 포트폴리오 추가 및 삭제 화면 공통 사항-->
+    <string name="addDelete_userName">User Name</string>
+
+    <!-- 포트폴리오 추가 버튼 -->
+    <string name="button_add_portfolio">Add Portfolio</string>
+
+    <!-- drawer menu -->
+    <string name="drawer_menu_home">Home</string>
+    <string name="drawer_menu_screen">Screen</string>
+    <string name="drawer_menu_setting">Setting</string>
+    <string name="drawer_menu_add">Add Portfolio</string>
+    <string name="drawer_menu_delete">Delete Portfolio</string>
+
+    <!-- viewPager Main -->
+    <string name="viewMain_title">Info</string>
+    <string name="viewMain_description">Take care of the members capabilities and careers right now!</string>
+    <string name="viewMain_user_list">User List</string>
+
+    <!-- tab_dialog_add -->
+    <string name="tabDialogAdd_title">Add Portfolio</string>
+    <string name="tabDialogAdd_description">Please select a user to add the portfolio</string>
+    <string name="tabDialogAdd_user_list">User List</string>
+
+    <!-- listview_card_portfolio -->
+    <string name="listView_CardPortfolio_title">This is title</string>
+    <string name="listView_CardPortfolio_contents">This is contents</string>
+    <string name="listView_CardPortfolio_link">Link</string>
+
+    <!-- listView_timeline_portfolio -->
+    <string name="listView_TimelinePortfolio_day">1</string>
+    <string name="listView_TimelinePortfolio_month">1</string>
+    <string name="listView_TimelinePortfolio_year">2022</string>
+    <string name="listView_TimelinePortfolio_title">This is title</string>
+    <string name="listView_TimelinePortfolio_contents">This is contents</string>
+    <string name="listView_TimelinePortfolio_link">Link</string>
+
+    <!-- listView_messenger_portfolio -->
+    <string name="listView_MessengerPortfolio_title">This is title</string>
+    <string name="listView_MessengerPortfolio_contents">This is contents</string>
+    <string name="listView_MessengerPortfolio_link">Link</string>
+
+    <!-- listView_home_user 홈 화면에 보여지는 유저 목록 -->
+    <string name="listView_home_userList_name">User Name</string>
+    <string name="listView_home_userList_title">User Title</string>
+
+    <!-- listView_menu_user 드로어 메뉴 화면에 보여지는 유저 목록 -->
+    <string name="listView_menu_userList_name">User Name</string>
+
+    <!-- listView_dialog_user 포트폴리오 추가 및 삭제 시 보여지는 유저 목록 -->
+    <string name="listView_dialog_user_name">User Name</string>
+
+    <!-- dialog_add_user 드로어 메뉴 중 포트폴리오 추가 다이얼로그 뷰 -->
+    <string name="dialog_add_user_title">Add User</string>
+    <string name="dialog_add_user_name">User Name</string>
+    <string name="dialog_add_user_edit_name">Please enter the name</string>
+    <string name="dialog_add_user_portfolio_title">Portfolio Type</string>
+
+    <!-- dialog_delete_portfolio 포트폴리오 삭제 메뉴 다이얼로그 뷰 -->
+    <string name="dialog_delete_portfolio_user_list">User List</string>
+
+    <!-- dialog_add_portfolio 포트폴리오 추가 다이얼로그 뷰 공통사항! -->
+    <string name="dialog_add_portfolio_title">Title</string>
+    <string name="dialog_add_portfolio_edit_title">Please enter the title</string>
+    <string name="dialog_add_portfolio_contents">Contents</string>
+    <string name="dialog_add_portfolio_edit_contents">Please enter the contents</string>
+    <string name="dialog_add_portfolio_url">Hyper Link</string>
+    <string name="dialog_add_portfolio_edit_url">Please enter the URL</string>
+    <string name="dialog_add_portfolio_added_image">Image has been set up</string>
+    <string name="dialog_add_portfolio_notAdded_image">Image not added</string>
+    <string name="dialog_add_portfolio_button_image">Add an image</string>
+
+    <!-- 타임라인 형태의 포트폴리오 추가 다이얼로그 뷰 -->
+    <string name="dialog_add_portfolio_date">Date</string>
+    <string name="dialog_add_portfolio_text_date">Click here to select a date</string>
+    <string name="dialog_add_portfolio_circleType">Circle Color</string>
+    <string name="dialog_add_portfolio_circleBlue">Blue</string>
+    <string name="dialog_add_portfolio_circleGreen">Green</string>
+    <string name="dialog_add_portfolio_circleOrange">Orange</string>
+
+    <!-- 포트폴리오 추가 및 삭제 화면 툴바 메뉴 -->
+    <string name="toolbar_menu_save">Save</string>
+    <string name="toolbar_menu_delete_user">Delete User</string>
+
+    <!-- 토스트 메시지 -->
+    <string name="toast_input_name">Please enter the name</string>
+    <string name="toast_exist_name">This user already exists</string>
+    <string name="toast_notExist_portfolio">No portfolio to delete</string>
+    <string name="toast_empty_input_value">Input value is empty</string>
+    <string name="toast_saved">Saved successfully</string>
+    <string name="toast_saved_changing">Changes have been saved</string>
+    <string name="toast_deleted_user">User deleted successfully</string>
+
+
+    <!-- 다이얼로그 타이틀 및 메시지  -->
+    <string name="dialog_title_cancel_add_portfolio">Exit</string>
+    <string name="dialog_title_cancel_delete_portfolio">Exit</string>
+    <string name="dialog_title_add_portfolio">Add Portfolio</string>
+    <string name="dialog_title_delete_portfolio">Delete Portfolio</string>
+    <string name="dialog_title_delete_user">Delete User</string>
+    <string name="dialog_title_save">Save</string>
+
+    <string name="dialog_message_cancel_add_portfolio">Are you sure you want to cancel adding the portfolio?</string>
+    <string name="dialog_message_cancel_delete_portfolio">Are you sure you want to undelete the portfolio?</string>
+    <string name="dialog_message_add_portfolio"> portfolio would you like to add it?</string>
+    <string name="dialog_message_delete_user_portfolio"> portfolio would you like to delete it?</string>
+    <string name="dialog_message_delete_user">
+         all data will be deleted.
+        Do you want to delete?
+    </string>
+    <string name="dialog_message_delete_portfolio">Are you sure you want to delete that portfolio?</string>
+    <string name="dialog_message_save_changed">Are you sure you want to save your changes?</string>
+
+    <string name="dialog_button_yes">Yes</string>
+    <string name="dialog_button_no">No</string>
+    <string name="dialog_button_add">Add</string>
+    <string name="dialog_button_cancel">Cancel</string>
+
+</resources>
