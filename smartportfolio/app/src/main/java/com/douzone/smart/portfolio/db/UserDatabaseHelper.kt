@@ -41,7 +41,7 @@ class UserDatabaseHelper(context: Context) : SQLiteOpenHelper(context, "userData
 
     fun updateData(data: User) {
         val db = this.writableDatabase
-        val query = "UPDATE user set name = '${data.name}', '${data.userTitle}' , profileImage = ?, viewType = '${data.viewType}' WHERE name = '${data.name}'"
+        val query = "UPDATE user set name = '${data.name}', userTitle = '${data.userTitle}', profileImage = ?, viewType = '${data.viewType}' WHERE name = '${data.name}'"
         val p = db.compileStatement(query)
         p.bindBlob(1, data.profileImage)
         p.execute()

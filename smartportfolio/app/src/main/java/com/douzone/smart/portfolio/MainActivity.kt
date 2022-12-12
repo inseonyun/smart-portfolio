@@ -59,13 +59,14 @@ class MainActivity : AppCompatActivity(), DialogUserOnItemClick
 
     private var loadingTime = Random.nextLong(1000, 3000)
 
-    override fun onClick(userName: String, viewType: Int, addDelete: Int) {
+    override fun onClick(userName: String, userTitle: String, viewType: Int, addDelete: Int) {
         when(addDelete) {
             AddDelete.ADD -> {
                 // 포트폴리오 추가
                 val intent = Intent(this@MainActivity, AddPortfolioActivity::class.java)
                 intent.putExtra("name", userName)
                 intent.putExtra("viewType", viewType)
+                intent.putExtra("userTitle", userTitle)
                 addPortfolioRequestLauncher.launch(intent)
             }
             AddDelete.DELETE -> {

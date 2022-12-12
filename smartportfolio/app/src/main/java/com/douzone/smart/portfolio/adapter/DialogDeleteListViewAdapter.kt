@@ -41,7 +41,7 @@ class DialogDeleteListViewAdapter(val context: Context, var items: ArrayList<Use
                 setTitle(context.getString(R.string.dialog_title_delete_portfolio))
                 setMessage(items[p0].name + context.getString(R.string.dialog_message_delete_user_portfolio))
                 setPositiveButton(context.getString(R.string.dialog_button_yes), DialogInterface.OnClickListener { dialogInterface, _ ->
-                    listener.onClick(items[p0].name, items[p0].viewType, AddDelete.DELETE)
+                    listener.onClick(items[p0].name, items[p0].userTitle, items[p0].viewType, AddDelete.DELETE)
                     dialogInterface.dismiss()
                 })
                 setNegativeButton(context.getString(R.string.dialog_button_no), DialogInterface.OnClickListener { dialogInterface, _ ->

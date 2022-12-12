@@ -41,7 +41,7 @@ class DialogAddPortfolioListViewAdapter(val context: Context, var items: ArrayLi
                 setTitle(context.getString(R.string.dialog_title_add_portfolio))
                 setMessage(items[p0].name + context.getString(R.string.dialog_message_add_portfolio))
                 setPositiveButton(context.getString(R.string.dialog_button_yes), DialogInterface.OnClickListener { dialogInterface, _ ->
-                    listener.onClick(items[p0].name, items[p0].viewType, AddDelete.ADD)
+                    listener.onClick(items[p0].name, items[p0].userTitle, items[p0].viewType, AddDelete.ADD)
                     dialogInterface.dismiss()
                 })
                 setNegativeButton(context.getString(R.string.dialog_button_no), DialogInterface.OnClickListener { dialogInterface, _ ->
