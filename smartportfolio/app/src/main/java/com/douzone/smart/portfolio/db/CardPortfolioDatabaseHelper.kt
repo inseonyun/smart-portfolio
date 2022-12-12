@@ -13,6 +13,7 @@ class CardPortfolioDatabaseHelper(context: Context): SQLiteOpenHelper(context, "
                 "title text," +
                 "contents text," +
                 "image blob," +
+                "defaultImage integer," +
                 "url text);"
         db?.execSQL(sql)
     }
@@ -25,7 +26,7 @@ class CardPortfolioDatabaseHelper(context: Context): SQLiteOpenHelper(context, "
 
     fun insertData(data: Card) {
         val db = this.writableDatabase
-        val query = "INSERT INTO CardPortfolio('name', 'title', 'contents', 'image', 'url') values('${data.name}', '${data.title}', '${data.contents}', ? , '${data.url}');"
+        val query = "INSERT INTO CardPortfolio('name', 'title', 'contents', 'image', 'defaultImage', 'url') values('${data.name}', '${data.title}', '${data.contents}', ? , '${data.defaultImage}', '${data.url}');"
 
         val p = db.compileStatement(query)
         p.bindBlob(1, data.image)
@@ -50,7 +51,7 @@ class CardPortfolioDatabaseHelper(context: Context): SQLiteOpenHelper(context, "
 
     fun updateData(data: Card) {
         val db = this.writableDatabase
-        val query = "UPDATE CardPortfolio set name = '${data.name}', title = '${data.title}', contents = '${data.contents}', image = ?, url = '${data.url}' WHERE id = '${data.id}'"
+        val query = "UPDATE CardPortfolio set name = '${data.name}', title = '${data.title}', contents = '${data.contents}', image = ?, defaultImage = '${data.defaultImage}', url = '${data.url}' WHERE id = '${data.id}'"
         val p = db.compileStatement(query)
         p.bindBlob(1, data.image)
         p.execute()
@@ -64,7 +65,7 @@ class CardPortfolioDatabaseHelper(context: Context): SQLiteOpenHelper(context, "
 
         val cursor = db.rawQuery("SELECT * FROM CardPortfolio WHERE name = '${name}'", null)
         while(cursor.moveToNext()) {
-            val rowData = Card(cursor.getInt(0), cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getBlob(4), cursor.getString(5))
+            val rowData = Card(cursor.getInt(0), cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getBlob(4), cursor.getInt(5), cursor.getString(6))
             result.add(rowData)
         }
         cursor.close()

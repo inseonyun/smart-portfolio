@@ -92,6 +92,7 @@
     <string name="dialog_add_portfolio_added_image">Image has been set up</string>
     <string name="dialog_add_portfolio_notAdded_image">Image not added</string>
     <string name="dialog_add_portfolio_button_image">Add an image</string>
+    <string name="dialog_add_portfolio_default_image">Insert default image when checked</string>
 
     <!-- 타임라인 형태의 포트폴리오 추가 다이얼로그 뷰 -->
     <string name="dialog_add_portfolio_date">Date</string>

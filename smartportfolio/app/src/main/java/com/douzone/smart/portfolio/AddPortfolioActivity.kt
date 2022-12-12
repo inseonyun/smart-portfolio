@@ -12,6 +12,7 @@ import android.provider.MediaStore
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
@@ -81,9 +82,18 @@ class AddPortfolioActivity : AppCompatActivity() {
                 postImage = outputStream.toByteArray()
 
                 when(intent.getIntExtra("viewType", 1)) {
-                    ViewType.CARDVIEW-> cardDialogBinding.tvImage.text = getString(R.string.dialog_add_portfolio_added_image)
-                    ViewType.TIMELINE-> timelineDialogBinding.tvImage.text = getString(R.string.dialog_add_portfolio_added_image)
-                    ViewType.MESSENGER-> messengerDialogBinding.tvImage.text = getString(R.string.dialog_add_portfolio_added_image)
+                    ViewType.CARDVIEW-> {
+                        cardDialogBinding.tvImage.text = getString(R.string.dialog_add_portfolio_added_image)
+                        cardDialogBinding.chkImage.visibility = View.GONE
+                    }
+                    ViewType.TIMELINE-> {
+                        timelineDialogBinding.tvImage.text = getString(R.string.dialog_add_portfolio_added_image)
+                        timelineDialogBinding.chkImage.visibility = View.GONE
+                    }
+                    ViewType.MESSENGER-> {
+                        messengerDialogBinding.tvImage.text = getString(R.string.dialog_add_portfolio_added_image)
+                        messengerDialogBinding.chkImage.visibility = View.GONE
+                    }
                 }
 
             } catch(e: FileNotFoundException) {
@@ -199,6 +209,7 @@ class AddPortfolioActivity : AppCompatActivity() {
                                     cardDialogBinding.etTitle.text.toString(),
                                     cardDialogBinding.etContents.text.toString(),
                                     postImage,
+                                    if(cardDialogBinding.chkImage.isChecked) DefaultImage.VISIBLE else DefaultImage.GONE,
                                     cardDialogBinding.etUrl.text.toString().trim()
                                 )
 
@@ -236,6 +247,7 @@ class AddPortfolioActivity : AppCompatActivity() {
                                     timelineDialogBinding.etContents.text.toString(),
                                     timelineDialogBinding.tvDate.text.toString(),
                                     postImage,
+                                    if(timelineDialogBinding.chkImage.isChecked) DefaultImage.VISIBLE else DefaultImage.GONE,
                                     timelineDialogBinding.etUrl.text.toString().trim(),
                                     circleColor
                                 )
@@ -264,6 +276,7 @@ class AddPortfolioActivity : AppCompatActivity() {
                                     messengerDialogBinding.etTitle.text.toString(),
                                     messengerDialogBinding.etContents.text.toString(),
                                     postImage,
+                                    if(messengerDialogBinding.chkImage.isChecked) DefaultImage.VISIBLE else DefaultImage.GONE,
                                     messengerDialogBinding.etUrl.text.toString().trim()
                                 )
                                 messengerPortfolio.add(rowMessengerPortfolio)

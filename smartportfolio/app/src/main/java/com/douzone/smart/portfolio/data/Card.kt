@@ -8,5 +8,6 @@ class Card (
     var title: String,
     var contents: String,
     var image: ByteArray?,
+    var defaultImage: Int,
     var url: String?
 ) : Serializable

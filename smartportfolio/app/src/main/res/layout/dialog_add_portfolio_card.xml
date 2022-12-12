@@ -83,6 +83,13 @@
         android:layout_marginTop="10dp"
         android:text="@string/dialog_add_portfolio_notAdded_image"/>
 
+    <CheckBox
+        android:id="@+id/chk_image"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/dialog_add_portfolio_default_image"/>
+
     <Button
         android:id="@+id/btn_image"
         android:layout_width="120dp"
@@ -92,5 +99,6 @@
         android:textColor="@color/white"
         android:background="@drawable/custom_button_round"
         android:backgroundTint="@color/user_button"/>
+
 
 </LinearLayout>

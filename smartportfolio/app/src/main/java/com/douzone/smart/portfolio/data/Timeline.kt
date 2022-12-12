@@ -9,6 +9,7 @@ class Timeline (
     var contents: String,
     var date: String,
     var image: ByteArray?,
+    var defaultImage: Int,
     var url: String?,
     var circleColor: Int,
 ) : Serializable

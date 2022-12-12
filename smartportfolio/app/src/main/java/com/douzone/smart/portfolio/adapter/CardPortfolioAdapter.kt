@@ -15,6 +15,7 @@ import com.douzone.smart.portfolio.BrowserActivity
 import com.douzone.smart.portfolio.R
 import com.douzone.smart.portfolio.controller.BrowserController
 import com.douzone.smart.portfolio.data.Card
+import com.douzone.smart.portfolio.data.DefaultImage
 import com.douzone.smart.portfolio.databinding.ListviewPortfolioCardBinding
 
 class CardPortfolioAdapter(val context: Context, var items: ArrayList<Card>): BaseAdapter() {
@@ -24,6 +25,7 @@ class CardPortfolioAdapter(val context: Context, var items: ArrayList<Card>): Ba
         binding.tvTitle.text = items[p0].title
         binding.tvContents.text = items[p0].contents
 
+        // defaultImage 여부에 따라 기본 이미지 보이게 할지 말지 정함
         // 이미지 넣음
         if(items[p0].image != null && items[p0].image!!.isNotEmpty()) {
             try {
@@ -33,6 +35,10 @@ class CardPortfolioAdapter(val context: Context, var items: ArrayList<Card>): Ba
                 }
             }catch (e: Exception) {
 
+            }
+        } else {
+            if(items[p0].defaultImage == DefaultImage.GONE) {
+                binding.cvImage.visibility = View.GONE
             }
         }
 
