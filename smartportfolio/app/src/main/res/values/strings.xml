@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">스마트 포트폴리오</string>
     <string name="back_toast_message">한 번 더 누르면 앱이 종료 됩니다</string>
+    <string name="back_webView_toast_message">한 번 더 누르면 브라우저를 닫습니다</string>
+    <string name="package_chrome">com.android.chrome</string>
 
     <!-- portfolio 종류 -->
     <string name="card_portfolio">카드형 포트폴리오</string>
@@ -73,7 +75,7 @@
     <string name="dialog_add_user_name">유저 이름</string>
     <string name="dialog_add_user_edit_name">이름을 입력해주세요</string>
     <string name="dialog_add_user_portfolio_title">포트폴리오 형태</string>
-    
+
     <!-- dialog_delete_portfolio 포트폴리오 삭제 메뉴 다이얼로그 뷰 -->
     <string name="dialog_delete_portfolio_user_list">유저 목록</string>
 
@@ -103,6 +105,9 @@
     <!-- 툴바 유저 이름 -->
     <string name="toolbar_userName">유저 이름</string>
 
+    <!-- 툴바 외부 브라우저로 열기 -->
+    <string name="toolbar_menu_external_web">외부 브라우저로 열기</string>
+
     <!-- 토스트 메시지 -->
     <string name="toast_input_name">이름을 입력해주세요</string>
     <string name="toast_exist_name">이미 있는 유저입니다</string>
@@ -111,6 +116,7 @@
     <string name="toast_saved">저장되었습니다</string>
     <string name="toast_saved_changing">변경사항이 저장되었습니다</string>
     <string name="toast_deleted_user">유저가 삭제되었습니다</string>
+    <string name="toast_Uninstalled_chrome">크롬이 설치되어 있지 않습니다</string>
 
 
     <!-- 다이얼로그 타이틀 및 메시지  -->
@@ -120,6 +126,9 @@
     <string name="dialog_title_delete_portfolio">포트폴리오 삭제</string>
     <string name="dialog_title_delete_user">유저 삭제</string>
     <string name="dialog_title_save">저장</string>
+    <string name="dialog_title_close_browser">브라우저 닫기</string>
+    <string name="dialog_title_open_link">링크 열기</string>
+    <string name="dialog_title_open_external_browser">외부 브라우저로 열기</string>
 
     <string name="dialog_message_cancel_add_portfolio">포트폴리오 추가를 취소하시겠습니까?</string>
     <string name="dialog_message_cancel_delete_portfolio">포트폴리오 삭제를 취소하시겠습니까?</string>
@@ -131,10 +140,15 @@
     </string>
     <string name="dialog_message_delete_portfolio">해당 포트폴리오를 삭제하시겠습니까?</string>
     <string name="dialog_message_save_changed">변경사항을 저장하시겠습니까?</string>
+    <string name="dialog_message_close_browser">브라우저를 닫으시겠습니까?</string>
+    <string name="dialog_message_open_link">내부 브라우저와 Chrome 브라우저 중 어느 브라우저로 연결하시겠습니까?</string>
+    <string name="dialog_message_open_external_browser">크롬 브라우저로 연결하시겠습니까?</string>
 
     <string name="dialog_button_yes">예</string>
     <string name="dialog_button_no">아니오</string>
     <string name="dialog_button_add">추가</string>
     <string name="dialog_button_cancel">취소</string>
+    <string name="dialog_button_chrome">크롬 열기</string>
+    <string name="dialog_button_internal_browser">내부 브라우저</string>
 
 </resources>

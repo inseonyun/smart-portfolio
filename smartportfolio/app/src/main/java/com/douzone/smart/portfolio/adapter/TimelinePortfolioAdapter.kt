@@ -2,13 +2,17 @@ package com.douzone.smart.portfolio.adapter
 
 import android.content.Context
 import android.content.DialogInterface
+import android.content.Intent
 import android.graphics.BitmapFactory
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import androidx.appcompat.app.AlertDialog
+import com.douzone.smart.portfolio.BrowserActivity
 import com.douzone.smart.portfolio.R
+import com.douzone.smart.portfolio.controller.BrowserController
 import com.douzone.smart.portfolio.data.CircleType
 import com.douzone.smart.portfolio.data.Timeline
 import com.douzone.smart.portfolio.databinding.ListviewPortfolioTimelineBinding
@@ -47,7 +51,40 @@ class TimelinePortfolioAdapter(val context: Context, var items: ArrayList<Timeli
         if(items[p0].url.isNullOrEmpty()) {
             binding.tvLink.visibility = View.GONE
         } else {
-            binding.tvLink.text = items[p0].url
+            binding.tvLink.visibility = View.VISIBLE
+            binding.tvLink.setOnClickListener {
+                // 크롬이 깔려있다면 다음 다이얼로그 띄움
+                if(BrowserController.checkToInstallChrome(context, context.getString(R.string.package_chrome))) {
+                    // url 내부 브라우저 혹은 외부 Chrome 띄움
+                    AlertDialog.Builder(context).run {
+                        setTitle(context.getString(R.string.dialog_title_open_link))
+                        setMessage(context.getString(R.string.dialog_message_open_link))
+                        setPositiveButton(context.getString(R.string.dialog_button_chrome), DialogInterface.OnClickListener { dialogInterface, _ ->
+                            dialogInterface.dismiss()
+
+                            // 크롬으로 띄움
+                            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(items[p0].url))
+//                            val intent = Intent(context, BrowserActivity::class.java)
+//                            intent.putExtra("url", items[p0].url)
+                            intent.setPackage(context.getString(R.string.package_chrome))
+                            context.startActivity(intent)
+                        })
+                        setNegativeButton(context.getString(R.string.dialog_button_internal_browser), DialogInterface.OnClickListener { dialogInterface, _ ->
+                            dialogInterface.dismiss()
+
+                            val intent = Intent(context, BrowserActivity::class.java)
+                            intent.putExtra("url", items[p0].url)
+                            context.startActivity(intent)
+                        })
+                        show()
+                    }
+                }else {
+                    // 안 깔려있다면 바로 내부 브라우저로 링크 띄움
+                    val intent = Intent(context, BrowserActivity::class.java)
+                    intent.putExtra("url", items[p0].url)
+                    context.startActivity(intent)
+                }
+            }
         }
 
         // 타임라인 서클 default : blue
