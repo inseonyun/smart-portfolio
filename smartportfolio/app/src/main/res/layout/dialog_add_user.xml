@@ -29,6 +29,31 @@
             android:background="@drawable/custom_edit_text" />
     </LinearLayout>
 
+    <!-- userTitle -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/dialog_add_user_userTitle"
+            style="@style/dialog_add_textView_title"/>
+
+        <EditText
+            android:id="@+id/et_userTitle"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:paddingLeft="10dp"
+            android:hint="@string/dialog_add_user_edit_description"
+            android:inputType="text"
+            android:maxLength="20"
+            android:background="@drawable/custom_edit_text" />
+    </LinearLayout>
+
     <!-- viewType -->
     <LinearLayout
         android:layout_width="match_parent"

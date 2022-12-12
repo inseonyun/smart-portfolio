@@ -10,6 +10,7 @@ class UserDatabaseHelper(context: Context) : SQLiteOpenHelper(context, "userData
     override fun onCreate(db: SQLiteDatabase?) {
         val sql = "CREATE TABLE if not exists user(" +
                 "name text primary key,"+
+                "userTitle text," +
                 "profileImage blob,"+
                 "viewType integer);"
         db?.execSQL(sql)
@@ -23,10 +24,9 @@ class UserDatabaseHelper(context: Context) : SQLiteOpenHelper(context, "userData
 
     fun insertData(data: User) {
         val db = this.writableDatabase
-        val query = "INSERT INTO user('name', 'profileImage', 'viewType') values(?, ?, ${data.viewType});"
+        val query = "INSERT INTO user('name', 'userTitle', 'profileImage', 'viewType') values('${data.name}', '${data.userTitle}', ?, ${data.viewType});"
         val p = db.compileStatement(query)
-        p.bindString(1, data.name)
-        p.bindBlob(2, data.profileImage)
+        p.bindBlob(1, data.profileImage)
         p.execute()
         p.close()
         db.close()
@@ -41,7 +41,7 @@ class UserDatabaseHelper(context: Context) : SQLiteOpenHelper(context, "userData
 
     fun updateData(data: User) {
         val db = this.writableDatabase
-        val query = "UPDATE user set name = '${data.name}', profileImage = ?, viewType = '${data.viewType}' WHERE name = '${data.name}'"
+        val query = "UPDATE user set name = '${data.name}', '${data.userTitle}' , profileImage = ?, viewType = '${data.viewType}' WHERE name = '${data.name}'"
         val p = db.compileStatement(query)
         p.bindBlob(1, data.profileImage)
         p.execute()
@@ -63,7 +63,7 @@ class UserDatabaseHelper(context: Context) : SQLiteOpenHelper(context, "userData
 
         val cursor = db.rawQuery("SELECT * FROM user WHERE name = '$name'", null)
         while(cursor.moveToNext()) {
-            return User(cursor.getString(0), cursor.getBlob(1), cursor.getInt(2))
+            return User(cursor.getString(0), cursor.getString(1), cursor.getBlob(2), cursor.getInt(3))
         }
         return null
     }
@@ -74,7 +74,7 @@ class UserDatabaseHelper(context: Context) : SQLiteOpenHelper(context, "userData
 
         val cursor = db.rawQuery("SELECT * FROM user", null)
         while(cursor.moveToNext()) {
-            val rowData = User(cursor.getString(0), cursor.getBlob(1), cursor.getInt(2))
+            val rowData = User(cursor.getString(0), cursor.getString(1), cursor.getBlob(2), cursor.getInt(3))
             result.add(rowData)
         }
 

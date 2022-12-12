@@ -321,9 +321,10 @@ class AddPortfolioActivity : AppCompatActivity() {
     fun insertPortfolio() {
         val userName = intent.getStringExtra("name")
         val userViewType = intent.getIntExtra("viewType", 1)
+        val userTitle = intent.getStringExtra("userTitle")
 
         // add user
-        val user = User(userName!!, changedUserImage, userViewType)
+        val user = User(userName!!, userTitle!!, changedUserImage, userViewType)
         val userDB = UserDatabaseHelper(this@AddPortfolioActivity)
         userDB.insertData(user)
 
@@ -353,9 +354,10 @@ class AddPortfolioActivity : AppCompatActivity() {
     fun updatePortfolio() {
         val userName = intent.getStringExtra("name")
         val userViewType = intent.getIntExtra("viewType", 1)
+        val userTitle = intent.getStringExtra("userTitle")
 
         // update userProfileImage
-        val user = User(userName!!, changedUserImage, userViewType)
+        val user = User(userName!!, userTitle!!, changedUserImage, userViewType)
         val userDB = UserDatabaseHelper(this@AddPortfolioActivity)
         userDB.updateData(user)
 

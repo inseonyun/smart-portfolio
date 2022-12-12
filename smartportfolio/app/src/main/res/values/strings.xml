@@ -62,7 +62,7 @@
 
     <!-- listView_home_user 홈 화면에 보여지는 유저 목록 -->
     <string name="listView_home_userList_name">유저 이름</string>
-    <string name="listView_home_userList_title">유저 타이틀</string>
+    <string name="listView_home_userList_title">한줄 소개가 없습니다</string>
 
     <!-- listView_menu_user 드로어 메뉴 화면에 보여지는 유저 목록 -->
     <string name="listView_menu_userList_name">유저 이름</string>
@@ -73,7 +73,9 @@
     <!-- dialog_add_user 드로어 메뉴 중 포트폴리오 추가 다이얼로그 뷰 -->
     <string name="dialog_add_user_title">유저 추가</string>
     <string name="dialog_add_user_name">유저 이름</string>
+    <string name="dialog_add_user_userTitle">한 줄 소개</string>
     <string name="dialog_add_user_edit_name">이름을 입력해주세요</string>
+    <string name="dialog_add_user_edit_description">한 줄 소개를 입력해주세요</string>
     <string name="dialog_add_user_portfolio_title">포트폴리오 형태</string>
 
     <!-- dialog_delete_portfolio 포트폴리오 삭제 메뉴 다이얼로그 뷰 -->

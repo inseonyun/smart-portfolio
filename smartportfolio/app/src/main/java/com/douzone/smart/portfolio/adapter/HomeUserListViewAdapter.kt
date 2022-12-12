@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import com.douzone.smart.portfolio.MainActivity
+import com.douzone.smart.portfolio.R
 import com.douzone.smart.portfolio.data.User
 import com.douzone.smart.portfolio.databinding.ListviewHomeUserBinding
 import java.lang.Exception
@@ -17,7 +18,7 @@ class HomeUserListViewAdapter(val context: Context, var items: ArrayList<User>) 
         val binding = ListviewHomeUserBinding.inflate(LayoutInflater.from(context))
 
         binding.tvUserName.text = items[p0].name
-        //binding.tvUserTitle.setText(items[p0].title)
+        binding.tvUserTitle.text = if(items[p0].userTitle.isNullOrEmpty()) context.getString(R.string.listView_home_userList_title) else items[p0].userTitle
 
         if(items[p0].profileImage != null && items[p0].profileImage!!.isNotEmpty()) {
             try {

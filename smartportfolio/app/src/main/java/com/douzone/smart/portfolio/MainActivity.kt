@@ -299,6 +299,8 @@ class MainActivity : AppCompatActivity(), DialogUserOnItemClick
                                 bindingDialogUserAdd.etName.text.toString().trim()
                             )
                             intent.putExtra("viewType", userViewType)
+                            val userTitle = if(bindingDialogUserAdd.etUserTitle.text.isNullOrEmpty()) "" else bindingDialogUserAdd.etUserTitle.text.toString()
+                            intent.putExtra("userTitle", userTitle)
                             addPortfolioRequestLauncher.launch(intent)
                         }
                     }
