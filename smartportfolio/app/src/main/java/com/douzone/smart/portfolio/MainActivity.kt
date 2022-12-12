@@ -2,6 +2,7 @@ package com.douzone.smart.portfolio
 
 import android.animation.ValueAnimator
 import android.content.Intent
+import android.graphics.Bitmap
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
@@ -242,6 +243,18 @@ class MainActivity : AppCompatActivity(), DialogUserOnItemClick
         supportActionBar?.setDisplayHomeAsUpEnabled(true) // 드로어를 꺼낼 홈 버튼 활성화
         supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_toolbar_button_menu) // 홈버튼 이미지 변경
         supportActionBar?.setDisplayShowTitleEnabled(false) // 툴바에 타이틀 안보이게
+    }
+
+    fun setToolbarUserImage(userImage: Bitmap) {
+        binding.toolbarUserImage.setImageBitmap(userImage)
+    }
+
+    fun setToolbarUserName(userName: String ) {
+        binding.toolbarUserName.text = userName
+    }
+
+    fun setVisibleToolbarLayout(visible: Int) {
+        binding.toolbarLayout.visibility = visible
     }
 
 // deprecated

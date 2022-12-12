@@ -16,6 +16,9 @@
     <color name="user_grey">#FF303030</color>
     <color name="user_button">#618eed</color>
     <color name="user_progress">#568bfc</color>
+
+    <color name="toolbar_userName">#707070</color>
+
     <color name="main_color">#6aa2fc</color>
     <color name="timeline_gray">#707070</color>
     <color name="messenger_gray">#B8B8B8</color>
