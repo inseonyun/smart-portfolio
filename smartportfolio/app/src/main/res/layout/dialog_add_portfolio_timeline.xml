@@ -126,7 +126,7 @@
     <RadioGroup
         android:id="@+id/rbt_circleColor"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
         android:orientation="horizontal">
 
         <RadioButton
@@ -140,12 +140,14 @@
             android:id="@+id/rbt_green"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
             android:text="@string/dialog_add_portfolio_circleGreen"/>
 
         <RadioButton
             android:id="@+id/rbt_orange"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
             android:text="@string/dialog_add_portfolio_circleOrange"/>
 
     </RadioGroup>
