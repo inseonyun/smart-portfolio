@@ -21,4 +21,9 @@
         <item name="colorAccent">@color/user_button</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <style name="Theme.webView" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorAccent">@color/user_button</item>
+        <!-- Customize your theme here. -->
+    </style>
 </resources>
