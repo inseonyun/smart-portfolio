@@ -38,7 +38,7 @@
     </style>
 
     <style name="portfolio_messenger_textView_link">
-        <item name="android:textSize">18dp</item>
+        <item name="android:textSize">15dp</item>
         <item name="android:textColor">@color/messenger_text_color</item>
         <item name="android:textAlignment">textEnd</item>
     </style>
