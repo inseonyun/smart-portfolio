@@ -32,6 +32,7 @@ import com.douzone.smart.portfolio.db.CardPortfolioDatabaseHelper
 import com.douzone.smart.portfolio.db.TimelinePortfolioDatabaseHelper
 import com.douzone.smart.portfolio.db.UserDatabaseHelper
 import java.io.ByteArrayOutputStream
+import java.io.File
 import java.io.FileNotFoundException
 import java.lang.Exception
 import java.util.*
@@ -72,8 +73,11 @@ class AddPortfolioActivity : AppCompatActivity() {
         ActivityResultContracts.StartActivityForResult()) { activityResult ->
         if(activityResult.resultCode == RESULT_OK && activityResult.data != null) {
             try {
+                val option = BitmapFactory.Options()
+                option.inSampleSize = 4
+
                 val inputStream = contentResolver.openInputStream(activityResult.data!!.data!!)
-                val bitmap = BitmapFactory.decodeStream(inputStream, null, null)
+                val bitmap = BitmapFactory.decodeStream(inputStream, null, option)
                 val outputStream = ByteArrayOutputStream()
                 bitmap!!.compress(Bitmap.CompressFormat.PNG, 100, outputStream)
                 inputStream!!.close()
@@ -411,8 +415,14 @@ class AddPortfolioActivity : AppCompatActivity() {
 
     fun setBitmapImage(uri: Uri) {
         try {
+            // 이미지 샘플 사이즈 설정
+            val option = BitmapFactory.Options()
+            option.inSampleSize = 4
+            
+            //이미지 로딩
             val inputStream = contentResolver.openInputStream(uri!!)
-            val bitmap = BitmapFactory.decodeStream(inputStream, null, null)
+
+            val bitmap = BitmapFactory.decodeStream(inputStream, null, option)
             val outputStream = ByteArrayOutputStream()
             bitmap!!.compress(Bitmap.CompressFormat.PNG, 100, outputStream)
             changedUserImage = outputStream.toByteArray()
