@@ -219,15 +219,14 @@ class AddPortfolioActivity : AppCompatActivity() {
 
                                 cardPortfolio.add(rowCardPortfolio)
                                 cardPortfolioAdapter.notifyDataSetChanged()
-
-                                // 뷰 제거 후 다시 바인딩
-                                if(cardDialogBinding.root.parent != null)
-                                    (cardDialogBinding.root.parent as ViewGroup).removeView(cardDialogBinding.root)
-
-                                cardDialogBinding = DialogAddPortfolioCardBinding.inflate(layoutInflater)
-                                postImage = byteArrayOf()
-                                initEvent()
                             }
+                            // 뷰 제거 후 다시 바인딩
+                            if(cardDialogBinding.root.parent != null)
+                                (cardDialogBinding.root.parent as ViewGroup).removeView(cardDialogBinding.root)
+
+                            cardDialogBinding = DialogAddPortfolioCardBinding.inflate(layoutInflater)
+                            postImage = byteArrayOf()
+                            initEvent()
 
                             dialogInterface.dismiss()
                         })
@@ -257,14 +256,13 @@ class AddPortfolioActivity : AppCompatActivity() {
                                 )
                                 timelinePortfolio.add(rowTimelinePortfolio)
                                 timelinePortfolioAdapter.notifyDataSetChanged()
-
-                                // 뷰 제거 후 다시 바인딩
-                                if(timelineDialogBinding.root.parent != null)
-                                    (timelineDialogBinding.root.parent as ViewGroup).removeView(timelineDialogBinding.root)
-                                timelineDialogBinding = DialogAddPortfolioTimelineBinding.inflate(layoutInflater)
-                                postImage = byteArrayOf()
-                                initEvent()
                             }
+                            // 뷰 제거 후 다시 바인딩
+                            if(timelineDialogBinding.root.parent != null)
+                                (timelineDialogBinding.root.parent as ViewGroup).removeView(timelineDialogBinding.root)
+                            timelineDialogBinding = DialogAddPortfolioTimelineBinding.inflate(layoutInflater)
+                            postImage = byteArrayOf()
+                            initEvent()
 
                             dialogInterface.dismiss()
                         })
@@ -285,14 +283,13 @@ class AddPortfolioActivity : AppCompatActivity() {
                                 )
                                 messengerPortfolio.add(rowMessengerPortfolio)
                                 messengerPortfolioAdapter.notifyDataSetChanged()
-
-                                // 뷰 제거 후 다시 바인딩
-                                if(messengerDialogBinding.root.parent != null)
-                                    (messengerDialogBinding.root.parent as ViewGroup).removeView(messengerDialogBinding.root)
-                                messengerDialogBinding = DialogAddPortfolioMessengerBinding.inflate(layoutInflater)
-                                postImage = byteArrayOf()
-                                initEvent()
                             }
+                            // 뷰 제거 후 다시 바인딩
+                            if(messengerDialogBinding.root.parent != null)
+                                (messengerDialogBinding.root.parent as ViewGroup).removeView(messengerDialogBinding.root)
+                            messengerDialogBinding = DialogAddPortfolioMessengerBinding.inflate(layoutInflater)
+                            postImage = byteArrayOf()
+                            initEvent()
 
                             dialogInterface.dismiss()
                         })
