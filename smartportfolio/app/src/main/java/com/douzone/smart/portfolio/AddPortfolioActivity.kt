@@ -234,7 +234,7 @@ class AddPortfolioActivity : AppCompatActivity() {
                     ViewType.TIMELINE -> {
                         setView(timelineDialogBinding.root)
                         setPositiveButton(getString(R.string.dialog_button_add), DialogInterface.OnClickListener { dialogInterface, _ ->
-                            if(timelineDialogBinding.etTitle.text.isNullOrEmpty() || timelineDialogBinding.etContents.text.isNullOrEmpty())
+                            if(timelineDialogBinding.etTitle.text.isNullOrEmpty() || timelineDialogBinding.etContents.text.isNullOrEmpty() || timelineDialogBinding.tvDate.text == getString(R.string.dialog_add_portfolio_text_date))
                                 Toast.makeText(this@AddPortfolioActivity, getString(R.string.toast_empty_input_value), Toast.LENGTH_SHORT).show()
                             else {
                                 // 라디오 선택된 컬러값으로 circleColor 조정
