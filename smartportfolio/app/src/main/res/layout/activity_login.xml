@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background_color"
     tools:context=".LoginActivity">
 
     <ImageView
@@ -23,6 +24,7 @@
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:background="@drawable/custom_edit_text"
+        android:backgroundTint="@color/white"
         android:drawableStart="@drawable/custom_edit_text_id"
         android:drawablePadding="12dp"
         android:hint="@string/activityLogin_edit_id"
@@ -43,6 +45,7 @@
         android:layout_height="50dp"
         android:layout_marginTop="20dp"
         android:background="@drawable/custom_edit_text"
+        android:backgroundTint="@color/white"
         android:drawableStart="@drawable/custom_edit_text_password"
         android:drawablePadding="12dp"
         android:hint="@string/activityLogin_edit_password"
