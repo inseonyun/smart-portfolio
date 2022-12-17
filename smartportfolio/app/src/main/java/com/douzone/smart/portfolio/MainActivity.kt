@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
@@ -336,12 +337,43 @@ class MainActivity : AppCompatActivity(), DialogUserOnItemClick
                 show()
             }
         }
+
+        binding.tvLogout.setOnClickListener {
+            // 로그아웃 기능
+            logoutEvent()
+        }
+    }
+
+    private fun logoutEvent() {
+        AlertDialog.Builder(this).run {
+            setTitle(getString(R.string.dialog_title_logout))
+            setMessage(R.string.dialog_message_logout)
+            setPositiveButton(getString(R.string.dialog_button_yes)) { dialogInterface, _ ->
+                dialogInterface.dismiss()
+                val intent = Intent(this@MainActivity, LoginActivity::class.java)
+                startActivity(intent)
+                finish()
+            }
+            setNegativeButton(getString(R.string.dialog_button_cancel)) { dialogInterface, _ ->
+                dialogInterface.dismiss()
+            }
+            show()
+        }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.menu_main, menu)
+        return super.onCreateOptionsMenu(menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
-            android.R.id.home->{ // 메뉴 버튼
+            android.R.id.home -> { // 메뉴 버튼
                 drawerLayout.openDrawer(GravityCompat.START)    // 네비게이션 드로어 열기
+            }
+            R.id.menu_logout -> {
+                // 로그아웃 버튼
+                logoutEvent()
             }
         }
         return super.onOptionsItemSelected(item)

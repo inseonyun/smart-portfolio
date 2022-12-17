@@ -17,7 +17,6 @@
             android:id="@+id/appBarLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:theme="@style/AppTheme.AppBarOverlay"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -27,8 +26,7 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                android:background="@color/colorPrimary"
-                app:popupTheme="@style/AppTheme.PopupOverlay" >
+                android:background="@color/colorPrimary" >
 
                 <LinearLayout
                     android:id="@+id/toolbar_layout"
@@ -247,6 +245,18 @@
                     style="slideBar_textView_size"
                     android:textColor="@color/black"
                     android:drawableStart="@drawable/ic_drawer_button_portfolio_delete"
+                    android:drawablePadding="10dp"
+                    android:gravity="center_vertical"
+                    android:layout_margin="10dp"/>
+
+                <TextView
+                    android:id="@+id/tv_logout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/drawer_menu_logout"
+                    style="slideBar_textView_size"
+                    android:textColor="@color/black"
+                    android:drawableStart="@drawable/ic_drawer_button_logout"
                     android:drawablePadding="10dp"
                     android:gravity="center_vertical"
                     android:layout_margin="10dp"/>

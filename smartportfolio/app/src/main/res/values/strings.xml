@@ -31,6 +31,7 @@
     <string name="drawer_menu_setting">설정</string>
     <string name="drawer_menu_add">포트폴리오 추가</string>
     <string name="drawer_menu_delete">포트폴리오 삭제</string>
+    <string name="drawer_menu_logout">로그아웃</string>
 
     <!-- viewPager Main -->
     <string name="viewMain_title">소개</string>
@@ -111,6 +112,9 @@
     <!-- 툴바 외부 브라우저로 열기 -->
     <string name="toolbar_menu_external_web">외부 브라우저로 열기</string>
 
+    <!-- 툴바 로그아웃 -->
+    <string name="toolbar_menu_logout">로그아웃</string>
+
     <!-- 토스트 메시지 -->
     <string name="toast_input_name">이름을 입력해주세요</string>
     <string name="toast_exist_name">이미 있는 유저입니다</string>
@@ -132,6 +136,7 @@
     <string name="dialog_title_close_browser">브라우저 닫기</string>
     <string name="dialog_title_open_link">링크 열기</string>
     <string name="dialog_title_open_external_browser">외부 브라우저로 열기</string>
+    <string name="dialog_title_logout">로그아웃</string>
 
     <string name="dialog_message_cancel_add_portfolio">포트폴리오 추가를 취소하시겠습니까?</string>
     <string name="dialog_message_cancel_delete_portfolio">포트폴리오 삭제를 취소하시겠습니까?</string>
@@ -146,6 +151,7 @@
     <string name="dialog_message_close_browser">브라우저를 닫으시겠습니까?</string>
     <string name="dialog_message_open_link">내부 브라우저와 Chrome 브라우저 중 어느 브라우저로 연결하시겠습니까?</string>
     <string name="dialog_message_open_external_browser">크롬 브라우저로 연결하시겠습니까?</string>
+    <string name="dialog_message_logout">로그아웃 하시겠습니까?</string>
 
     <string name="dialog_button_yes">예</string>
     <string name="dialog_button_no">아니오</string>
