@@ -27,6 +27,7 @@ import com.douzone.smart.portfolio.databinding.ActivityAddPortfolioBinding
 import com.douzone.smart.portfolio.databinding.DialogAddPortfolioCardBinding
 import com.douzone.smart.portfolio.databinding.DialogAddPortfolioMessengerBinding
 import com.douzone.smart.portfolio.databinding.DialogAddPortfolioTimelineBinding
+import com.douzone.smart.portfolio.databinding.DialogEditUserDescriptionBinding
 import com.douzone.smart.portfolio.db.MessengerPortfolioDatabaseHelper
 import com.douzone.smart.portfolio.db.CardPortfolioDatabaseHelper
 import com.douzone.smart.portfolio.db.TimelinePortfolioDatabaseHelper
@@ -181,6 +182,9 @@ class AddPortfolioActivity : AppCompatActivity() {
 
                     }
                 }
+                // 유저 한줄 소개 있는지 확인하고 있으면 반영
+                if(userData.userTitle.isNotEmpty())
+                    binding.tvUserDescription.text = userData.userTitle
             }
         }
     }
@@ -323,6 +327,30 @@ class AddPortfolioActivity : AppCompatActivity() {
             // 이미지 선택할 수 있게 함
             getPostImage()
         }
+
+        // 한 줄 소개 변경 이벤트
+        binding.ivEditDescription.setOnClickListener {
+            val dialogBinding = DialogEditUserDescriptionBinding.inflate(layoutInflater)
+            AlertDialog.Builder(this).run {
+                setTitle(getString(R.string.dialog_edit_description_title))
+                setView(dialogBinding.root)
+                setPositiveButton(getString(R.string.dialog_button_save)) { dialogInterface, _ ->
+                    dialogInterface.dismiss()
+
+                    val description = dialogBinding.etDescription.text.toString()
+
+                    if(description.isNullOrEmpty())
+                        Toast.makeText(this@AddPortfolioActivity, getString(R.string.toast_empty_input_value), Toast.LENGTH_SHORT).show()
+                    else {
+                        binding.tvUserDescription.text = description
+                    }
+                }
+                setNegativeButton(getString(R.string.dialog_button_cancel)) { dialogInterface, _ ->
+                    dialogInterface.dismiss()
+                }
+                show()
+            }
+        }
     }
 
     fun getPostImage() {
@@ -335,7 +363,7 @@ class AddPortfolioActivity : AppCompatActivity() {
     fun insertPortfolio() {
         val userName = intent.getStringExtra("name")
         val userViewType = intent.getIntExtra("viewType", 1)
-        val userTitle = intent.getStringExtra("userTitle")
+        val userTitle = binding.tvUserDescription.text.toString()
 
         // add user
         val user = User(userName!!, userTitle!!, changedUserImage, userViewType)
@@ -368,10 +396,10 @@ class AddPortfolioActivity : AppCompatActivity() {
     fun updatePortfolio() {
         val userName = intent.getStringExtra("name")
         val userViewType = intent.getIntExtra("viewType", 1)
-        val userTitle = intent.getStringExtra("userTitle")
+        val userTitle = binding.tvUserDescription.text.toString()
 
         // update userProfileImage
-        val user = User(userName!!, userTitle!!, changedUserImage, userViewType)
+        val user = User(userName!!, userTitle, changedUserImage, userViewType)
         val userDB = UserDatabaseHelper(this@AddPortfolioActivity)
         userDB.updateData(user)
 
@@ -426,7 +454,7 @@ class AddPortfolioActivity : AppCompatActivity() {
             inputStream!!.close()
             outputStream.close()
 
-            bitmap?.let {
+            bitmap.let {
                 binding.ivUserImage.setImageBitmap(bitmap)
             }
         } catch(e: FileNotFoundException) {

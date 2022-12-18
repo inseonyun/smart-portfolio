@@ -22,6 +22,7 @@
 
     <!-- 포트폴리오 추가 및 삭제 화면 공통 사항-->
     <string name="addDelete_userName">User Name</string>
+    <string name="addDelete_userDescription">User Description</string>
 
     <!-- 포트폴리오 추가 버튼 -->
     <string name="button_add_portfolio">Add Portfolio</string>
@@ -71,6 +72,10 @@
 
     <!-- listView_dialog_user 포트폴리오 추가 및 삭제 시 보여지는 유저 목록 -->
     <string name="listView_dialog_user_name">User Name</string>
+
+    <!-- dialog_edit_description -->
+    <string name="dialog_edit_description_title">한줄 소개 수정</string>
+    <string name="dialog_edit_description_message">한줄 소개 입력</string>
 
     <!-- dialog_add_user 드로어 메뉴 중 포트폴리오 추가 다이얼로그 뷰 -->
     <string name="dialog_add_user_title">Add User</string>
@@ -160,5 +165,6 @@
     <string name="dialog_button_cancel">Cancel</string>
     <string name="dialog_button_chrome">Chrome</string>
     <string name="dialog_button_internal_browser">internal browser</string>
+    <string name="dialog_button_save">Save</string>
 
 </resources>
