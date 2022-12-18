@@ -18,10 +18,7 @@ import com.airbnb.lottie.LottieAnimationView
 import com.douzone.smart.portfolio.adapter.CardPortfolioAdapter
 import com.douzone.smart.portfolio.adapter.MessengerPortfolioAdapter
 import com.douzone.smart.portfolio.adapter.TimelinePortfolioAdapter
-import com.douzone.smart.portfolio.data.Messenger
-import com.douzone.smart.portfolio.data.Card
-import com.douzone.smart.portfolio.data.Timeline
-import com.douzone.smart.portfolio.data.ViewType
+import com.douzone.smart.portfolio.data.*
 import com.douzone.smart.portfolio.databinding.ActivityDeleteBinding
 import com.douzone.smart.portfolio.db.MessengerPortfolioDatabaseHelper
 import com.douzone.smart.portfolio.db.CardPortfolioDatabaseHelper
@@ -46,6 +43,11 @@ class DeletePortfolioActivity : AppCompatActivity() {
 
     private var loadingTime = Random.nextLong(1000, 3000)
 
+    private var userImageArray = ByteArray(1)
+    var noImage = true
+
+    var noDescription = true
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -59,6 +61,7 @@ class DeletePortfolioActivity : AppCompatActivity() {
         // 유저 이름에 따른 데이터 가져옴
         initUserData()
 
+        initEvent()
     }
 
     fun startLoading() {
@@ -106,9 +109,16 @@ class DeletePortfolioActivity : AppCompatActivity() {
                     bitmap?.let {
                         binding.ivUserImage.setImageBitmap(bitmap)
                     }
+                    userImageArray = userData.profileImage!!
+                    noImage = false
                 }catch (e: Exception) {
 
                 }
+            }
+            // 유저 한 줄 소개 있으면 가져옴
+            if(userData.userTitle.isNotEmpty()) {
+                binding.tvUserDescription.text = userData.userTitle
+                noDescription = false
             }
         }
     }
@@ -139,6 +149,52 @@ class DeletePortfolioActivity : AppCompatActivity() {
         title = getString(R.string.activityMain_tab_item_delete)
     }
 
+    fun initEvent() {
+        binding.cardViewUser.setOnClickListener {
+            // 유저 이미지 제거 할 수 있게 함, 만약 없으면 띄우지 않음
+            if(noImage) {
+                Toast.makeText(this@DeletePortfolioActivity, getString(R.string.toast_empty_user_image), Toast.LENGTH_SHORT).show()
+            }
+            else {
+                AlertDialog.Builder(this).run {
+                    setTitle(getString(R.string.dialog_title_delete_user_image))
+                    setMessage(getString(R.string.dialog_message_delete_user_image))
+                    setPositiveButton(getString(R.string.dialog_button_yes)) {dialogInterface, _ ->
+                        dialogInterface.dismiss()
+                        binding.ivUserImage.setImageResource(R.drawable.ic_listview_user)
+                        userImageArray = ByteArray(1)
+                        noImage = true
+                    }
+                    setNegativeButton(getString(R.string.dialog_button_cancel)) {dialogInterface, _ ->
+                        dialogInterface.dismiss()
+                    }
+                    show()
+                }
+            }
+        }
+
+        binding.ivDeleteDescription.setOnClickListener {
+            // 한줄 소개 제거 할 수 있게 함, 만약 없으면 띄우지 않음
+            if(noDescription) {
+                Toast.makeText(this@DeletePortfolioActivity, getString(R.string.toast_empty_user_description), Toast.LENGTH_SHORT).show()
+            }else {
+                AlertDialog.Builder(this).run {
+                    setTitle(getString(R.string.dialog_title_delete_user_description))
+                    setMessage(getString(R.string.dialog_message_delete_user_description))
+                    setPositiveButton(getString(R.string.dialog_button_yes)) {dialogInterface, _ ->
+                        dialogInterface.dismiss()
+                        noDescription = true
+                        binding.tvUserDescription.text = getString(R.string.addDelete_userDescription)
+                    }
+                    setNegativeButton(getString(R.string.dialog_button_cancel)) {dialogInterface, _ ->
+                        dialogInterface.dismiss()
+                    }
+                    show()
+                }
+            }
+        }
+    }
+
     fun deleteUser() {
         val userName = intent.getStringExtra("name")
 
@@ -162,6 +218,12 @@ class DeletePortfolioActivity : AppCompatActivity() {
 
     fun deletePortfolio() {
         val userName = intent.getStringExtra("name")
+
+        // 유저 업데이트도 진행
+        val userDB = UserDatabaseHelper(this@DeletePortfolioActivity)
+        val userData = userDB.selecetUser(userName!!)
+        val userDescription = if(noDescription) "" else binding.tvUserDescription.text.toString()
+        userDB.updateData(User(userData!!.name, userDescription, userImageArray, intent.getIntExtra("viewType", 1)))
 
         when(intent.getIntExtra("viewType", 1)) {
             ViewType.CARDVIEW -> {

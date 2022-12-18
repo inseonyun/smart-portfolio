@@ -18,7 +18,7 @@
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_gravity="center"
-            android:layout_margin="30dp"
+            android:layout_marginBottom="30dp"
             app:cardCornerRadius="50dp"
             app:cardElevation="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -27,11 +27,23 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:translationZ="1dp"
+                android:src="@drawable/ic_drawer_button_portfolio_delete"/>
+
+            <ImageView
                 android:id="@+id/iv_user_image"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
                 android:src="@drawable/ic_listview_user" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/card_background_color"/>
 
         </androidx.cardview.widget.CardView>
 
@@ -42,10 +54,30 @@
             android:layout_height="wrap_content"
             android:layout_margin="15dp"
             android:text="@string/addDelete_userName"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/cardView_user"
             app:layout_constraintStart_toStartOf="@+id/cardView_user"
-            app:layout_constraintTop_toBottomOf="@+id/cardView_user" />
+            app:layout_constraintTop_toBottomOf="@+id/cardView_user"  />
+
+        <TextView
+            android:id="@+id/tv_userDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="@string/addDelete_userDescription"
+            app:layout_constraintEnd_toEndOf="@+id/tv_userName"
+            app:layout_constraintStart_toStartOf="@+id/tv_userName"
+            app:layout_constraintTop_toBottomOf="@+id/tv_userName" />
+
+        <ImageView
+            android:id="@+id/iv_delete_description"
+            android:layout_marginLeft="5dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/ic_drawer_button_portfolio_delete"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_userDescription"
+            app:layout_constraintStart_toEndOf="@+id/tv_userDescription"
+            app:layout_constraintTop_toTopOf="@+id/tv_userDescription" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

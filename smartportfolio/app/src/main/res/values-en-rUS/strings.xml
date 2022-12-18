@@ -130,6 +130,8 @@
     <string name="toast_saved_changing">Changes have been saved</string>
     <string name="toast_deleted_user">User deleted successfully</string>
     <string name="toast_Uninstalled_chrome">Uninstalled Chrome application</string>
+    <string name="toast_empty_user_image">User Image is empty to delete</string>
+    <string name="toast_empty_user_description">User Description is empty to delete</string>
 
 
     <!-- 다이얼로그 타이틀 및 메시지  -->
@@ -143,6 +145,8 @@
     <string name="dialog_title_open_link">Open Link</string>
     <string name="dialog_title_open_external_browser">Open External Browser</string>
     <string name="dialog_title_logout">LogOut</string>
+    <string name="dialog_title_delete_user_image">Delete User Image</string>
+    <string name="dialog_title_delete_user_description">Delete User Description</string>
 
     <string name="dialog_message_cancel_add_portfolio">Are you sure you want to cancel adding the portfolio?</string>
     <string name="dialog_message_cancel_delete_portfolio">Are you sure you want to undelete the portfolio?</string>
@@ -158,6 +162,9 @@
     <string name="dialog_message_open_link">Do you want to connect with the internal browser or the Chrome browser?</string>
     <string name="dialog_message_open_external_browser">Would you like to connect with the Chrome browser?</string>
     <string name="dialog_message_logout">Would you like to logout?</string>
+    <string name="dialog_message_delete_user_image">Would you like to delete user image?</string>
+    <string name="dialog_message_delete_user_description">Would you like to delete user description?</string>
+
 
     <string name="dialog_button_yes">Yes</string>
     <string name="dialog_button_no">No</string>
