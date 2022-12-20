@@ -97,7 +97,7 @@
                     android:layout_height="wrap_content"
                     android:adjustViewBounds="true"
                     android:scaleType="fitXY"
-                    android:src="@drawable/test_img"/>
+                    android:src="@drawable/img_default"/>
 
             </androidx.cardview.widget.CardView>
 
