@@ -6,6 +6,8 @@ import android.content.DialogInterface
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.Matrix
+import android.media.ExifInterface
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
@@ -19,9 +21,11 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import com.bumptech.glide.Glide
 import com.douzone.smart.portfolio.adapter.CardPortfolioAdapter
 import com.douzone.smart.portfolio.adapter.MessengerPortfolioAdapter
 import com.douzone.smart.portfolio.adapter.TimelinePortfolioAdapter
+import com.douzone.smart.portfolio.controller.RotateImageController
 import com.douzone.smart.portfolio.data.*
 import com.douzone.smart.portfolio.databinding.ActivityAddPortfolioBinding
 import com.douzone.smart.portfolio.databinding.DialogAddPortfolioCardBinding
@@ -73,18 +77,12 @@ class AddPortfolioActivity : AppCompatActivity() {
     private val getPostImage: ActivityResultLauncher<Intent> = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()) { activityResult ->
         if(activityResult.resultCode == RESULT_OK && activityResult.data != null) {
-            try {
-                val option = BitmapFactory.Options()
-                option.inSampleSize = 4
-
-                val inputStream = contentResolver.openInputStream(activityResult.data!!.data!!)
-                val bitmap = BitmapFactory.decodeStream(inputStream, null, option)
+            val bitmap = RotateImageController(this@AddPortfolioActivity).rotateImage(activityResult.data!!.data!!)
+            if(bitmap != null) {
                 val outputStream = ByteArrayOutputStream()
-                bitmap!!.compress(Bitmap.CompressFormat.PNG, 100, outputStream)
-                inputStream!!.close()
-                outputStream.close()
-
+                bitmap.compress(Bitmap.CompressFormat.PNG, 100, outputStream)
                 postImage = outputStream.toByteArray()
+                outputStream.close()
 
                 when(intent.getIntExtra("viewType", 1)) {
                     ViewType.CARDVIEW-> {
@@ -100,10 +98,39 @@ class AddPortfolioActivity : AppCompatActivity() {
                         messengerDialogBinding.chkImage.visibility = View.GONE
                     }
                 }
-
-            } catch(e: FileNotFoundException) {
-                Log.e("UserImage ERROR", "${e.printStackTrace()}")
             }
+
+//            try {
+//                val option = BitmapFactory.Options()
+//                option.inSampleSize = 4
+//
+//                val inputStream = contentResolver.openInputStream(activityResult.data!!.data!!)
+//                val bitmap = BitmapFactory.decodeStream(inputStream, null, option)
+//                val outputStream = ByteArrayOutputStream()
+//                bitmap!!.compress(Bitmap.CompressFormat.PNG, 100, outputStream)
+//                inputStream!!.close()
+//                outputStream.close()
+//
+//                postImage = outputStream.toByteArray()
+//
+//                when(intent.getIntExtra("viewType", 1)) {
+//                    ViewType.CARDVIEW-> {
+//                        cardDialogBinding.tvImage.text = getString(R.string.dialog_add_portfolio_added_image)
+//                        cardDialogBinding.chkImage.visibility = View.GONE
+//                    }
+//                    ViewType.TIMELINE-> {
+//                        timelineDialogBinding.tvImage.text = getString(R.string.dialog_add_portfolio_added_image)
+//                        timelineDialogBinding.chkImage.visibility = View.GONE
+//                    }
+//                    ViewType.MESSENGER-> {
+//                        messengerDialogBinding.tvImage.text = getString(R.string.dialog_add_portfolio_added_image)
+//                        messengerDialogBinding.chkImage.visibility = View.GONE
+//                    }
+//                }
+//
+//            } catch(e: FileNotFoundException) {
+//                Log.e("UserImage ERROR", "${e.printStackTrace()}")
+//            }
         }
     }
 
@@ -302,7 +329,32 @@ class AddPortfolioActivity : AppCompatActivity() {
 
                 setNegativeButton(getString(R.string.dialog_button_cancel), DialogInterface.OnClickListener { dialogInterface, _ ->
                     dialogInterface.dismiss()
+
+                    when(intent.getIntExtra("viewType", 1)) {
+                        ViewType.CARDVIEW -> {
+                            // 뷰 제거 후 다시 바인딩
+                            if(cardDialogBinding.root.parent != null)
+                                (cardDialogBinding.root.parent as ViewGroup).removeView(cardDialogBinding.root)
+
+                            cardDialogBinding = DialogAddPortfolioCardBinding.inflate(layoutInflater)
+                        }
+                        ViewType.TIMELINE -> {
+                            // 뷰 제거 후 다시 바인딩
+                            if(timelineDialogBinding.root.parent != null)
+                                (timelineDialogBinding.root.parent as ViewGroup).removeView(timelineDialogBinding.root)
+                            timelineDialogBinding = DialogAddPortfolioTimelineBinding.inflate(layoutInflater)
+                        }
+                        ViewType.MESSENGER -> {
+                            // 뷰 제거 후 다시 바인딩
+                            if(messengerDialogBinding.root.parent != null)
+                                (messengerDialogBinding.root.parent as ViewGroup).removeView(messengerDialogBinding.root)
+                            messengerDialogBinding = DialogAddPortfolioMessengerBinding.inflate(layoutInflater)
+                        }
+                    }
+                    postImage = byteArrayOf()
+                    initEvent()
                 })
+                setCancelable(false)
                 show()
             }
         }
@@ -439,27 +491,35 @@ class AddPortfolioActivity : AppCompatActivity() {
     }
 
     fun setBitmapImage(uri: Uri) {
-        try {
-            // 이미지 샘플 사이즈 설정
-            val option = BitmapFactory.Options()
-            option.inSampleSize = 4
-            
-            //이미지 로딩
-            val inputStream = contentResolver.openInputStream(uri!!)
-
-            val bitmap = BitmapFactory.decodeStream(inputStream, null, option)
+        val bitmap = RotateImageController(this@AddPortfolioActivity).rotateImage(uri)
+        if(bitmap != null) {
             val outputStream = ByteArrayOutputStream()
-            bitmap!!.compress(Bitmap.CompressFormat.PNG, 100, outputStream)
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, outputStream)
             changedUserImage = outputStream.toByteArray()
-            inputStream!!.close()
             outputStream.close()
-
-            bitmap.let {
-                binding.ivUserImage.setImageBitmap(bitmap)
-            }
-        } catch(e: FileNotFoundException) {
-            Log.e("UserImage ERROR", "${e.printStackTrace()}")
+            binding.ivUserImage.setImageBitmap(bitmap)
         }
+//        try {
+//            // 이미지 샘플 사이즈 설정
+//            val option = BitmapFactory.Options()
+//            option.inSampleSize = 4
+//
+//            //이미지 로딩
+//            val inputStream = contentResolver.openInputStream(uri!!)
+//
+//            val bitmap = BitmapFactory.decodeStream(inputStream, null, option)
+//            val outputStream = ByteArrayOutputStream()
+//            bitmap!!.compress(Bitmap.CompressFormat.PNG, 100, outputStream)
+//            changedUserImage = outputStream.toByteArray()
+//            inputStream!!.close()
+//            outputStream.close()
+//
+//            bitmap.let {
+//                binding.ivUserImage.setImageBitmap(bitmap)
+//            }
+//        } catch(e: FileNotFoundException) {
+//            Log.e("UserImage ERROR", "${e.printStackTrace()}")
+//        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean = when(item.itemId) {
