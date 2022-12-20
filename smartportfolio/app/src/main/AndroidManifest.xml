@@ -15,6 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Smartportfolio"
         android:usesCleartextTraffic="true"
+        android:screenOrientation="portrait"
         tools:targetApi="31">
         <activity
             android:name=".BrowserActivity"
