@@ -251,6 +251,10 @@ class MainActivity : AppCompatActivity(), DialogUserOnItemClick
         binding.toolbarUserImage.setImageBitmap(userImage)
     }
 
+    fun setToolbarUserImageResources(resources: Int) {
+        binding.toolbarUserImage.setImageResource(resources)
+    }
+
     fun setToolbarUserName(userName: String ) {
         binding.toolbarUserName.text = userName
     }

@@ -95,7 +95,7 @@ class Fragment_Home : Fragment() {
 
                         }
                     } else {
-                        (context as MainActivity).setToolbarUserImage(ContextCompat.getDrawable((context as MainActivity), R.drawable.ic_listview_user)!!.toBitmap())
+                        (context as MainActivity).setToolbarUserImageResources(R.drawable.ic_listview_user)
                     }
 
                     (context as MainActivity).setToolbarUserName(pageList[position].name)
