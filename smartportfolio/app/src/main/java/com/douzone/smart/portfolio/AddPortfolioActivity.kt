@@ -6,12 +6,9 @@ import android.content.DialogInterface
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.graphics.Matrix
-import android.media.ExifInterface
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -21,7 +18,6 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import com.bumptech.glide.Glide
 import com.douzone.smart.portfolio.adapter.CardPortfolioAdapter
 import com.douzone.smart.portfolio.adapter.MessengerPortfolioAdapter
 import com.douzone.smart.portfolio.adapter.TimelinePortfolioAdapter
@@ -37,8 +33,6 @@ import com.douzone.smart.portfolio.db.CardPortfolioDatabaseHelper
 import com.douzone.smart.portfolio.db.TimelinePortfolioDatabaseHelper
 import com.douzone.smart.portfolio.db.UserDatabaseHelper
 import java.io.ByteArrayOutputStream
-import java.io.File
-import java.io.FileNotFoundException
 import java.lang.Exception
 import java.util.*
 
@@ -99,38 +93,6 @@ class AddPortfolioActivity : AppCompatActivity() {
                     }
                 }
             }
-
-//            try {
-//                val option = BitmapFactory.Options()
-//                option.inSampleSize = 4
-//
-//                val inputStream = contentResolver.openInputStream(activityResult.data!!.data!!)
-//                val bitmap = BitmapFactory.decodeStream(inputStream, null, option)
-//                val outputStream = ByteArrayOutputStream()
-//                bitmap!!.compress(Bitmap.CompressFormat.PNG, 100, outputStream)
-//                inputStream!!.close()
-//                outputStream.close()
-//
-//                postImage = outputStream.toByteArray()
-//
-//                when(intent.getIntExtra("viewType", 1)) {
-//                    ViewType.CARDVIEW-> {
-//                        cardDialogBinding.tvImage.text = getString(R.string.dialog_add_portfolio_added_image)
-//                        cardDialogBinding.chkImage.visibility = View.GONE
-//                    }
-//                    ViewType.TIMELINE-> {
-//                        timelineDialogBinding.tvImage.text = getString(R.string.dialog_add_portfolio_added_image)
-//                        timelineDialogBinding.chkImage.visibility = View.GONE
-//                    }
-//                    ViewType.MESSENGER-> {
-//                        messengerDialogBinding.tvImage.text = getString(R.string.dialog_add_portfolio_added_image)
-//                        messengerDialogBinding.chkImage.visibility = View.GONE
-//                    }
-//                }
-//
-//            } catch(e: FileNotFoundException) {
-//                Log.e("UserImage ERROR", "${e.printStackTrace()}")
-//            }
         }
     }
 
@@ -169,6 +131,7 @@ class AddPortfolioActivity : AppCompatActivity() {
 
     fun initUser() {
         binding.tvUserName.text = intent.getStringExtra("name")
+        binding.tvUserDescription.text = if(intent.getStringExtra("userTitle").isNullOrEmpty()) getString(R.string.listView_home_userList_title) else intent.getStringExtra("userTitle")
     }
 
     fun initData() {
@@ -499,27 +462,6 @@ class AddPortfolioActivity : AppCompatActivity() {
             outputStream.close()
             binding.ivUserImage.setImageBitmap(bitmap)
         }
-//        try {
-//            // 이미지 샘플 사이즈 설정
-//            val option = BitmapFactory.Options()
-//            option.inSampleSize = 4
-//
-//            //이미지 로딩
-//            val inputStream = contentResolver.openInputStream(uri!!)
-//
-//            val bitmap = BitmapFactory.decodeStream(inputStream, null, option)
-//            val outputStream = ByteArrayOutputStream()
-//            bitmap!!.compress(Bitmap.CompressFormat.PNG, 100, outputStream)
-//            changedUserImage = outputStream.toByteArray()
-//            inputStream!!.close()
-//            outputStream.close()
-//
-//            bitmap.let {
-//                binding.ivUserImage.setImageBitmap(bitmap)
-//            }
-//        } catch(e: FileNotFoundException) {
-//            Log.e("UserImage ERROR", "${e.printStackTrace()}")
-//        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean = when(item.itemId) {
