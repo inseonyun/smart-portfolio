@@ -57,6 +57,7 @@ class AddPortfolioActivity : AppCompatActivity() {
     private val messengerPortfolioAdapter = MessengerPortfolioAdapter(this@AddPortfolioActivity, messengerPortfolio)
 
     private var checkUser = false
+    private var checkUserDescription = false
 
     private var changedUserImage: ByteArray = byteArrayOf()
     private var postImage: ByteArray = byteArrayOf()
@@ -131,7 +132,12 @@ class AddPortfolioActivity : AppCompatActivity() {
 
     fun initUser() {
         binding.tvUserName.text = intent.getStringExtra("name")
-        binding.tvUserDescription.text = if(intent.getStringExtra("userTitle").isNullOrEmpty()) getString(R.string.listView_home_userList_title) else intent.getStringExtra("userTitle")
+        if(intent.getStringExtra("userTitle").isNullOrEmpty())
+            binding.tvUserDescription.text = getString(R.string.listView_home_userList_title)
+        else {
+            binding.tvUserDescription.text = intent.getStringExtra("userTitle")
+            checkUserDescription = true
+        }
     }
 
     fun initData() {
@@ -173,8 +179,10 @@ class AddPortfolioActivity : AppCompatActivity() {
                     }
                 }
                 // 유저 한줄 소개 있는지 확인하고 있으면 반영
-                if(userData.userTitle.isNotEmpty())
+                if(userData.userTitle.isNotEmpty()) {
                     binding.tvUserDescription.text = userData.userTitle
+                    checkUserDescription = true
+                }
             }
         }
     }
@@ -378,7 +386,10 @@ class AddPortfolioActivity : AppCompatActivity() {
     fun insertPortfolio() {
         val userName = intent.getStringExtra("name")
         val userViewType = intent.getIntExtra("viewType", 1)
-        val userTitle = binding.tvUserDescription.text.toString()
+        val userTitle: String = if(checkUserDescription)
+            binding.tvUserDescription.text.toString()
+        else
+            ""
 
         // add user
         val user = User(userName!!, userTitle!!, changedUserImage, userViewType)
@@ -411,7 +422,10 @@ class AddPortfolioActivity : AppCompatActivity() {
     fun updatePortfolio() {
         val userName = intent.getStringExtra("name")
         val userViewType = intent.getIntExtra("viewType", 1)
-        val userTitle = binding.tvUserDescription.text.toString()
+        val userTitle: String = if(checkUserDescription)
+            binding.tvUserDescription.text.toString()
+        else
+            ""
 
         // update userProfileImage
         val user = User(userName!!, userTitle, changedUserImage, userViewType)
