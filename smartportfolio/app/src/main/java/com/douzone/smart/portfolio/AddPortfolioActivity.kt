@@ -365,6 +365,7 @@ class AddPortfolioActivity : AppCompatActivity() {
                     if(description.isNullOrEmpty())
                         Toast.makeText(this@AddPortfolioActivity, getString(R.string.toast_empty_input_value), Toast.LENGTH_SHORT).show()
                     else {
+                        checkUserDescription = true
                         binding.tvUserDescription.text = description
                     }
                 }
