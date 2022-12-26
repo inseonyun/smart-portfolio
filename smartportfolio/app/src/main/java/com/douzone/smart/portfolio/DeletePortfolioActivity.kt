@@ -103,7 +103,7 @@ class DeletePortfolioActivity : AppCompatActivity() {
         val dbHelper = UserDatabaseHelper(this@DeletePortfolioActivity)
         val userData = dbHelper.selecetUser(userName!!)
         if(userData != null) {
-            if(userData.profileImage != null && userData.profileImage!!.isNotEmpty()) {
+            if(userData.profileImage != null && userData.profileImage!!.isNotEmpty() && userData.profileImage!!.size > 1) {
                 try {
                     val bitmap = BitmapFactory.decodeByteArray(userData.profileImage, 0, userData.profileImage!!.size)
                     bitmap?.let {
