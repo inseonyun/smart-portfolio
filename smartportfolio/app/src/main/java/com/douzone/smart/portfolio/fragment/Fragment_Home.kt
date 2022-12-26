@@ -85,7 +85,7 @@ class Fragment_Home : Fragment() {
                 }else {
                     // 해당 포지션의 유저 이름, 이미지 보이게 함
                     // 이미지 넣음
-                    if(pageList[position].profileImage != null && pageList[position].profileImage!!.isNotEmpty()) {
+                    if(pageList[position].profileImage != null && pageList[position].profileImage!!.isNotEmpty() && pageList[position].profileImage!!.size > 1) {
                         try {
                             val bitmap = BitmapFactory.decodeByteArray(pageList[position].profileImage, 0, pageList[position].profileImage!!.size)
                             bitmap?.let {
