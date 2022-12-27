@@ -3,12 +3,12 @@
 
 ## 대표 이미지
 <p orientaion=horizontal align=center>
-  <img src=img/app-image/Login.jpg height=500>
-  <img src=img/app-image/Home.jpg height=500>
+  <img src=img/refactor-image/Login.jpg height=500>
+  <img src=img/refactor-image/Home.jpg height=500>
   <br>
-  <img src=img/app-image/Timeline.jpg height=500>
-  <img src=img/app-image/Messenger.jpg height=500>
-  <img src=img/app-image/Card.jpg height=500>
+  <img src=img/refactor-image/Port_Timeline.jpg height=500>
+  <img src=img/refactor-image/Port_Messenger.jpg height=500>
+  <img src=img/refactor-image/Port_Card.jpg height=500>
 </p>
 
 ## 개요
